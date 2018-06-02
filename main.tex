@@ -1,0 +1,51 @@
+\documentclass[12pt]{article}
+\usepackage{listings}
+\begin{document}
+\section{Descrizione dati iniziali}
+Il dataset che abbiamo analizzato contiene dati sulle carriere accademiche degli studenti del corso di laurea di informatica dell'università degli studi di Firenze e il loro voto conseguito 
+al test di ingresso. In particolare, le informazioni presenti sono:
+\begin{itemize}
+	\item Coorte: Anno di immatricolazione
+	\item Crediti totali: Numero crediti complessivi dello studente
+	\item Crediti con voto: Numero di crediti assegnati allo studente per esami con votazione in trentesimi(tutti tranne inglese)
+	\item Voto medio: Media pesata dei voti degli esami sostenuti
+\end{itemize}
+In seguito ci sono sei coppie di attributi che indicano:
+\begin{itemize}
+	\item Nome dell'esame
+	\item Data in cui lo studente ha sostenuto l'esame
+\end{itemize}
+Gli esami sono Algoritmi e strutture dati (ASD), Architetture degli elaboratori(ARC), Programmazione(PRG), Analisi I(ANI), Matematica discreta e logica(MDL) e Inglese.
+\begin{itemize}
+	\item Punteggio conseguito al test di ingresso.
+\end{itemize}
+
+Per quanto riguarda gli attributi relativi ai voti degli esami i valori che questi assumono sono:
+il voto conseguito dallo studente nel caso in cui abbia sostenuto l'esame;
+oppure zero se lo studente non ha sostenuto l'esame durante la sessione estiva del proprio anno di immatricolazione.
+
+\section{Gestione dei dati}
+Abbiamo deciso di effetture le seguenti operazioni sul dataset:
+\begin{itemize}
+	\item eliminazione degli studenti che hanno sostenuto solo inglese
+	\item riportare tutti gli attributi relativi alle date degli esami nel formato YYYY-MM-DD
+\end{itemize}
+Il motivo per cui abbiamo deciso di eseguire l operazione del primo punto è che gli studenti in questione non avendo voti in trentesimi non ci sono pari significativi per analisi.
+Per quanto riguarda il secondo punto invece, nel caso in cui uno studente non avesse sostenuto un particolare esame, erano presenti valori pari a zero in alcuni casi e valori pari a "0000-00-00" in altri.
+Abbiamo quindi deciso di trattare questa incosisistenza dei dati ponendo i valori pari a "0000-00-00".
+
+Per effetturare queste due operazioni abbiamo importato il dataset in database tramite l'operazione di import riportata nel codice.
+\begin{lstlisting}
+	CODICE IMPORT
+\end{lstlisting}
+Per quanto riguarda la gestione dell incosisistenza relativa alle date degli esami abbiamo risolto il problema specificando le query ripotate nel codice
+\begin{lstlisting}
+update dmo.studenti set data_ARC = '0000-00-00' where data_ARC = '0'; 
+update dmo.studenti set data_ASD = '0000-00-00' where data_ASD = '0'; 
+update dmo.studenti set data_PRG = '0000-00-00' where data_PRG = '0'; 
+update dmo.studenti set data_ANI = '0000-00-00' where data_ANI = '0'; 
+update dmo.studenti set data_MDL = '0000-00-00' where data_MDL = '0';
+update dmo.studenti set data_INGLESE = '0000-00-00' where data_INGLESE = '0';
+\end{lstlisting}
+
+\end{document}
