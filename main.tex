@@ -48,4 +48,28 @@ update dmo.studenti set data_MDL = '0000-00-00' where data_MDL = '0';
 update dmo.studenti set data_INGLESE = '0000-00-00' where data_INGLESE = '0';
 \end{lstlisting}
 
+\section{Analisi dei dati}
+Per analizzare i dati a disposizione abbiamo utilizzato il linguaggio R per determinare la correlazione tra i diversi attributi.
+In figura è riportata la tabella con i valori di correlazione.
+
+Come è possibile notare dalla tabella, ci sono alcune ovvie correlazioni che coinvolgono gli attributi crediti totali e crediti con voto.
+Per quanto riguarda l'attributo corte si può notare come questo abbia una scarsa correlazione con gli altri attributi.
+Le correlazioni più evidenti e significative sono quelle che coinvolgono l' attributo crediti totali ( e quindi anche crediti con voto) con il voto che gli studenti hanno ottenuto per i diversi esami sostenuti.
+Infatti il valore di queste correlazioni è compreso tra 0.53 per quanto riguarda l'attributo di crediti totali e quello di Algoritmi e strutture dati e 0.73 per quanto riguarda crediti totali e il voto di Architetture degli elaboratori.
+Tale risultato può essere interpretato in maniera abbastanza intuitiva, infatti mostra che se uno studente ha sostenuto più esami( e quindi ha più crediti) ha in generale ottenuto dei voti migliori.
+
+L'attributo test è correlato maggiormente con l'attributo voto medio. 
+Si può notare inoltre che il valore di correlazione è significativamente più alto di quello che l'attributo test ha con i voti dei singoli esami, con l'unica eccezione di MDL.
+Questi valori lasciano suggerire che il punteggio conseguito al test d'ingresso di ogni studente sia un buon parametro per valutarne l'andamento generale piuttosto che i voti di un singolo esame.
+Inoltre l'attributo test mostra una discreta correlazione con i crediti totali( e quindi anche con i crediti con voto).
+
+Per quanto riguarda le correlazioni tra i voti dei diversi esami è possibile notare che il valore più alto è quello tra Architetture degli elaboratori e Programmazione che è circa pari a 0.43.
+Mentre invece si ha una correlazione quasi nulla, ossia circa 0.10, tra il voto di Algoritmi e strutture dati e il voto di Analisi 1.
+
+In figura X viene riportata la matrice di correlazione.
+
+In figura Y viene riportato lo scatter plot dei attributi del dataset.
+
+Per applicare gli algoritmi di clustering è stato utilizzato il software Weka. Tuttavia prima di applicare tali algoritmi è stato necessiaria un ulteriore fase di preprocessing
+nella quale sono stati normalizzati tutti gli attributi del dataset in una scala di valori compresi tra zero e uno in modo da evitare problemi dovuto alle diverse scale di valori dei attributi.
 \end{document}
