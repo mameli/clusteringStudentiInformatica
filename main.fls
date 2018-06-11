@@ -15,6 +15,8 @@ INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/listings/lstmi
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/listings/lstmisc.sty
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/listings/listings.cfg
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/listings/listings.cfg
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/tools/enumerate.sty
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/tools/enumerate.sty
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/xcolor/xcolor.sty
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/xcolor/xcolor.sty
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/graphics-cfg/color.cfg
@@ -42,11 +44,37 @@ INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/generic/babel/babel.
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/generic/babel/switch.def
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/etoolbox/etoolbox.sty
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/etoolbox/etoolbox.sty
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/inputenc.sty
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/inputenc.sty
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/utf8.def
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/utf8.def
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/t1enc.dfu
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/t1enc.dfu
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/ot1enc.dfu
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/ot1enc.dfu
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/omsenc.dfu
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/omsenc.dfu
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/float/float.sty
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/float/float.sty
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/caption/caption.sty
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/caption/caption.sty
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/caption/caption3.sty
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/caption/caption3.sty
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/enumitem/enumitem.sty
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/enumitem/enumitem.sty
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/fontenc.sty
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/fontenc.sty
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/t1enc.def
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/t1enc.def
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/jknappen/ec/ecrm1200.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/psnfss/mathpazo.sty
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/psnfss/mathpazo.sty
 INPUT main.aux
 INPUT main.aux
 OUTPUT main.aux
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/psnfss/t1ppl.fd
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/psnfss/t1ppl.fd
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplr8t.tfm
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/context/base/supp-pdf.mkii
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/context/base/supp-pdf.mkii
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/oberdiek/epstopdf-base.sty
@@ -71,34 +99,80 @@ INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/generic/oberdiek/pdf
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/generic/oberdiek/pdftexcmds.sty
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/generic/oberdiek/ifpdf.sty
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/generic/oberdiek/ifpdf.sty
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmr17.tfm
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmr12.tfm
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmmi12.tfm
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmsy10.tfm
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmtt12.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplrc8t.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplrc8t.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplrc8t.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplrc8t.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplr8t.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplb8t.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplr8t.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplri8t.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/t1cmtt.fd
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/t1cmtt.fd
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/jknappen/ec/ectt1440.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/psnfss/ot1ppl.fd
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/psnfss/ot1ppl.fd
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplr7t.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplr7t.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplr7t.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/psnfss/omlzplm.fd
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/psnfss/omlzplm.fd
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/mathpazo/zplmr7m.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/mathpazo/zplmr7m.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/mathpazo/zplmr7m.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/psnfss/omszplm.fd
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/psnfss/omszplm.fd
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/mathpazo/zplmr7y.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/mathpazo/zplmr7y.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/mathpazo/zplmr7y.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/psnfss/omxzplm.fd
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/psnfss/omxzplm.fd
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/mathpazo/zplmr7v.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/mathpazo/zplmr7v.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/mathpazo/zplmr7v.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/psnfss/ot1zplm.fd
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/psnfss/ot1zplm.fd
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/mathpazo/zplmr7t.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/mathpazo/zplmr7t.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/mathpazo/zplmr7t.tfm
 OUTPUT main.pdf
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/vf/adobe/palatino/pplrc8t.vf
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplr8r.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplr8r.tfm
 INPUT C:/Users/mameli/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmr17.tfm
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmbx12.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/vf/adobe/palatino/pplrc8t.vf
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplr8r.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplr8r.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/vf/adobe/palatino/pplrc8t.vf
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplr8r.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplr8r.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/vf/adobe/palatino/pplb8t.vf
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplb8r.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/vf/adobe/palatino/pplri8t.vf
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplri8r.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/vf/adobe/palatino/pplr8t.vf
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplr8t.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplb8t.tfm
 INPUT main.toc
 INPUT main.toc
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmbx12.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplb8t.tfm
 OUTPUT main.toc
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/omscmr.fd
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/omscmr.fd
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/vf/adobe/palatino/pplb8t.vf
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplb8r.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/vf/adobe/palatino/pplb8t.vf
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplb8r.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/vf/adobe/palatino/pplr8t.vf
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplr8r.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/psnfss/omsppl.fd
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/psnfss/omsppl.fd
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmsy10.tfm
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/listings/lstlang1.sty
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/tex/latex/listings/lstlang1.sty
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmr10.tfm
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmbx10.tfm
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmtt10.tfm
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmr8.tfm
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmr6.tfm
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmmi12.tfm
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmmi8.tfm
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmmi6.tfm
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmsy8.tfm
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmsy6.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplr8t.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/jknappen/ec/ectt1095.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/jknappen/ec/ectt1200.tfm
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/vf/adobe/palatino/pplr8t.vf
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/palatino/pplr8r.tfm
 INPUT img/creditiAsd.png
 INPUT ./img/creditiAsd.png
 INPUT ./img/creditiAsd.png
@@ -136,17 +210,16 @@ INPUT main.lot
 INPUT main.lot
 OUTPUT main.lot
 INPUT main.aux
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb
+INPUT C:/Users/mameli/AppData/Local/MiKTeX/2.9/fonts/pk/ljfour/jknappen/ec/dpi600/ectt1095.pk
+INPUT C:/Users/mameli/AppData/Local/MiKTeX/2.9/fonts/pk/ljfour/jknappen/ec/dpi600/ectt1095.pk
+INPUT C:/Users/mameli/AppData/Local/MiKTeX/2.9/fonts/pk/ljfour/jknappen/ec/dpi600/ectt1440.pk
+INPUT C:/Users/mameli/AppData/Local/MiKTeX/2.9/fonts/pk/ljfour/jknappen/ec/dpi600/ectt1440.pk
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb
-INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplb8a.pfb
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplb8a.pfb
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplr8a.pfb
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplr8a.pfb
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplri8a.pfb
+INPUT C:/Users/mameli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplri8a.pfb

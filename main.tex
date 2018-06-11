@@ -1,36 +1,101 @@
 \documentclass[12pt]{article}
 \usepackage{listings}
+\usepackage{enumerate}
 \usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
 \usepackage{float}
+\usepackage{caption}
+\usepackage[shortlabels]{enumitem}
+\usepackage[T1]{fontenc}
 
-\lstdefinestyle{sql}
-{
-    language=SQL,
-    basicstyle=\small,
-    identifierstyle=\ttfamily,
-    keywordstyle=\bfseries\ttfamily\color[rgb]{0,0,1},
-	stringstyle=\ttfamily\color[rgb]{0.627,0.126,0.941},
-	columns=fullflexible,
-    morekeywords={REFERENCES}
+\usepackage{mathpazo} 
+
+\definecolor{codeblue}{rgb}{0.21, 0.46, 0.80}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{monokai@black}{HTML}{2C2C2A}
+\definecolor{monokai@gray}{HTML}{524F52}
+\definecolor{monokai@magenta}{HTML}{D33682}
+\definecolor{monokai@blue}{HTML}{004C99}
+
+\lstdefinestyle{sql}{
+	frame=tb,
+	language=SQL,
+	backgroundcolor=\color{backcolour},
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=left,
+	numberstyle=\tiny\color{monokai@black},
+	numbersep=5pt,
+	stepnumber=2,
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3,
+	numberstyle=\color{monokai@gray},
+	keywordstyle=\color{codeblue},
+	stringstyle=\color{monokai@magenta}\ttfamily,
+	identifierstyle=\color{monokai@black},
+	commentstyle=\color{monokai@blue},
+	emphstyle=\color{monokai@red},
+	columns=fullflexible
+}
+
+\newcommand{\sectionline}[2]{%
+  \nointerlineskip \vspace{.5\baselineskip}\hspace{\fill}
+  {\color{#1}
+    \resizebox{0.5\linewidth}{2ex}
+    {{%
+    {\begin{tikzpicture}
+    \node  (C) at (0,0) {};
+    \node (D) at (9,0) {};
+    \path (C) to [ornament=#2] (D);
+    \end{tikzpicture}}}}}%
+    \hspace{\fill}
+    \par\nointerlineskip \vspace{.5\baselineskip}
 }
 
 \renewcommand{\lstlistingname}{Codice}
 
 \begin{document}
+\begin{titlepage}
+	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
-\title{Analisi carriere studenti iscritti al I anno del corso di laurea in Informatica}
-\author{
-  Tommaso, Ceccarini\\
-  \texttt{tommaso.ceccarini1@stud.unifi.it}
-  \and
-  Filippo, Mameli\\
-  \texttt{filippo.mameli@stud.unifi.it}
-}
-\date{Giugno 2018}
-\maketitle
+	\center
+	
+	\textsc{\LARGE Università degli studi di Firenze}\\[1.5cm] 
+	
+	\textsc{\Large Curriculum Data Science}\\[0.5cm] 
+	
+	\textsc{\large Data mining and organisation}\\[0.5cm] 
+
+	\HRule\\[0.4cm]
+	
+	{\huge\bfseries Analisi carriere studenti iscritti al I anno del corso di laurea in Informatica}\\[0.4cm] % Title of your document
+	
+	\HRule\\[1.5cm]
+	\vfill\vfill\vfill 
+
+	\begin{minipage}{\textwidth}
+		\begin{flushright}
+			\large
+			\textit{Studenti}\\
+			Tommaso \textsc{Ceccarini}\\
+			\texttt{tommaso.ceccarini1@stud.unifi.it}\\
+			Filippo \textsc{Mameli}\\
+			\texttt{filippo.mameli@stud.unifi.it}
+		\end{flushright}
+	\end{minipage}
+	
+	\vfill
+	
+	{\large\today}
+	
+\end{titlepage}
 
 \newpage
 
@@ -38,15 +103,16 @@
 
 \newpage
 
-% \thispagestyle{empty}\clearpage\mbox{}\clearpage
+\thispagestyle{empty}\clearpage\mbox{}\clearpage
 
 \section{Descrizione dati iniziali}
 Il dataset che abbiamo analizzato contiene dati sulle carriere accademiche degli studenti del corso di laurea di informatica dell'università degli studi di Firenze e il loro voto conseguito 
-al test di ingresso. In particolare, le informazioni presenti sono:
+al test di ingresso. 
+In particolare, le informazioni presenti sono:
 \begin{itemize}
 	\item Coorte: Anno di immatricolazione
 	\item Crediti totali: Numero crediti complessivi dello studente
-	\item Crediti con voto: Numero di crediti assegnati allo studente per esami con votazione in trentesimi(tutti tranne inglese)
+	\item Crediti con voto: Numero di crediti assegnati allo studente per esami con votazione in trentesimi(tutti tranne Inglese)
 	\item Voto medio: Media pesata dei voti degli esami sostenuti
 \end{itemize}
 In seguito ci sono sei coppie di attributi che indicano:
@@ -58,117 +124,129 @@ Gli esami sono Algoritmi e strutture dati (ASD), Architetture degli elaboratori(
 \begin{itemize}
 	\item Punteggio conseguito al test di ingresso.
 \end{itemize}
-
 Per quanto riguarda gli attributi relativi ai voti degli esami i valori che questi assumono sono:
-il voto conseguito dallo studente nel caso in cui abbia sostenuto l'esame;
-oppure zero se lo studente non ha sostenuto l'esame durante la sessione estiva del proprio anno di immatricolazione.
-
+il voto conseguito dallo studente nel caso in cui abbia sostenuto l'esame oppure
+zero se lo studente non ha sostenuto l'esame durante la sessione estiva del proprio anno di immatricolazione.
 \section{Gestione dei dati}
 Abbiamo deciso di effetture le seguenti operazioni sul dataset:
 \begin{itemize}
 	\item eliminazione degli studenti che hanno sostenuto solo inglese
 	\item riportare tutti gli attributi relativi alle date degli esami nel formato YYYY-MM-DD
 \end{itemize}
-Il motivo per cui abbiamo deciso di eseguire l operazione del primo punto è che gli studenti in questione non avendo voti in trentesimi non ci sono pari significativi per analisi.
-Per quanto riguarda il secondo punto invece, nel caso in cui uno studente non avesse sostenuto un particolare esame, erano presenti valori pari a zero in alcuni casi e valori pari a "0000-00-00" in altri.
-Abbiamo quindi deciso di trattare questa incosisistenza dei dati ponendo i valori pari a "0000-00-00".
 
-Per effetturare queste due operazioni abbiamo importato il dataset in database tramite l'operazione di import riportata nel Codice 1.
-\begin{lstlisting}[caption={Creazione della table}, style=sql, label={import}]
-CREATE TABLE `studenti` (
-  `coorte` int(11),
-  `crediti_totali` int(11),
-  `crediti_con_voto` int(11),
-  `voto_medio` int(11),
-  `ASD` int(11),
-  `data_ASD` text,
-  `ARC` int(11),
-  `data_ARC` text,
-  `PRG` int(11),
-  `data_PRG` text,
-  `ANI` int(11),
-  `data_ANI` text,
-  `MDL` int(11),
-  `data_MDL` text,
-  `INGLESE` int(11),
-  `data_INGLESE` text,
-  `TEST` int(11)
+Il motivo per cui abbiamo deciso di eseguire l'operazione del primo punto è che gli studenti in questione non avendo voti in trentesimi non ci sono parsi particolarmente significativi per analisi.
+
+Per quanto riguarda il secondo punto invece, nel caso in cui uno studente non avesse sostenuto un particolare esame, erano presenti valori pari a zero in alcuni casi e valori pari a ``0000-00-00'' in altri.
+Abbiamo quindi deciso di trattare questa incosisistenza dei dati ponendo i valori pari a ``0000-00-00''.
+
+Per effetturare queste due operazioni abbiamo importato il dataset in un database creando per prima una tabella, che è stata popolata in seguito importando il file CSV con i comandi riportati in Codice \ref{import}.
+\begin{lstlisting}[caption={Creazione della table}, style=sql, label={import}, captionpos=b]
+CREATE TABLE 'studenti' (
+  'coorte' int(11),
+  'crediti_totali' int(11),
+  'crediti_con_voto' int(11),
+  'voto_medio' int(11),
+  'ASD' int(11),
+  'data_ASD' text,
+  'ARC' int(11),
+  'data_ARC' text,
+  'PRG' int(11),
+  'data_PRG' text,
+  'ANI' int(11),
+  'data_ANI' text,
+  'MDL' int(11),
+  'data_MDL' text,
+  'INGLESE' int(11),
+  'data_INGLESE' text,
+  'TEST' int(11)
 ) ENGINE=InnoDB
-\end{lstlisting}
-Per quanto riguarda la gestione dell incosisistenza relativa alle date degli esami abbiamo risolto il problema specificando le query ripotate nel Codice \ref{update}.
 
-\begin{lstlisting}[caption={Update della tabella},style=sql, label={update}]
-update dmo.studenti set data_ARC = '0000-00-00' where data_ARC = '0'; 
-update dmo.studenti set data_ASD = '0000-00-00' where data_ASD = '0'; 
-update dmo.studenti set data_PRG = '0000-00-00' where data_PRG = '0'; 
-update dmo.studenti set data_ANI = '0000-00-00' where data_ANI = '0'; 
-update dmo.studenti set data_MDL = '0000-00-00' where data_MDL = '0';
+LOAD DATA INFILE 'studenti.csv' INTO TABLE studenti
+  FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+  LINES TERMINATED BY '\r\n'
+  IGNORE 1 LINES;
+\end{lstlisting}
+\newpage
+Per quanto riguarda la gestione dell incosisistenza relativa alle date degli esami abbiamo risolto il problema specificando le query ripotate nel Codice \ref{update}.
+\begin{lstlisting}[caption={Update della tabella},style=sql, label={update},captionpos=b]
+update dmo.studenti set data_ARC = '0000-00-00' where data_ARC='0'; 
+update dmo.studenti set data_ASD = '0000-00-00' where data_ASD='0'; 
+update dmo.studenti set data_PRG = '0000-00-00' where data_PRG='0'; 
+update dmo.studenti set data_ANI = '0000-00-00' where data_ANI='0'; 
+update dmo.studenti set data_MDL = '0000-00-00' where data_MDL='0';
 update dmo.studenti set data_INGLESE = '0000-00-00' where data_INGLESE = '0';
 \end{lstlisting}
 
 \section{Analisi dei dati}
 Per analizzare i dati a disposizione abbiamo utilizzato il linguaggio R per determinare la correlazione tra i diversi attributi.
-In Tabella \ref{corr} sono riportati i valori di correlazione.
+In Tabella~\ref{tab:corr} sono riportati i valori di correlazione.
 
 \begin{table}[H]
-\centering
-\caption{Correlazione}
-\label{corr}
-\resizebox{\textwidth}{!}{
-\begin{tabular}{@{}llllllllllll@{}}
-\toprule
-                   & coorte   & crediti\_totali & crediti\_con\_voto  & voto\_medio  & ASD      & ARC      & PRG     & ANI     & MDL      & INGLESE & TEST    \\
-coorte             & 1        & 0.013343        & 0.01821             & 0.03655      & 0.03581  & -0.01609 & -0.0822 & 0.13386 & -0.04033 & NA      & 0.04126 \\ \midrule
-crediti\_totali    & 0.01334  & 1               & 0.99522             & 0.44571      & 0.52984  & 0.72508  & 0.69882 & 0.61015 & 0.62789  & NA      & 0.38433 \\
-crediti\_con\_voto & 0.01821  & 0.99522         & 1                   & 0.44838      & 0.52957  & 0.71955  & 0.70879 & 0.61593 & 0.62654  & NA      & 0.39025 \\
-voto\_medio        & 0.03655  & 0.44571         & 0.44838             & 1            & 0.36900  & 0.36427  & 0.43085 & 0.39777 & 0.31828  & NA      & 0.39428 \\
-ASD                & 0.03581  & 0.52984         & 0.52957             & 0.36900      & 1        & 0.29321  & 0.31192 & 0.10116 & 0.23775  & NA      & 0.16149 \\
-ARC                & -0.0160  & 0.72508         & 0.71955             & 0.36427      & 0.29321  & 1        & 0.43166 & 0.27541 & 0.39622  & NA      & 0.29979 \\
-PRG                & -0.0822  & 0.69882         & 0.70879             & 0.43085      & 0.31192  & 0.43166  & 1       & 0.19585 & 0.27295  & NA      & 0.24356 \\
-ANI                & 0.13386  & 0.61015         & 0.61593             & 0.39777      & 0.10116  & 0.27541  & 0.19585 & 1       & 0.36333  & NA      & 0.32378 \\
-MDL                & -0.0403  & 0.62789         & 0.62654             & 0.31828      & 0.23775  & 0.39622  & 0.27295 & 0.36333 & 1        & NA      & 0.38777 \\
-INGLESE            & NA       & NA              & NA                  & NA           & NA       & NA       & NA      & NA      & NA       & 1       & NA      \\ 
-TEST               & 0.04126  & 0.384332        & 0.39025             & 0.39428      & 0.16149  & 0.29979  & 0.2435  & 0.32378 & 0.38777  & NA      & 1       \\\bottomrule                 
-\end{tabular}
-}
+	
+	\centering
+	\resizebox{\textwidth}{!}{
+	\begin{tabular}{@{}l|l|l|l|l|l|l|l|l|l|l|l@{}}
+	\toprule
+	                   & coorte   & crediti totali & crediti con voto  & voto medio  & ASD      & ARC      & PRG     & ANI     & MDL      & INGLESE & TEST    \\ \midrule
+	coorte             & 1        & 0.013343        & 0.01821             & 0.03655      & 0.03581  & -0.01609 & -0.0822 & 0.13386 & -0.04033 & NA      & 0.04126 \\ 
+	crediti\_totali    & 0.01334  & 1               & 0.99522             & 0.44571      & 0.52984  & 0.72508  & 0.69882 & 0.61015 & 0.62789  & NA      & 0.38433 \\
+	crediti\_con\_voto & 0.01821  & 0.99522         & 1                   & 0.44838      & 0.52957  & 0.71955  & 0.70879 & 0.61593 & 0.62654  & NA      & 0.39025 \\
+	voto\_medio        & 0.03655  & 0.44571         & 0.44838             & 1            & 0.36900  & 0.36427  & 0.43085 & 0.39777 & 0.31828  & NA      & 0.39428 \\
+	ASD                & 0.03581  & 0.52984         & 0.52957             & 0.36900      & 1        & 0.29321  & 0.31192 & 0.10116 & 0.23775  & NA      & 0.16149 \\
+	ARC                & -0.0160  & 0.72508         & 0.71955             & 0.36427      & 0.29321  & 1        & 0.43166 & 0.27541 & 0.39622  & NA      & 0.29979 \\
+	PRG                & -0.0822  & 0.69882         & 0.70879             & 0.43085      & 0.31192  & 0.43166  & 1       & 0.19585 & 0.27295  & NA      & 0.24356 \\
+	ANI                & 0.13386  & 0.61015         & 0.61593             & 0.39777      & 0.10116  & 0.27541  & 0.19585 & 1       & 0.36333  & NA      & 0.32378 \\
+	MDL                & -0.0403  & 0.62789         & 0.62654             & 0.31828      & 0.23775  & 0.39622  & 0.27295 & 0.36333 & 1        & NA      & 0.38777 \\
+	INGLESE            & NA       & NA              & NA                  & NA           & NA       & NA       & NA      & NA      & NA       & 1       & NA      \\ 
+	TEST               & 0.04126  & 0.384332        & 0.39025             & 0.39428      & 0.16149  & 0.29979  & 0.2435  & 0.32378 & 0.38777  & NA      & 1       \\\bottomrule                 
+	\end{tabular}
+	}
+	\caption{Correlazione}
+	\label{tab:corr}
 \end{table}
-Come è possibile notare dalla tabella, ci sono alcune ovvie correlazioni che coinvolgono gli attributi crediti totali e crediti con voto.
-Per quanto riguarda l'attributo corte si può notare come questo abbia una scarsa correlazione con gli altri attributi.
-Le correlazioni più evidenti e significative sono quelle che coinvolgono l' attributo crediti totali ( e quindi anche crediti con voto) con il voto che gli studenti hanno ottenuto per i diversi esami sostenuti.
-Infatti il valore di queste correlazioni è compreso tra 0.53 per quanto riguarda l'attributo di crediti totali e quello di Algoritmi e strutture dati e 0.73 per quanto riguarda crediti totali e il voto di Architetture degli elaboratori.
+Come è possibile notare dalla tabella, ci sono alcune ovvie correlazioni, come quella che coinvolge l'attributo crediti totali e crediti con voto.
+Per quanto riguarda l'attributo corte si può notare come questo abbia una scarsa correlazione con tutti gli altri attributi.
+
+Le correlazioni più evidenti e significative sono quelle che coinvolgono l' attributo crediti totali (e quindi anche crediti con voto) con il voto che gli studenti hanno ottenuto nei diversi esami sostenuti.
+Infatti il valore di queste correlazioni è compreso tra 0.53 per quanto riguarda l'attributo di crediti totali e quello di Algoritmi e strutture dati e 0.73 per quanto riguarda Crediti totali e il voto di Architetture degli elaboratori.
 Tale risultato può essere interpretato in maniera abbastanza intuitiva, infatti mostra che se uno studente ha sostenuto più esami( e quindi ha più crediti) ha in generale ottenuto dei voti migliori.
+
 Nelle figure sono riportati gli scatterplot degli attributi relativi a crediti totali con i voti di Architetture degli elaboratori e Algoritmi e strutture dati.
 \begin{figure}[H]
 	\includegraphics[width=\textwidth]{img/creditiAsd.png}
+	\caption{Scatterplot tra Crediti totali e Algoritmi e strutture dati}
 \end{figure}
 
 \begin{figure}[H]
 	\includegraphics[width=\textwidth]{img/creditiArc.png}
+	\caption{Scatterplot tra Crediti totali e Architetture degli elaboratori}
 \end{figure}
 
 L'attributo test è correlato maggiormente con l'attributo voto medio. 
 Si può notare inoltre che il valore di correlazione è significativamente più alto di quello che l'attributo test ha con i voti dei singoli esami, con l'unica eccezione di MDL.
 Questi valori lasciano suggerire che il punteggio conseguito al test d'ingresso di ogni studente sia un buon parametro per valutarne l'andamento generale piuttosto che i voti di un singolo esame.
-Inoltre l'attributo test mostra una discreta correlazione con i crediti totali( e quindi anche con i crediti con voto).
+Inoltre l'attributo test mostra una discreta correlazione con i crediti totali (e quindi anche con i crediti con voto).
 
 Per quanto riguarda le correlazioni tra i voti dei diversi esami è possibile notare che il valore più alto è quello tra Architetture degli elaboratori e Programmazione che è circa pari a 0.43.
-Mentre invece si ha una correlazione quasi nulla, ossia circa 0.10, tra il voto di Algoritmi e strutture dati e il voto di Analisi 1.
-Nelle figure sono riportati gli tra ARC e PRG e ASD  e Analisi 1
+Mentre si ha una correlazione quasi nulla, ossia circa 0.10, tra il voto di Algoritmi e strutture dati e il voto di Analisi 1.
+
+Nelle figure sono riportati gli scatterplot tra Architetture degli elaboratori e Programmazione e tra Algoritmi e strutture dati  e Analisi I.
+
 \begin{figure}[H]
+	\centering
 	\includegraphics[width=\textwidth]{img/arcPrg.png}
-\end{figure}
-
-\begin{figure}[h]
 	\includegraphics[width=\textwidth]{img/asdAni.png}
+	\captionsetup{justification=centering}
+	\caption{Scatterplot tra Architetture degli elaboratori e Programmazione e tra Algoritmi e strutture dati e Analisi I}
 \end{figure}
 
-In figura X viene riportata la matrice di correlazione.
 \begin{figure}[H]
 	\includegraphics[width=\textwidth]{img/corMatrix.png}
+	\caption{Matrice di correlazione}
+	\label{fig:cMatrix}
 \end{figure}
 
-In figura Y viene riportato lo scatter plot dei attributi del dataset.
-
+In Figura~\ref{fig:cMatrix} viene riportata la matrice di correlazione.
 Per applicare gli algoritmi di clustering è stato utilizzato il software Weka. Tuttavia prima di applicare tali algoritmi è stato necessiaria un ulteriore fase di preprocessing
 nella quale sono stati normalizzati tutti gli attributi del dataset in una scala di valori compresi tra zero e uno in modo da evitare problemi dovuto alle diverse scale di valori dei attributi.
 
@@ -318,8 +396,10 @@ una votazione discreta all'esame di Analisi I e che non hanno sostenuto Matemati
 In Figura \ref{APC} è riportato lo scatter plot relativo ai voti di Architetture degli Elaboratori e Programmazione che sono
 maggiormente correlati. Il valore del SSE in questo caso è pari a 106.19.
 \begin{figure}[H]
-	\label{APC}
 	\includegraphics[width=\textwidth]{img/ARC-PRG-Cluster.png}
+	\captionsetup{justification=centering}
+	\caption{Scatter plot relativo ai cluster dei voti di Architetture degli Elaboratori e Programmazione}
+	\label{APC}
 \end{figure}
 
 \section{Conclusioni}
