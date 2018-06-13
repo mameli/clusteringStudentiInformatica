@@ -112,7 +112,7 @@ In particolare, le informazioni presenti sono:
 \begin{itemize}
 	\item Coorte: Anno di immatricolazione
 	\item Crediti totali: Numero crediti complessivi dello studente
-	\item Crediti con voto: Numero di crediti assegnati allo studente per esami con votazione in trentesimi(tutti tranne Inglese)
+	\item Crediti con voto: Numero di crediti assegnati allo studente per esami con votazione in trentesimi (tutti tranne Inglese)
 	\item Voto medio: Media pesata dei voti degli esami sostenuti
 \end{itemize}
 In seguito ci sono sei coppie di attributi che indicano:
@@ -120,7 +120,7 @@ In seguito ci sono sei coppie di attributi che indicano:
 	\item Nome dell'esame
 	\item Data in cui lo studente ha sostenuto l'esame
 \end{itemize}
-Gli esami sono Algoritmi e strutture dati (ASD), Architetture degli elaboratori(ARC), Programmazione(PRG), Analisi I(ANI), Matematica discreta e logica(MDL) e Inglese.
+Gli esami sono Algoritmi e strutture dati (ASD), Architetture degli elaboratori (ARC), Programmazione (PRG), Analisi I (ANI), Matematica discreta e logica (MDL) e Inglese.
 \begin{itemize}
 	\item Punteggio conseguito al test di ingresso.
 \end{itemize}
@@ -205,11 +205,11 @@ In Tabella~\ref{tab:corr} sono riportati i valori di correlazione.
 	\label{tab:corr}
 \end{table}
 Come è possibile notare dalla tabella, ci sono alcune ovvie correlazioni, come quella che coinvolge l'attributo crediti totali e crediti con voto.
-Per quanto riguarda l'attributo corte si può notare come questo abbia una scarsa correlazione con tutti gli altri attributi.
+Per quanto riguarda l'attributo coorte si può notare come questo abbia una scarsa correlazione con tutti gli altri attributi.
 
 Le correlazioni più evidenti e significative sono quelle che coinvolgono l' attributo crediti totali (e quindi anche crediti con voto) con il voto che gli studenti hanno ottenuto nei diversi esami sostenuti.
 Infatti il valore di queste correlazioni è compreso tra 0.53 per quanto riguarda l'attributo di crediti totali e quello di Algoritmi e strutture dati e 0.73 per quanto riguarda Crediti totali e il voto di Architetture degli elaboratori.
-Tale risultato può essere interpretato in maniera abbastanza intuitiva, infatti mostra che se uno studente ha sostenuto più esami( e quindi ha più crediti) ha in generale ottenuto dei voti migliori.
+Tale risultato può essere interpretato in maniera abbastanza intuitiva, infatti mostra che se uno studente ha sostenuto più esami (e quindi ha più crediti) ha in generale ottenuto dei voti migliori.
 
 Nelle figure sono riportati gli scatterplot degli attributi relativi a crediti totali con i voti di Architetture degli elaboratori e Algoritmi e strutture dati.
 \begin{figure}[H]
@@ -257,7 +257,7 @@ Infatti come è stato già precedentemente detto c'è una forte correlazione tra
 
 È stato utilizzato l'algoritmo di Kmeans implementato in Weka specificando inizialmente un numero di cluster pari a due, lasciando i valori di default per la generazione dei centroidi.
 
-In tabella \ref{c2AP} sono riportate le coordinate dei centroidi relativi all'esecuzione dell'algoritmo con un valore di k pari a 2.
+In Tabella \ref{c2AP} sono riportate le coordinate dei centroidi relativi all'esecuzione dell'algoritmo con un valore di k pari a 2.
 
 % Cluster# 2 sse 51.35
 % Attribute         Full Data          0          1
@@ -272,20 +272,20 @@ In tabella \ref{c2AP} sono riportate le coordinate dei centroidi relativi all'es
 
 \begin{table}[ht]
 	\centering
-	\caption{Cluster con ARC e PRG con k = 2 SSE 51.35}
-	\label{c2AP}
 	\begin{tabular}{@{}lllll@{}}
 	\toprule
 	  & Crediti totali & ARC  & PRG  & Istanze\\ \midrule
 	0 & 0.65           & 0.32 & 0.85 & 183 ( 58\%)\\
 	1 & 0.27           & 0.05 & 0    & 133 ( 42\%)\\ \bottomrule
 	\end{tabular}
+	\caption{Cluster con ARC e PRG con k = 2 SSE 51.35}
+	\label{c2AP}
 \end{table}
 
-Come si può notare dalle cordinate dei centroidi questa prima esecuzione dell'algoritmo suddivide il dataset in due gruppi piuttosto distinti.
+Come si può notare dalle coordinate dei centroidi questa prima esecuzione dell'algoritmo suddivide il dataset in due gruppi piuttosto distinti.
 Il valore della somma degli errori al quadrato(SSE) in questa esecuzione è risultata pari a 51.35
 
-In tabella \ref{c3AP} sono riportate le coordinate dei centroidi relativi all'esecuzione dell'algoritmo con un valore di k pari a 3.
+In Tabella \ref{c3AP} sono riportate le coordinate dei centroidi relativi all'esecuzione dell'algoritmo con un valore di k pari a 3.
 % Cluster# 3 sse 14.85
 % Attribute         Full Data          0          1          2
 %                     (316.0)     (73.0)    (133.0)    (110.0)
@@ -299,8 +299,6 @@ In tabella \ref{c3AP} sono riportate le coordinate dei centroidi relativi all'es
 % 2      110 ( 35%)
 \begin{table}[ht]
 	\centering
-	\caption{Cluster con ARC e PRG con k = 3 SSE 14.85}
-	\label{c3AP}
 	\begin{tabular}{@{}lllll@{}}
 	\toprule
 	  & Crediti totali & ARC  & PRG  & Istanze\\ \midrule
@@ -308,9 +306,11 @@ In tabella \ref{c3AP} sono riportate le coordinate dei centroidi relativi all'es
 	1 & 0.27           & 0.05 & 0    & 133 ( 42\%)\\
 	2 & 0.50           & 0    & 0.81 & 110 ( 35\%)\\ \bottomrule
 	\end{tabular}
+	\caption{Cluster con ARC e PRG con k = 3 SSE 14.85}
+	\label{c3AP}
 \end{table}
 
-In questo caso il valore di SSE è pari a 14.85. È inoltre possibile constatare come l'algoritmo di kmean abbia messo in evidenza tre tipologie ben distinte di studenti:
+In questo caso il valore di SSE è pari a 14.85. È inoltre possibile constatare come l'algoritmo di kmeans abbia messo in evidenza tre tipologie ben distinte di studenti:
 \begin{itemize}
 	\item Gli studenti appartenenti al cluster 0 sono gli studenti "migliori" avendo sostenuto la quasi totalità degli esami del primo anno alla fine della sessione estiva e riportando delle ottime valutazioni per quanto riguarda gli esami di Architetture e di Programmazione;
 	\item La seconda categoria di studenti (cluster 1) sono gli studenti "peggiori" che hanno sostenuto pochi esami e nel caso specifico delle materie considerate hanno conseguito valutazioni basse o non hanno sostenuto l'esame;
@@ -360,8 +360,6 @@ In Tabella \ref{c3MT} sono riportate le coordinate dei centroidi relativi all'es
 % 2       85 ( 27%)
 \begin{table}[ht]
 	\centering
-	\caption{Cluster con Voto\_medio e Test con k = 3 SSE 9.6}
-	\label{c3MT}
 	\begin{tabular}{@{}llll@{}}
 	\toprule
 	  & voto medio & Test  & Istanze\\ \midrule
@@ -369,6 +367,8 @@ In Tabella \ref{c3MT} sono riportate le coordinate dei centroidi relativi all'es
 	1 & 0.75       & 0.66  & 146 ( 42\%)\\
 	2 & 0.45       & 0.67  & 85  ( 27\%)\\ \bottomrule
 	\end{tabular}
+	\caption{Cluster con Voto\_medio e Test con k = 3 SSE 9.6}
+	\label{c3MT}
 \end{table}
 
 In questo caso è possibile notare come
@@ -383,7 +383,7 @@ SSE del clustering in questo caso è 9.6.
 
 Infine l'ultima analisi che abbiamo deciso di condurre è quella relativa a tutti i voti conseguiti dagli studenti del primo
 anno durante la sessione estiva. In questo caso l'algoritmo di clustering è stato inizializzato con un valore di k=3.
-In Tabella Tabella \ref{c3V} sono riportate le coordinate dei centroidi al termine dell'algoritmo. 
+In Tabella \ref{c3V} sono riportate le coordinate dei centroidi al termine dell'algoritmo. 
 
 % Attribute    Full Data          0          1          2
 %                (316.0)    (100.0)    (133.0)     (83.0)
@@ -400,8 +400,6 @@ In Tabella Tabella \ref{c3V} sono riportate le coordinate dei centroidi al termi
 
 \begin{table}[ht]
 	\centering
-	\caption{Cluster di tutti i voti con k = 3 SSE 106.19}
-	\label{c3V}
 	\begin{tabular}{@{}lllllll@{}}
 	\toprule
 	  & ASD  & ARC  & PRG & ANI  & MDL  & Istanze      \\ \midrule
@@ -409,6 +407,8 @@ In Tabella Tabella \ref{c3V} sono riportate le coordinate dei centroidi al termi
 	1 & 0.65 & 0.05 & 0   & 0.50 & 0.12 &  133 ( 42\%) \\
 	2 & 0.91 & 0.65 & 0.89& 0.88 & 0.60 &  83  ( 26\%) \\ \bottomrule
 	\end{tabular}
+	\caption{Cluster di tutti i voti con k = 3 SSE 106.19}
+	\label{c3V}
 \end{table}
 
 In questo caso sono stati determinati i profili di tre diversi gruppi di studenti:
