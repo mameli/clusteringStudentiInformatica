@@ -1,0 +1,18 @@
+#creare un grafico con ggplot
+
+x <- 2:50
+y<- c(51.35,14.85,12.38,9.99,9.49,9.23,8.85,7.77,7.63 ,3.45,2.93,2.64,2.46,2.43,2.40,2.36,2.28,2.28,2.00,1.86,1.83,1.78,1.73,1.60,1.60,1.25,1.21,1.11,1.11,1.10,1.08,1.06,1.04,1.02,1.02,0.98,0.96,0.96,0.95,0.95,0.90,0.83,0.81,0.78,0.78,0.78,0.74,0.74,0.73)
+library(ggplot2)
+data = data.frame(x,y)
+k = x
+SSE = y
+ggplot(data, aes(x=k, y=SSE)) +    geom_point(shape=1) +  geom_line() + geom_point(color = 'black')
+
+#stampare valori di k con variazione di SSE minore di una soglia eps
+
+eps = 0.01
+for(i in 1:48){
+	if(data[i,2] - data[i+1,2] < eps){
+		print(data[i,1])    
+    	}
+}

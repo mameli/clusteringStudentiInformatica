@@ -3,6 +3,7 @@
 \usepackage{enumerate}
 \usepackage{xcolor}
 \usepackage{graphicx}
+\usepackage{subcaption}
 \usepackage{booktabs}
 \usepackage[italian]{babel}
 \usepackage[utf8]{inputenc}
@@ -252,6 +253,8 @@ nella quale sono stati normalizzati tutti gli attributi del dataset in una scala
 
 
 \section{Clustering}
+\label{cap:clust}
+In questo Capitolo verranno effettuate alcune analisi di clustering utilizzando alcuni degli algoritmi piu'\ noti per risolvere questo problema. In particolare, nel caso dell'algoritmo di Kmeans viene stabilito preventivamente il numero dei cluster possibili utilizzando valori ritenuti sensati di volta in volta. Per la valutazione del clustering ottenuto si rimanda al Capitolo \ref{cap:val-clust} in cui viene analizzata la validità dei risultati ottenuti e viene determinato il numero di cluster ottimali per ogni analisi effettuata.
 Come prima analisi mostriamo quella relativa ai tre attributi del dataset maggiormente correlati (a meno di correlazioni ovvie) ossia crediti totali, Architetture e Programmazione.
 Infatti come è stato già precedentemente detto c'è una forte correlazione tra i crediti totali e architetture pari a 0.73 mentre tra crediti totali e Programmazione pari a 0.70.
 
@@ -428,6 +431,89 @@ maggiormente correlati. Il valore del SSE in questo caso è pari a 106.19.
 	\caption{Scatter plot relativo ai cluster dei voti di Architetture degli Elaboratori e Programmazione}
 	\label{APC}
 \end{figure}
+
+\section{Valutazione del clustering e model selection}
+\label{cap:val-clust}
+
+Nel Capitolo \ref{cap:clust} l'algoritmo di Kmeans è stato eseguito scegliendo preventivamente il numero di cluster possibili (tipicamente 2 o 3) basandosi esclusivamente sull'intuizione e quindi senza avere garanzie circa la bontà e correttezza dei risultati ottenuti. In questo Capitolo viene valutata la validità delle analisi di clustering effettuate e viene utilizzata una procedura basata sul SSE e che tenta di determinare il valore ottimale di $k$ con cui inizializzare l'algoritmo di Kmeans in modo da migliorarne la validità. Per ciascuno degli aspetti inizializzati vengono quindi eseguite le seguenti operazioni:
+
+\begin{enumerate}
+\item determinazione dei valori del SSE in funzione di $k$;
+\item \label{item:k-opt} scelta di $k_{opt}$ come il più piccolo $k$ tale per cui il valore di SSE "smette di diminuire";
+\item \label{item:corr-neg} confronto del valore di correlazione ottenuta tra la matrice di incidenza e quella delle distanze per i valori di $k=2$,$k=3$ e $k_{opt}$.
+\end{enumerate}
+
+Per quanto riguarda il Punto \ref{item:k-opt} è necessario approssimare il valore di $k_{opt}$ scegliendo, ad esempio, il primo valore di $k$ per cui si verifica una variazione nel SSE minore di una quantità fissata $\varepsilon$. Per quanto concerne il Punto \ref{item:corr-neg} si ha che un valore inferiore della correlazione (sperabilmente negativo) indica un miglior risultato di clustering poiché, idealmente, punti appartenenti allo stesso cluster (quindi con valore di incidenza $1$) dovrebbero trovarsi a una distanza minore. Quindi, per i tre attributi crediti totali, architetture e programmazione su cui è stata fatta la prima analisi con l'algoritmo di Kmeans si ottiene il grafico $k-SSE$ riportato in Figura \ref{fig:k-sse1}.
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{img/k-sse-crediti-totali-arc-prg.pdf}
+	\caption{Andamento del valore del $SSE$ in funzione del valore di $k$.}
+	\label{fig:k-sse1}
+\end{figure}
+
+Scegliendo il valore minimo di $\varepsilon=0.01$ (dato che è stato scelto di memorizzare i valori di SSE fino alla seconda cifra decimale) si ottiene un valore di $k_{opt}=18$. Quindi, per determinare il valore di correlazione tra matrice di incidenza e matrice delle distanze è necessario esportare preventivamente da Weka il dataset munito di un attributo aggiuntivo che indichi il cluster di appartenenza di ciascun record. In Figura \ref{fig:add-cluster} viene mostrato come creare ed esportare un dataset con weka aggiungendo per ogni record il riferimento al cluster di appartenenza a seguito dell'esecuzione dell'algoritmo di Kmeans per gli attributi crediti totali, architetture e programmazione con $k=2$.
+
+\begin{figure}
+	\centering 
+	\begin{subfigure}[b]{0.4\textwidth} 
+	\includegraphics[width=\textwidth]{img/save-cluster-ass-1.pdf}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[width=\textwidth]{img/save-cluster-ass-2.pdf}
+	\end{subfigure}
+	\\
+	\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[width=\textwidth]{img/save-cluster-ass-3.pdf}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[width=\textwidth]{img/save-cluster-ass-4.pdf}
+	\end{subfigure}
+	\caption{creazione ed esportazione del dataset con indicazione del cluster di appartenenza in Weka.}
+	\label{fig:add-cluster}
+\end{figure}
+
+Nel Codice \ref{datacluster} viene mostrato importare il dataset comprensivo degli attributi crediti totali, architetture, programmazione e cluster con R, mentre il Codice \ref{matrix-cor1} calcola la Matrice di incidenza dei cluster, la Matrice delle distanze per i punti e, infine, la correlazione tra le due matrici. Come si evince dal Codice, per poter calcolare il valore della correlazione è stato necessario linearizzare preventivamente le due matrici utilizzando l'istruzione \texttt{as.vector} di \texttt{R}.
+
+\lstset{%
+   breaklines=true
+}
+
+\begin{lstlisting}[caption={Importazione degli attributi crediti totali, architetture, programmazione e cluster.}, label={datacluster}, captionpos=b, language = R]
+library(readr)
+crediti_totali_prg_arc_clustered <- read_csv("git/clusteringStudentiInformatica/crediti_totali-prg-arc-clustered.csv", 
+    col_types = cols(ANI = col_skip(), ASD = col_skip(), 
+        INGLESE = col_skip(), Instance_number = col_skip(), 
+        MDL = col_skip(), TEST = col_skip(), 
+        coorte = col_skip(), crediti_con_voto = col_skip(), 
+        data_ANI = col_skip(), data_ARC = col_skip(), 
+        data_ASD = col_skip(), data_INGLESE = col_skip(), 
+        data_MDL = col_skip(), data_PRG = col_skip(), 
+        voto_medio = col_skip()))
+View(crediti_totali_prg_arc_clustered)
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Calcolo Matrice di incidenza dei cluster, delle distanze e correlazione tra le due matrici.}, label={matrix-cor1}, captionpos=b, language = R]
+#Matrice di incidenza
+C = matrix(nrow = 316,ncol = 316)
+for(i in 1:316){
+    for(j in 1:316){
+        if(crediti_totali_programmazione_architetture_clustered[i,4]==crediti_totali_programmazione_architetture_clustered[j,4]){
+            C[i,j] = 1
+        }else{
+            C[i,j] = 0
+        }
+    }
+}
+#Matrice distanza
+D = as.matrix(dist(crediti_totali_programmazione_architetture_clustered[,1:3],method = 'euclidean',diag = TRUE,upper = TRUE))
+
+c = as.vector(t(C))
+d = as.vector(t(D))
+
+cor(c,d,method="pearson")
+\end{lstlisting}	
+
+Il valore di correlazione ottenuto in questo caso è pari a $-0.687$.
 
 \section{Conclusioni}
 In riferimento ai risultati ottenuti con le tecniche di clustering è possibile trarre le seguenti conclusioni riguardo
