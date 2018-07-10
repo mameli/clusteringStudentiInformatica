@@ -451,7 +451,7 @@ Per quanto riguarda il Punto \ref{item:k-opt} è necessario approssimare il valo
 	\label{fig:k-sse1}
 \end{figure}
 
-Scegliendo il valore minimo di $\varepsilon=0.01$ (dato che è stato scelto di memorizzare i valori di SSE fino alla seconda cifra decimale) si ottiene un valore di $k_{opt}=18$. Quindi, per determinare il valore di correlazione tra matrice di incidenza e matrice delle distanze è necessario esportare preventivamente da Weka il dataset munito di un attributo aggiuntivo che indichi il cluster di appartenenza di ciascun record. In Figura \ref{fig:add-cluster} viene mostrato come creare ed esportare un dataset con weka aggiungendo per ogni record il riferimento al cluster di appartenenza a seguito dell'esecuzione dell'algoritmo di Kmeans per gli attributi crediti totali, architetture e programmazione con $k=2$.
+Scegliendo il valore minimo di $\varepsilon=0.01$ (dato che è stato scelto di memorizzare i valori di SSE fino alla seconda cifra decimale) si ottiene un valore di $k_{opt}=18$. Quindi, per determinare il valore di correlazione tra matrice di incidenza e matrice delle distanze è necessario esportare preventivamente da Weka il dataset munito di un attributo aggiuntivo che indichi il cluster di appartenenza di ciascun record. In Figura \ref{fig:add-cluster} viene mostrato come creare ed esportare un dataset con Weka aggiungendo per ogni record il riferimento al cluster di appartenenza a seguito dell'esecuzione dell'algoritmo di Kmeans per gli attributi crediti totali, architetture e programmazione con $k=2$.
 
 \begin{figure}
 	\centering 
@@ -513,7 +513,7 @@ d = as.vector(t(D))
 cor(c,d,method="pearson")
 \end{lstlisting}	
 
-Il valore di correlazione ottenuto in questo caso è pari a $-0.687$.
+Il valore di correlazione ottenuto in questo caso è pari a $-0.687$. Ripetendo il clustering per gli stessi attributi con $k=3$ e $k=18$ si ottiene, rispettivamente un valore della correlazione tra le due matrici di $-0.854$ e $-0.489$. Diversamente da quanto atteso, il valore calcolato per $k_{opt}$ non presenta un valore di correlazione inferiore rispetto agli altri due clustering, bensì risulta essere il valore peggiore tra quelli verificati con il metodo della correlazione.
 
 \section{Conclusioni}
 In riferimento ai risultati ottenuti con le tecniche di clustering è possibile trarre le seguenti conclusioni riguardo
