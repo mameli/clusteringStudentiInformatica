@@ -7,3 +7,5 @@
 \contentsline {figure}{\numberline {5}{\ignorespaces Scatter plot relativo ai cluster dei voti di Architetture degli Elaboratori e Programmazione\relax }}{13}
 \contentsline {figure}{\numberline {6}{\ignorespaces Andamento del valore del $SSE$ in funzione del valore di $k$.\relax }}{15}
 \contentsline {figure}{\numberline {7}{\ignorespaces creazione ed esportazione del dataset con indicazione del cluster di appartenenza in Weka.\relax }}{16}
+\contentsline {figure}{\numberline {8}{\ignorespaces Andamento del valore del $SSE$ in funzione del valore di $k$ per i voti di architetture, programmazione, algoritmi e strutture dati, analisi matematica 1 e matematica discreta e logica.\relax }}{19}
+\contentsline {figure}{\numberline {9}{\ignorespaces Andamento del valore del $SSE$ in funzione del valore di $k$ per il voto medio e il voto del test.\relax }}{20}
