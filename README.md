@@ -58,11 +58,11 @@ Voto medio e test correlazione
 
 k NN per DBSCAN
 
-> D = as.matrix(dist(voto_medio_test[,1:ncol(voto_medio_test)-1],method = 'euclidean',diag = TRUE,upper = TRUE))
-> D_1 = D
-> for(i in 1:nrow(voto_medio_test)){
-+     D_1[i,] = sort(D[i,])
-+ }
-> x = 1:nrow(voto_medio_test)
-> y = sort(D_1[,4])            			#mettere k al posto di 4
-> plot(x,y)
+D = as.matrix(dist(voto_medio_test[,1:ncol(voto_medio_test)-1],method = 'euclidean',diag = TRUE,upper = TRUE))
+D_1 = D
+for(i in 1:nrow(voto_medio_test)){
+    D_1[i,] = sort(D[i,])
+}
+x = 1:nrow(voto_medio_test)
+y = sort(D_1[,4])            			#mettere k al posto di 4
+plot(x,y)
