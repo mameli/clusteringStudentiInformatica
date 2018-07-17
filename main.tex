@@ -248,20 +248,29 @@ Nelle figure sono riportati gli scatterplot tra Architetture degli elaboratori e
 \end{figure}
 
 In Figura~\ref{fig:cMatrix} viene riportata la matrice di correlazione.
-Per applicare gli algoritmi di clustering è stato utilizzato il software Weka. Tuttavia prima di applicare tali algoritmi è stato necessiaria un ulteriore fase di preprocessing
-nella quale sono stati normalizzati tutti gli attributi del dataset in una scala di valori compresi tra zero e uno in modo da evitare problemi dovuto alle diverse scale di valori dei attributi.
+Per applicare gli algoritmi di clustering è stato utilizzato il software Weka. Tuttavia prima di applicare tali algoritmi è stato necessaria un ulteriore fase di preprocessing
+nella quale sono stati normalizzati tutti gli attributi del dataset in una scala di valori compresi tra zero e uno in modo da evitare problemi dovuto alle diverse scale di valori degli attributi.
 
 
 \section{Clustering}
 \label{cap:clust}
-In questo Capitolo verranno effettuate alcune analisi di clustering utilizzando alcuni degli algoritmi piu'\ noti per risolvere questo problema. In particolare, nel caso dell'algoritmo di Kmeans viene stabilito preventivamente il numero dei cluster possibili utilizzando valori ritenuti sensati di volta in volta. Per la valutazione del clustering ottenuto si rimanda al Capitolo \ref{cap:val-clust} in cui viene analizzata la validità dei risultati ottenuti e viene determinato il numero di cluster ottimali per ogni analisi effettuata.
-Come prima analisi mostriamo quella relativa ai tre attributi del dataset maggiormente correlati (a meno di correlazioni ovvie) ossia crediti totali, Architetture e Programmazione.
+In questo Capitolo verranno effettuate alcune analisi di clustering sui seguenti attributi:
+\begin{itemize}
+\item crediti totali, architetture, programmazione;
+\item algoritmi e strutture dati, architetture, programmazione, analisi 1 e matematica discreta e logica;
+\item voto medio e test.
+\end{itemize}
+Le tecniche di clustering utilizzate sono il clustering gerarchico, l'algoritmo di Kmeans e infine l'algoritmo DBSCAN. In particolare:
+\begin{itemize}
+\item l'analisi effettuata con tecniche di clustering gerarchico è stata effettuata su un sottoinsieme dei dati a disposizione selezionato in base alla coorte dello studente;
+\item nel caso dell'algoritmo di Kmeans viene stabilito preventivamente il numero dei cluster possibili utilizzando valori ritenuti sensati di volta in volta;
+\item l'algoritmo DBSCAN è stato utilizzato per l'analisi relativa ai voti dei diversi esami scegliendo preventivamente i valori di \texttt{MinPts} e \texttt{eps} ritenuti sensati di volta in volta.
+\end{itemize}
+A eccezione fatta dell'algoritmo di DBSCAN tutte le analisi condotte sono state effettuate procedendo preventivamente alla normalizzazione degli attributi coinvolti. Per la valutazione dei risultati ottenuti si rimanda al Capitolo \ref{cap:val-clust} dove viene analizzata la validità dei risultati ottenuti e viene determinato: numero di cluster ottimali per l'algoritmo di Kmeans e valore di \texttt{eps} ottimale per DBSCAN.
+Come prima analisi viene mostrata quella relativa ai tre attributi del dataset maggiormente correlati (a meno di correlazioni ovvie) ossia crediti totali, architetture e programmazione.
 Infatti come è stato già precedentemente detto c'è una forte correlazione tra i crediti totali e architetture pari a 0.73 mentre tra crediti totali e Programmazione pari a 0.70.
-
 È stato utilizzato l'algoritmo di Kmeans implementato in Weka specificando inizialmente un numero di cluster pari a due, lasciando i valori di default per la generazione dei centroidi.
-
 In Tabella \ref{c2AP} sono riportate le coordinate dei centroidi relativi all'esecuzione dell'algoritmo con un valore di k pari a 2.
-
 % Cluster# 2 sse 51.35
 % Attribute         Full Data          0          1
 %                     (316.0)    (183.0)    (133.0)
@@ -272,7 +281,6 @@ In Tabella \ref{c2AP} sono riportate le coordinate dei centroidi relativi all'es
 % Clustered Instances
 % 0      183 ( 58%)
 % 1      133 ( 42%)
-
 \begin{table}[ht]
 	\centering
 	\begin{tabular}{@{}lllll@{}}
@@ -284,10 +292,8 @@ In Tabella \ref{c2AP} sono riportate le coordinate dei centroidi relativi all'es
 	\caption{Cluster con ARC e PRG con k = 2 SSE 51.35}
 	\label{c2AP}
 \end{table}
-
 Come si può notare dalle coordinate dei centroidi questa prima esecuzione dell'algoritmo suddivide il dataset in due gruppi piuttosto distinti.
-Il valore della somma degli errori al quadrato(SSE) in questa esecuzione è risultata pari a 51.35
-
+Il valore della somma degli errori al quadrato (SSE) in questa esecuzione è risultata pari a 51.35.
 In Tabella \ref{c3AP} sono riportate le coordinate dei centroidi relativi all'esecuzione dell'algoritmo con un valore di k pari a 3.
 % Cluster# 3 sse 14.85
 % Attribute         Full Data          0          1          2
@@ -312,15 +318,14 @@ In Tabella \ref{c3AP} sono riportate le coordinate dei centroidi relativi all'es
 	\caption{Cluster con ARC e PRG con k = 3 SSE 14.85}
 	\label{c3AP}
 \end{table}
-
 In questo caso il valore di SSE è pari a 14.85. È inoltre possibile constatare come l'algoritmo di kmeans abbia messo in evidenza tre tipologie ben distinte di studenti:
 \begin{itemize}
 	\item Gli studenti appartenenti al cluster 0 sono gli studenti "migliori" avendo sostenuto la quasi totalità degli esami del primo anno alla fine della sessione estiva e riportando delle ottime valutazioni per quanto riguarda gli esami di Architetture e di Programmazione;
 	\item La seconda categoria di studenti (cluster 1) sono gli studenti "peggiori" che hanno sostenuto pochi esami e nel caso specifico delle materie considerate hanno conseguito valutazioni basse o non hanno sostenuto l'esame;
 	\item Infine gli studenti appartenenti all'ultimo cluster sono gli studenti che hanno sostenuto Programmazione con un buon voto ma non hanno fatto l'esame di Architetture.
 \end{itemize}
-Come si evince andando ad analizzare i tre cluster in particolare notando le diverse combinazioni dei valori assunti dai centroidi dei voti, si capisce come sia assente la categoria di studenti che ha sostenuto con profitto l'esame di Architetture, ma non ha sostenuto l'esame di Programmazione,
-lasciando quindi intendere che se uno studente ha sostenuto l'esame di Architetture allora generalmente ha sostenuto con una buona valutazione l'esame di Programmazione.
+Come si evince analizzando i tre cluster in particolare notando le diverse combinazioni dei valori assunti dai centroidi dei voti, si capisce come sia assente la categoria di studenti che ha sostenuto con profitto l'esame di architetture, ma non ha sostenuto l'esame di programmazione,
+lasciando quindi intendere che se uno studente ha sostenuto l'esame di architetture allora generalmente ha sostenuto con una buona valutazione l'esame di programmazione.
 
 
 % Cluster# 2 sse 12.4
@@ -345,10 +350,102 @@ lasciando quindi intendere che se uno studente ha sostenuto l'esame di Architett
 % 	\end{tabular}
 % \end{table}
 
-La seconda analisi che è stata condotta riguarda gli attributi TEST e voto\_medio. E' stato scelto di analizzare 
-questi due attributi congiuntamente in quanto, come è stato detto nel capitolo precedente, l'attributo voto\_medio 
-presenta una buona correlazione con l'attributo TEST. 
+La seconda analisi che è stata condotta è quella relativa ai voti conseguiti dagli studenti del primo anno durante la sessione estiva. In questo caso l'algoritmo di K-means è stato inizializzato con un valore di $k=3$.
+In Tabella \ref{c3V} sono riportate le coordinate dei centroidi al termine dell'algoritmo. 
+% Attribute    Full Data          0          1          2
+%                (316.0)    (100.0)    (133.0)     (83.0)
+% =======================================================
+% ASD             0.7502      0.739     0.6551     0.9161
+% ARC             0.2126     0.0565     0.0519     0.6584
+% PRG             0.4929     0.8168          0     0.8923
+% ANI             0.5787     0.4303     0.5006     0.8826
+% MDL             0.2169     0.0223     0.1208     0.6055
+% 0      100 ( 32%)
+% 1      133 ( 42%)
+% 2       83 ( 26%) SSE106.19
+\begin{table}[ht]
+	\centering
+	\begin{tabular}{@{}lllllll@{}}
+	\toprule
+	  & ASD  & ARC  & PRG & ANI  & MDL  & Istanze      \\ \midrule
+	0 & 0.73 & 0.05 & 0.81& 0.43 & 0.02 &  100  ( 32\%)\\
+	1 & 0.65 & 0.05 & 0   & 0.50 & 0.12 &  133 ( 42\%) \\
+	2 & 0.91 & 0.65 & 0.89& 0.88 & 0.60 &  83  ( 26\%) \\ \bottomrule
+	\end{tabular}
+	\caption{Cluster di tutti i voti con k = 3 SSE 106.19}
+	\label{c3V}
+\end{table}
+In questo caso sono quindi stati determinati i profili di tre diversi gruppi di studenti:
+\begin{itemize}
+\item gli studenti che hanno conseguito una buona votazione negli esami di Algoritmi e Strutture Dati e Programmazione,
+una votazione discreta all'esame di Analisi I e che non hanno sostenuto Matematica discreta e Logica e Architetture degli elaboratori;
+\item gli studenti con le stesse caratteristiche del cluster precedente, ma che hanno sostenuto Programmazione
+\item gli studenti che hanno sostenuto tutti gli esami e con un buona votazione.
+\end{itemize}
+In Figura \ref{APC} è riportato lo scatter plot relativo ai voti di Architetture degli Elaboratori e Programmazione che sono
+maggiormente correlati. Il valore del SSE in questo caso è pari a 106.19. Come è stato specificato all'inizio del Capitolo, in questo caso è stato utilizzato anche l'algoritmo DBSCAN per effettuare il clustering degli attributi scelti. Inoltre, poiché gli attributi scelti per l'analisi in questo caso hanno valori scelti nello stesso intervallo $[0,31]$ non è stato necessario procedere alla normalizzazione. Quindi, analogamente a quanto fatto con l'algoritmo di K-means, i parametri con cui eseguire l'algoritmo sono stati scelti basandosi sull'intuizione e sulla conoscenza del problema. Per la valutazione dei risultati ottenuti e la scelta del valore ottimale di \texttt{eps} in funzione di \texttt{MinPts} si rimanda al Capitolo \ref{cap:val-clust}. In Tabella \ref{tab:dbscan605} sono riportati i cluster ottenuti e la proporzione di istanze al loro interno eseguendo l'algoritmo DBSCAN con \texttt{MinPts=6} e \texttt{eps=0.5}. In questo caso $38$ record dei $316$ totali sono stati marcati come rumore dall'algoritmo. In Tabella \ref{tab:dbscan1004} sono riportati i medesimi risultati eseguendo l'algoritmo DBSCAN con \texttt{MinPts=10} e \texttt{eps=0.4}. In questo caso, i record marcati come rumore dall'algoritmo sono invece $44$. Infine, la Tabella \ref{tab:dbscan2004} riporta i risultati ottenuti per l'esecuzione dell'algoritmo DBSCAN con \texttt{MinPts=20} e \texttt{eps=0.4}. Tuttavia, quest'ultima esecuzione dell'algoritmo ha portato a un notevole incremento di dati marcati come rumore. Infatti, in questo caso, ben $89$ dei $316$ record totali sono stati esclusi dal clustering. 
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{img/ARC-PRG-Cluster.png}
+	\captionsetup{justification=centering}
+	\caption{Scatter plot relativo ai cluster dei voti di Architetture degli Elaboratori e Programmazione}
+	\label{APC}
+\end{figure}
+\begin{table}[H]
+\centering
+\begin{tabular}{l|l|}
+\cline{2-2}
+                        & Istanze    \\ \hline
+\multicolumn{1}{|l|}{0} & 40 ( 14\%) \\ \hline
+\multicolumn{1}{|l|}{1} & 46 ( 17\%) \\ \hline
+\multicolumn{1}{|l|}{2} & 41 ( 15\%) \\ \hline
+\multicolumn{1}{|l|}{3} & 13 (5\%)   \\ \hline
+\multicolumn{1}{|l|}{4} & 45 ( 16\%) \\ \hline
+\multicolumn{1}{|l|}{5} & 33 ( 12\%) \\ \hline
+\multicolumn{1}{|l|}{6} & 6 (2\%)    \\ \hline
+\multicolumn{1}{|l|}{7} & 18 (6\%)   \\ \hline
+\multicolumn{1}{|l|}{8} & 22 (8\%)   \\ \hline
+\multicolumn{1}{|l|}{9} & 14 (5\%)   \\ \hline
+\end{tabular}
+\caption{Cluster ottenuti con DBSCAN eseguito con \texttt{MinPts=6} e \texttt{eps=0.5}.}
+\label{tab:dbscan605}
+\end{table}
+\begin{table}[H]
+\centering
+\begin{tabular}{l|l|}
+\cline{2-2}
+                        & Istanze    \\ \hline
+\multicolumn{1}{|l|}{0} & 40 ( 15\%) \\ \hline
+\multicolumn{1}{|l|}{1} & 46 ( 17\%) \\ \hline
+\multicolumn{1}{|l|}{2} & 41 ( 15\%) \\ \hline
+\multicolumn{1}{|l|}{3} & 13 (5\%)   \\ \hline
+\multicolumn{1}{|l|}{4} & 45 ( 17\%) \\ \hline
+\multicolumn{1}{|l|}{5} & 33 ( 12\%) \\ \hline
+\multicolumn{1}{|l|}{6} & 18 (7\%)   \\ \hline
+\multicolumn{1}{|l|}{7} & 22 (8\%)   \\ \hline
+\multicolumn{1}{|l|}{8} & 14 (5\%)   \\ \hline
+\end{tabular}
+\caption{Cluster ottenuti con DBSCAN eseguito con \texttt{MinPts=10} e \texttt{eps=0.4}.}
+\label{tab:dbscan1004}
+\end{table}
+\begin{table}[H]
+\centering
+\begin{tabular}{l|l|}
+\cline{2-2}
+                        & Istanze    \\ \hline
+\multicolumn{1}{|l|}{0} & 40 ( 18\%) \\ \hline
+\multicolumn{1}{|l|}{1} & 46 ( 20\%) \\ \hline
+\multicolumn{1}{|l|}{2} & 41 ( 18\%) \\ \hline
+\multicolumn{1}{|l|}{3} & 45 ( 20\%) \\ \hline
+\multicolumn{1}{|l|}{4} & 33 ( 15\%) \\ \hline
+\multicolumn{1}{|l|}{5} & 22 ( 10\%) \\ \hline
+\end{tabular}
+\caption{Cluster ottenuti con DBSCAN eseguito con \texttt{MinPts=20} e \texttt{eps=0.4}.}
+\label{tab:dbscan2004}
+\end{table}
 
+Infine, l'ultima analisi che è stata condotta riguarda gli attributi test e voto medio. E' stato scelto di analizzare 
+questi due attributi congiuntamente in quanto, come è stato detto nel capitolo precedente, l'attributo voto medio 
+presenta una buona correlazione con l'attributo test. 
 In Tabella \ref{c3MT} sono riportate le coordinate dei centroidi relativi all'esecuzione dell'algoritmo con un numero di cluster pari a 3.
 % Cluster# 3 sse 9.6
 % Attribute     Full Data          0          1          2
@@ -357,7 +454,6 @@ In Tabella \ref{c3MT} sono riportate le coordinate dei centroidi relativi all'es
 % voto_medio       0.5684     0.3665     0.7529     0.4534
 % TEST             0.5996     0.4188     0.6622     0.6729
 % Clustered Instances
-
 % 0       85 ( 27%)
 % 1      146 ( 46%)
 % 2       85 ( 27%)
@@ -373,64 +469,14 @@ In Tabella \ref{c3MT} sono riportate le coordinate dei centroidi relativi all'es
 	\caption{Cluster con Voto\_medio e Test con k = 3 SSE 9.6}
 	\label{c3MT}
 \end{table}
-
 In questo caso è possibile notare come
-l'algoritmo di k-means determini due cluster ben definiti che suddividono il dataset tra gli studenti che hanno una
+l'algoritmo di K-means determini due cluster ben definiti che suddividono il dataset tra gli studenti che hanno una
 media complessiva maggiore e un voto al test d'ingresso alto e quelli che invece hanno una media più bassa e 
 hanno conseguito punteggio basso al test di ingresso. Questi gruppi determinati sono coerenti con la correlazione 
 che esiste tra i due attributi che tuttavia non è particolarmente elevata (diversamente dagli attributi presi in 
 considerazione nell'analisi precedente). Infatti, oltre ai primi due cluster che identificano gli studenti "migliori"
 e quelli "peggiori" esiste un terzo cluster di studenti che hanno conseguito un punteggio al test d'ingresso decisamente
-positivo, ma non hanno mantenuto una media dei voti altrettanto buona. 
-SSE del clustering in questo caso è 9.6.
-
-Infine l'ultima analisi che abbiamo deciso di condurre è quella relativa a tutti i voti conseguiti dagli studenti del primo
-anno durante la sessione estiva. In questo caso l'algoritmo di clustering è stato inizializzato con un valore di k=3.
-In Tabella \ref{c3V} sono riportate le coordinate dei centroidi al termine dell'algoritmo. 
-
-% Attribute    Full Data          0          1          2
-%                (316.0)    (100.0)    (133.0)     (83.0)
-% =======================================================
-% ASD             0.7502      0.739     0.6551     0.9161
-% ARC             0.2126     0.0565     0.0519     0.6584
-% PRG             0.4929     0.8168          0     0.8923
-% ANI             0.5787     0.4303     0.5006     0.8826
-% MDL             0.2169     0.0223     0.1208     0.6055
-
-% 0      100 ( 32%)
-% 1      133 ( 42%)
-% 2       83 ( 26%) SSE106.19
-
-\begin{table}[ht]
-	\centering
-	\begin{tabular}{@{}lllllll@{}}
-	\toprule
-	  & ASD  & ARC  & PRG & ANI  & MDL  & Istanze      \\ \midrule
-	0 & 0.73 & 0.05 & 0.81& 0.43 & 0.02 &  100  ( 32\%)\\
-	1 & 0.65 & 0.05 & 0   & 0.50 & 0.12 &  133 ( 42\%) \\
-	2 & 0.91 & 0.65 & 0.89& 0.88 & 0.60 &  83  ( 26\%) \\ \bottomrule
-	\end{tabular}
-	\caption{Cluster di tutti i voti con k = 3 SSE 106.19}
-	\label{c3V}
-\end{table}
-
-In questo caso sono stati determinati i profili di tre diversi gruppi di studenti:
-
-\begin{itemize}
-\item gli studenti che hanno conseguito una buona votazione negli esami di Algoritmi e Strutture Dati e Programmazione,
-una votazione discreta all'esame di Analisi I e che non hanno sostenuto Matematica discreta e Logica e Architetture degli elaboratori;
-\item gli studenti con le stesse caratteristiche del cluster precedente, ma che hanno sostenuto Programmazione
-\item gli studenti che hanno sostenuto tutti gli esami e con un buona votazione.
-\end{itemize}
-
-In Figura \ref{APC} è riportato lo scatter plot relativo ai voti di Architetture degli Elaboratori e Programmazione che sono
-maggiormente correlati. Il valore del SSE in questo caso è pari a 106.19.
-\begin{figure}[H]
-	\includegraphics[width=\textwidth]{img/ARC-PRG-Cluster.png}
-	\captionsetup{justification=centering}
-	\caption{Scatter plot relativo ai cluster dei voti di Architetture degli Elaboratori e Programmazione}
-	\label{APC}
-\end{figure}
+positivo, ma non hanno mantenuto una media dei voti altrettanto buona. Il valore del SSE in questo caso è 9.6.
 
 \section{Valutazione del clustering e model selection}
 \label{cap:val-clust}
