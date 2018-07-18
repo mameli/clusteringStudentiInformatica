@@ -480,16 +480,16 @@ positivo, ma non hanno mantenuto una media dei voti altrettanto buona. Il valore
 
 \section{Valutazione del clustering e model selection}
 \label{cap:val-clust}
-
-Nel Capitolo \ref{cap:clust} l'algoritmo di Kmeans è stato eseguito scegliendo preventivamente il numero di cluster possibili (tipicamente 2 o 3) basandosi esclusivamente sull'intuizione e quindi senza avere garanzie circa la bontà e correttezza dei risultati ottenuti. In questo Capitolo viene valutata la validità delle analisi di clustering effettuate e viene utilizzata una procedura basata sul SSE e che tenta di determinare il valore ottimale di $k$ con cui inizializzare l'algoritmo di Kmeans in modo da migliorarne la validità. Per ciascuno degli aspetti inizializzati vengono quindi eseguite le seguenti operazioni:
+In questo Capitolo vengono presi in considerazione alcuni metodi per scegliere i parametri con cui inizializzare gli algoritmi di K-means e DBSCAN e vengono analizzati i risultati ottenuti nel Capitolo \ref{cap:clust}.
+Nel Capitolo precedente, infatti, l'algoritmo di K-means è stato eseguito scegliendo preventivamente il numero di cluster possibili (tipicamente 2 o 3) basandosi esclusivamente sull'intuizione e quindi senza avere garanzie circa la bontà e correttezza dei risultati ottenuti. In questo Capitolo viene valutata la validità delle analisi di clustering effettuate con l'algoritmo K-means e viene utilizzata una procedura basata sul SSE e che tenta di determinare il valore ottimale di $k$ con cui inizializzare l'algoritmo di K-means in modo da migliorarne la validità. Per ciascuno degli aspetti analizzati vengono quindi eseguite le seguenti operazioni:
 
 \begin{enumerate}
 \item determinazione dei valori del SSE in funzione di $k$;
-\item \label{item:k-opt} scelta di $k_{opt}$ come il più piccolo $k$ tale per cui il valore di SSE "smette di diminuire";
+\item \label{item:k-opt} scelta di $k_{opt}$ come il più piccolo $k$ tale per cui il valore del SSE "smette di decrescere";
 \item \label{item:corr-neg} confronto del valore di correlazione ottenuta tra la matrice di incidenza e quella delle distanze per i valori di $k=2$,$k=3$ e $k_{opt}$.
 \end{enumerate}
 
-Per quanto riguarda il Punto \ref{item:k-opt} è necessario approssimare il valore di $k_{opt}$ scegliendo, ad esempio, il primo valore di $k$ per cui si verifica una variazione nel SSE minore di una quantità fissata $\varepsilon$. Per quanto concerne il Punto \ref{item:corr-neg} si ha che un valore inferiore della correlazione (sperabilmente negativo) indica un miglior risultato di clustering poiché, idealmente, punti appartenenti allo stesso cluster (quindi con valore di incidenza $1$) dovrebbero trovarsi a una distanza minore. Quindi, per i tre attributi crediti totali, architetture e programmazione su cui è stata fatta la prima analisi con l'algoritmo di Kmeans si ottiene il grafico $k-SSE$ riportato in Figura \ref{fig:k-sse1}.
+Per quanto riguarda il Punto \ref{item:k-opt} è necessario approssimare il valore di $k_{opt}$ scegliendo, ad esempio, il primo valore di $k$ per cui si verifica una variazione nel SSE minore di una quantità fissata $\varepsilon$. Per quanto concerne il Punto \ref{item:corr-neg} si ha che un valore inferiore della correlazione (sperabilmente negativo) indica un miglior risultato di clustering poiché, idealmente, punti appartenenti allo stesso cluster (quindi con valore di incidenza $1$) dovrebbero trovarsi a una distanza minore. Quindi, per i tre attributi crediti totali, architetture e programmazione su cui è stata fatta la prima analisi con l'algoritmo di K-means si ottiene il grafico $k-SSE$ riportato in Figura \ref{fig:k-sse1}.
 
 \begin{figure}[H]
 	\includegraphics[width=\textwidth]{img/k-sse-crediti-totali-arc-prg.pdf}
@@ -594,7 +594,27 @@ In Tabella \ref{tab:corr} sono riportate sinteticamente le correlazioni ottenute
 	\label{fig:k-sse3}
 \end{figure}
 
-Una possibile spiegazione di questo fenomeno è la seguente: aumentando notevolmente il numero di cluster $k$ è probabile che record vicini vengano posti in cluster differenti soprattutto se i centroidi di quest'ultimi sono anch'essi molto vicini. Quando si verifica questa circostanza il valore di incidenza nella matrice dei cluster è $0$ anche se la corrispettiva distanza tra due record è molto piccola andando così a ridurre il modulo della correlazione (negativa) che esiste tra i valori delle due matrici. 
+Una possibile spiegazione di questo fenomeno è la seguente: aumentando notevolmente il numero di cluster $k$ è probabile che record vicini vengano posti in cluster differenti soprattutto se i centroidi di quest'ultimi sono anch'essi molto vicini. Quando si verifica questa circostanza il valore di incidenza nella matrice dei cluster è $0$ anche se la corrispettiva distanza tra due record è molto piccola andando così a ridurre il modulo della correlazione (negativa) che esiste tra i valori delle due matrici. E' possibile calcolare il valore di correlazione (e quindi valutare la bontà del clustering) tra matrice di incidenza dei cluster e matrice delle distanze anche nel clustering calcolato dall'algoritmo DBSCAN. Tale metodo è stato utilizzato nell'analisi relativa ai voti conseguiti dagli studenti nelle cinque materie del primo anno. Tuttavia, in questa circostanza è necessario provvedere all'eliminazione dal dataset dei record marcati come rumore da DBSCAN e quindi sarà necessario tener conto non solo del valore di correlazione ottenuto, ma considerare anche quanti dati vengono esclusi eseguendo l'algoritmo con certi parametri. La Figura \ref{fig:remove-noise} mostra con che valori inizializzare i parametri del filtro di Weka \texttt{RemoveWithValues} al fine di eliminare dal dataset i record marcati come rumore. La Tabella \ref{tab:corr-noise-dbscan} riporta sinteticamente i valori di correlazione e numero di record etichettati come rumore ottenuti per ogni esecuzione dell'algoritmo DBSCAN con i diversi parametri utilizzati. Come si evince dalla Tabella \ref{tab:corr-noise-dbscan} l'esecuzione ottimale del DBSCAN è ottenuta con \texttt{MinPts = 20} e \texttt{eps=0.4}. Tale risultato ha tuttavia un prezzo: i record etichettati in questo caso sono $89$ ossia più del doppio rispetto alle altre due esecuzioni prese in considerazione. Inoltre, considerando la Tabella \ref{tab:corr} è possibile concludere che, l'algoritmo DBSCAN determina dei clustering migliori rispetto a K-means per l'analisi relativa ai voti conseguiti dagli studenti.
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=0.7\textwidth]{img/filter-for-remove-noise.pdf}
+	\caption{Valori da impostare nei parametri del filtro \texttt{RemoveWithValues} di Weka.}
+	\label{fig:remove-noise}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\texttt{MinPts}, \texttt{eps} & Correlazione & Rumore \\ \hline
+$6$,$0.5$       & $-0.725$  & $38$     \\ \hline
+$10$,$0.4$      & $-0.728$  & $44$     \\ \hline
+$20$,$0.4$      & $-0.758$  & $89$     \\ \hline
+\end{tabular}
+\caption{Valori riepilogativi di correlazione e rumore per DBSCAN}
+\label{tab:corr-noise-dbscan}
+\end{table}
 
 \section{Conclusioni}
 In riferimento ai risultati ottenuti con le tecniche di clustering è possibile trarre le seguenti conclusioni riguardo
