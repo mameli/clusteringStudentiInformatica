@@ -58,11 +58,13 @@ Voto medio e test correlazione
 
 k NN per DBSCAN
 
-D = as.matrix(dist(voto_medio_test[,1:ncol(voto_medio_test)-1],method = 'euclidean',diag = TRUE,upper = TRUE))
+D = as.matrix(dist(asd_arc_prg_an1_mdl_clustered[,1:ncol(asd_arc_prg_an1_mdl_clustered)-1],method = 'euclidean',diag = TRUE,upper = TRUE))
+library(ggplot2)
 D_1 = D
-for(i in 1:nrow(voto_medio_test)){
+for(i in 1:nrow(asd_arc_prg_an1_mdl_clustered)){
     D_1[i,] = sort(D[i,])
 }
-x = 1:nrow(voto_medio_test)
-y = sort(D_1[,4])            			#mettere k al posto di 4
-plot(x,y)
+p = 1:nrow(asd_arc_prg_an1_mdl_clustered)
+dist = sort(D_1[,6])                                    #cambia 6 con k
+data = data.frame(p,dist)
+ggplot(data, aes(x=p, y=dist)) +    geom_point(shape=1) +  geom_line() + geom_point(color = 'black')

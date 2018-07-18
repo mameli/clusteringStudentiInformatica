@@ -616,6 +616,8 @@ $20$,$0.4$      & $-0.758$  & $89$     \\ \hline
 \label{tab:corr-noise-dbscan}
 \end{table}
 
+Fino a questo momento è stata analizzata la bontà del clustering fornito da DBSCAN con i parametri scelti in maniera arbitraria basandosi su intuito e conoscenza del problema. In maniera del tutto analoga a quanto fatto per l'algoritmo di K-means è possibile utilizzare una procedura di model selection che cerchi di stabilire il modello (e quindi i parametri) ottimale. Nel caso di DBSCAN la procedura che verrà utilizzata cerca di determinare il valore ottimale di \texttt{eps} fissando il valore di \texttt{MinPts} basandosi sull'idea che i $k$-esimi vicini dei punti contenuti in un cluster sono più o meno posti alla stessa distanza mentre i punti etichettati come rumore hanno il $k$-esimo vicino a una distanza maggiore. Basandosi su questo fatto è possibile determinare un grafico che sulle ascisse contiene gli indici dei record ordinati in modo non decrescente rispetto alla distanza dal loro $k$-esimo recordi più vicino e sulle ordinate mostra il valore di tale distanza. Come valore di \texttt{eps} è quindi possibile scegliere una distanza che è sufficientemente maggiore dalle precedenti.
+
 \section{Conclusioni}
 In riferimento ai risultati ottenuti con le tecniche di clustering è possibile trarre le seguenti conclusioni riguardo
 le carriere degli studenti:
