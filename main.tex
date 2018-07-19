@@ -237,9 +237,9 @@ In Tabella~\ref{tab:corr} sono riportati i valori di correlazione.
 	
 	\centering
 	\resizebox{\textwidth}{!}{
-	\begin{tabular}{@{}l|l|l|l|l|l|l|l|l|l|l|l@{}}
+	\begin{tabular}{@{}llllllllllll@{}}
 	\toprule
-	                   & coorte   & crediti totali & crediti con voto  & voto medio  & ASD      & ARC      & PRG     & ANI     & MDL      & INGLESE & TEST    \\ \midrule
+	                   & coorte   & crediti totali & crediti con voto  & voto medio  & ASD      & ARC      & PRG     & ANI     & MDL      & ING & TEST    \\ \midrule
 	coorte             & 1        & 0.013343        & 0.01821             & 0.03655      & 0.03581  & -0.01609 & -0.0822 & 0.13386 & -0.04033 & NA      & 0.04126 \\ 
 	crediti\_totali    & 0.01334  & 1               & 0.99522             & 0.44571      & 0.52984  & 0.72508  & 0.69882 & 0.61015 & 0.62789  & NA      & 0.38433 \\
 	crediti\_con\_voto & 0.01821  & 0.99522         & 1                   & 0.44838      & 0.52957  & 0.71955  & 0.70879 & 0.61593 & 0.62654  & NA      & 0.39025 \\
@@ -249,7 +249,7 @@ In Tabella~\ref{tab:corr} sono riportati i valori di correlazione.
 	PRG                & -0.0822  & 0.69882         & 0.70879             & 0.43085      & 0.31192  & 0.43166  & 1       & 0.19585 & 0.27295  & NA      & 0.24356 \\
 	ANI                & 0.13386  & 0.61015         & 0.61593             & 0.39777      & 0.10116  & 0.27541  & 0.19585 & 1       & 0.36333  & NA      & 0.32378 \\
 	MDL                & -0.0403  & 0.62789         & 0.62654             & 0.31828      & 0.23775  & 0.39622  & 0.27295 & 0.36333 & 1        & NA      & 0.38777 \\
-	INGLESE            & NA       & NA              & NA                  & NA           & NA       & NA       & NA      & NA      & NA       & 1       & NA      \\ 
+	ING                & NA       & NA              & NA                  & NA           & NA       & NA       & NA      & NA      & NA       & 1       & NA      \\ 
 	TEST               & 0.04126  & 0.384332        & 0.39025             & 0.39428      & 0.16149  & 0.29979  & 0.2435  & 0.32378 & 0.38777  & NA      & 1       \\\bottomrule                 
 	\end{tabular}
 	}
@@ -446,52 +446,52 @@ maggiormente correlati. Il valore del SSE in questo caso è pari a 106.19. Come 
 \end{figure}
 \begin{table}[H]
 \centering
-\begin{tabular}{l|l|}
-\cline{2-2}
-                        & Istanze    \\ \hline
-\multicolumn{1}{|l|}{0} & 40 ( 14\%) \\ \hline
-\multicolumn{1}{|l|}{1} & 46 ( 17\%) \\ \hline
-\multicolumn{1}{|l|}{2} & 41 ( 15\%) \\ \hline
-\multicolumn{1}{|l|}{3} & 13 (5\%)   \\ \hline
-\multicolumn{1}{|l|}{4} & 45 ( 16\%) \\ \hline
-\multicolumn{1}{|l|}{5} & 33 ( 12\%) \\ \hline
-\multicolumn{1}{|l|}{6} & 6 (2\%)    \\ \hline
-\multicolumn{1}{|l|}{7} & 18 (6\%)   \\ \hline
-\multicolumn{1}{|l|}{8} & 22 (8\%)   \\ \hline
-\multicolumn{1}{|l|}{9} & 14 (5\%)   \\ \hline
+\begin{tabular}{@{}ll@{}}
+\toprule
+                        & Istanze  \\\midrule
+\multicolumn{1}{l}{0} & 40 (14\%)  \\
+\multicolumn{1}{l}{1} & 46 (17\%)  \\
+\multicolumn{1}{l}{2} & 41 (15\%)  \\
+\multicolumn{1}{l}{3} & 13 (5\%)   \\
+\multicolumn{1}{l}{4} & 45 (16\%)  \\
+\multicolumn{1}{l}{5} & 33 (12\%)  \\
+\multicolumn{1}{l}{6} & 6  (2\%)   \\
+\multicolumn{1}{l}{7} & 18 (6\%)   \\
+\multicolumn{1}{l}{8} & 22 (8\%)   \\
+\multicolumn{1}{l}{9} & 14 (5\%)   \\\bottomrule
 \end{tabular}
 \caption{Cluster ottenuti con DBSCAN eseguito con \texttt{MinPts=6} e \texttt{eps=0.5}.}
 \label{tab:dbscan605}
 \end{table}
 \begin{table}[H]
 \centering
-\begin{tabular}{l|l|}
-\cline{2-2}
-                        & Istanze    \\ \hline
-\multicolumn{1}{|l|}{0} & 40 ( 15\%) \\ \hline
-\multicolumn{1}{|l|}{1} & 46 ( 17\%) \\ \hline
-\multicolumn{1}{|l|}{2} & 41 ( 15\%) \\ \hline
-\multicolumn{1}{|l|}{3} & 13 (5\%)   \\ \hline
-\multicolumn{1}{|l|}{4} & 45 ( 17\%) \\ \hline
-\multicolumn{1}{|l|}{5} & 33 ( 12\%) \\ \hline
-\multicolumn{1}{|l|}{6} & 18 (7\%)   \\ \hline
-\multicolumn{1}{|l|}{7} & 22 (8\%)   \\ \hline
-\multicolumn{1}{|l|}{8} & 14 (5\%)   \\ \hline
+\begin{tabular}{@{}ll@{}}
+\toprule
+                        & Istanze    \\ \midrule
+\multicolumn{1}{l}{0}   & 40 (15\%)  \\ 
+\multicolumn{1}{l}{1}   & 46 (17\%)  \\ 
+\multicolumn{1}{l}{2}   & 41 (15\%)  \\ 
+\multicolumn{1}{l}{3}   & 13 (5\%)   \\ 
+\multicolumn{1}{l}{4}   & 45 (17\%)  \\ 
+\multicolumn{1}{l}{5}   & 33 (12\%)  \\ 
+\multicolumn{1}{l}{6}   & 18 (7\%)   \\ 
+\multicolumn{1}{l}{7}   & 22 (8\%)   \\ 
+\multicolumn{1}{l}{8}   & 14 (5\%)   \\ \bottomrule
 \end{tabular}
 \caption{Cluster ottenuti con DBSCAN eseguito con \texttt{MinPts=10} e \texttt{eps=0.4}.}
 \label{tab:dbscan1004}
 \end{table}
 \begin{table}[H]
 \centering
-\begin{tabular}{l|l|}
-\cline{2-2}
-                        & Istanze    \\ \hline
-\multicolumn{1}{|l|}{0} & 40 ( 18\%) \\ \hline
-\multicolumn{1}{|l|}{1} & 46 ( 20\%) \\ \hline
-\multicolumn{1}{|l|}{2} & 41 ( 18\%) \\ \hline
-\multicolumn{1}{|l|}{3} & 45 ( 20\%) \\ \hline
-\multicolumn{1}{|l|}{4} & 33 ( 15\%) \\ \hline
-\multicolumn{1}{|l|}{5} & 22 ( 10\%) \\ \hline
+\begin{tabular}{@{}ll@{}}
+\toprule
+                        & Istanze  \\ \midrule
+\multicolumn{1}{l}{0} & 40 (18\%) \\
+\multicolumn{1}{l}{1} & 46 (20\%) \\
+\multicolumn{1}{l}{2} & 41 (18\%) \\
+\multicolumn{1}{l}{3} & 45 (20\%) \\
+\multicolumn{1}{l}{4} & 33 (15\%) \\
+\multicolumn{1}{l}{5} & 22 (10\%) \\ \bottomrule
 \end{tabular}
 \caption{Cluster ottenuti con DBSCAN eseguito con \texttt{MinPts=20} e \texttt{eps=0.4}.}
 \label{tab:dbscan2004}
@@ -556,21 +556,21 @@ Scegliendo il valore minimo di $\varepsilon=0.01$ (dato che è stato scelto di m
 
 \begin{figure}
 	\centering 
-	\begin{subfigure}[b]{0.4\textwidth} 
+	\begin{subfigure}[b]{0.496\textwidth} 
 	\includegraphics[width=\textwidth]{img/save-cluster-ass-1.pdf}
 	\end{subfigure}
-	\begin{subfigure}[b]{0.4\textwidth}
+	\begin{subfigure}[b]{0.496\textwidth}
 	\includegraphics[width=\textwidth]{img/save-cluster-ass-2.pdf}
 	\end{subfigure}
-	\\
-	\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[width=\textwidth]{img/save-cluster-ass-3.pdf}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[width=\textwidth]{img/save-cluster-ass-4.pdf}
-	\end{subfigure}
-	\caption{creazione ed esportazione del dataset con indicazione del cluster di appartenenza in Weka.}
-	\label{fig:add-cluster}
+
+	\begin{subfigure}[b]{0.496\textwidth}
+		\includegraphics[width=\textwidth]{img/save-cluster-ass-3.pdf}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.496\textwidth}
+		\includegraphics[width=\textwidth]{img/save-cluster-ass-4.pdf}
+		\end{subfigure}
+		\caption{creazione ed esportazione del dataset con indicazione del cluster di appartenenza in Weka.}
+		\label{fig:add-cluster}
 \end{figure}
 
 Nel Codice \ref{datacluster} viene mostrato importare il dataset comprensivo degli attributi crediti totali, architetture, programmazione e cluster con R, mentre il Codice \ref{matrix-cor1} calcola la Matrice di incidenza dei cluster, la Matrice delle distanze per i punti e, infine, la correlazione tra le due matrici. Come si evince dal Codice, per poter calcolare il valore della correlazione è stato necessario linearizzare preventivamente le due matrici utilizzando l'istruzione \texttt{as.vector} di \texttt{R}.
