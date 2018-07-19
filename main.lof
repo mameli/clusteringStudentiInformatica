@@ -7,6 +7,6 @@
 \contentsline {figure}{\numberline {5}{\ignorespaces Scatter plot relativo ai cluster dei voti di Architetture degli Elaboratori e Programmazione\relax }}{13}
 \contentsline {figure}{\numberline {6}{\ignorespaces Andamento del valore del $SSE$ in funzione del valore di $k$.\relax }}{17}
 \contentsline {figure}{\numberline {7}{\ignorespaces creazione ed esportazione del dataset con indicazione del cluster di appartenenza in Weka.\relax }}{18}
-\contentsline {figure}{\numberline {8}{\ignorespaces Andamento del valore del $SSE$ in funzione del valore di $k$ per i voti di architetture, programmazione, algoritmi e strutture dati, analisi matematica 1 e matematica discreta e logica.\relax }}{21}
-\contentsline {figure}{\numberline {9}{\ignorespaces Andamento del valore del $SSE$ in funzione del valore di $k$ per il voto medio e il voto del test.\relax }}{22}
-\contentsline {figure}{\numberline {10}{\ignorespaces Valori da impostare nei parametri del filtro \texttt {RemoveWithValues} di Weka.\relax }}{23}
+\contentsline {figure}{\numberline {8}{\ignorespaces Andamento del valore del $SSE$ in funzione del valore di $k$ per i voti di architetture, programmazione, algoritmi e strutture dati, analisi matematica 1 e matematica discreta e logica.\relax }}{23}
+\contentsline {figure}{\numberline {9}{\ignorespaces Andamento del valore del $SSE$ in funzione del valore di $k$ per il voto medio e il voto del test.\relax }}{24}
+\contentsline {figure}{\numberline {10}{\ignorespaces Valori da impostare nei parametri del filtro \texttt {RemoveWithValues} di Weka.\relax }}{25}

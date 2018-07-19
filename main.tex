@@ -7,10 +7,10 @@
 \usepackage{booktabs}
 \usepackage[italian]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{float}
 \usepackage{caption}
 \usepackage[shortlabels]{enumitem}
-\usepackage[T1]{fontenc}
 
 \usepackage{mathpazo} 
 
@@ -42,6 +42,57 @@
 	stringstyle=\color{monokai@magenta}\ttfamily,
 	identifierstyle=\color{monokai@black},
 	commentstyle=\color{monokai@blue},
+	emphstyle=\color{monokai@red},
+	columns=fullflexible
+}
+
+\lstdefinestyle{R}{
+	frame=tb,
+	language=R,
+	backgroundcolor=\color{backcolour},
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=left,
+	numberstyle=\tiny\color{monokai@black},
+	numbersep=5pt,
+	stepnumber=2,
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3,
+	numberstyle=\color{monokai@gray},
+	keywordstyle=\color{codeblue},
+	stringstyle=\color{monokai@magenta}\ttfamily,
+	identifierstyle=\color{monokai@black},
+	commentstyle=\color{monokai@magenta},
+	emphstyle=\color{monokai@red},
+	columns=fullflexible
+}
+
+
+\lstdefinestyle{java}{
+	frame=tb,
+	language=java,
+	backgroundcolor=\color{backcolour},
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=left,
+	numberstyle=\tiny\color{monokai@black},
+	numbersep=5pt,
+	stepnumber=2,
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3,
+	numberstyle=\color{monokai@gray},
+	keywordstyle=\color{codeblue},
+	stringstyle=\color{monokai@magenta}\ttfamily,
+	identifierstyle=\color{monokai@black},
+	commentstyle=\color{monokai@magenta},
 	emphstyle=\color{monokai@red},
 	columns=fullflexible
 }
@@ -121,13 +172,13 @@ In seguito ci sono sei coppie di attributi che indicano:
 	\item Nome dell'esame
 	\item Data in cui lo studente ha sostenuto l'esame
 \end{itemize}
-Gli esami sono Algoritmi e strutture dati (ASD), Architetture degli elaboratori (ARC), Programmazione (PRG), Analisi I (ANI), Matematica discreta e logica (MDL) e Inglese.
+Gli esami sono Algoritmi e strutture dati (ASD), Programmazione (PRG), Architetture degli elaboratori (ARC), Analisi I (ANI), Matematica discreta e logica (MDL) e Inglese.
 \begin{itemize}
 	\item Punteggio conseguito al test di ingresso.
 \end{itemize}
 Per quanto riguarda gli attributi relativi ai voti degli esami i valori che questi assumono sono:
 il voto conseguito dallo studente nel caso in cui abbia sostenuto l'esame oppure
-zero se lo studente non ha sostenuto l'esame durante la sessione estiva del proprio anno di immatricolazione.
+zero se lo studente non ha sostenuto l'esa\-me durante la sessione estiva del proprio anno di immatricolazione.
 \section{Gestione dei dati}
 Abbiamo deciso di effetture le seguenti operazioni sul dataset:
 \begin{itemize}
@@ -137,7 +188,7 @@ Abbiamo deciso di effetture le seguenti operazioni sul dataset:
 
 Il motivo per cui abbiamo deciso di eseguire l'operazione del primo punto è che gli studenti in questione non avendo voti in trentesimi non ci sono parsi particolarmente significativi per analisi.
 
-Per quanto riguarda il secondo punto invece, nel caso in cui uno studente non avesse sostenuto un particolare esame, erano presenti valori pari a zero in alcuni casi e valori pari a ``0000-00-00'' in altri.
+Per quanto riguarda il secondo punto invece, nel caso in cui uno stu\-dete non avesse sostenuto un particolare esame, erano presenti valori pari a zero in alcuni casi e valori pari a ``0000-00-00'' in altri.
 Abbiamo quindi deciso di trattare questa incosisistenza dei dati ponendo i valori pari a ``0000-00-00''.
 
 Per effetturare queste due operazioni abbiamo importato il dataset in un database creando per prima una tabella, che è stata popolata in seguito importando il file CSV con i comandi riportati in Codice \ref{import}.
@@ -210,7 +261,7 @@ Per quanto riguarda l'attributo coorte si può notare come questo abbia una scar
 
 Le correlazioni più evidenti e significative sono quelle che coinvolgono l' attributo crediti totali (e quindi anche crediti con voto) con il voto che gli studenti hanno ottenuto nei diversi esami sostenuti.
 Infatti il valore di queste correlazioni è compreso tra 0.53 per quanto riguarda l'attributo di crediti totali e quello di Algoritmi e strutture dati e 0.73 per quanto riguarda Crediti totali e il voto di Architetture degli elaboratori.
-Tale risultato può essere interpretato in maniera abbastanza intuitiva, infatti mostra che se uno studente ha sostenuto più esami (e quindi ha più crediti) ha in generale ottenuto dei voti migliori.
+Tale risul\-tato può essere interpretato in maniera abbastanza intuitiva, infatti mostra che se uno studente ha sostenuto più esami (e quindi ha più crediti) ha in generale ottenuto dei voti migliori.
 
 Nelle figure sono riportati gli scatterplot degli attributi relativi a crediti totali con i voti di Architetture degli elaboratori e Algoritmi e strutture dati.
 \begin{figure}[H]
@@ -225,13 +276,13 @@ Nelle figure sono riportati gli scatterplot degli attributi relativi a crediti t
 
 L'attributo test è correlato maggiormente con l'attributo voto medio. 
 Si può notare inoltre che il valore di correlazione è significativamente più alto di quello che l'attributo test ha con i voti dei singoli esami, con l'unica eccezione di MDL.
-Questi valori lasciano suggerire che il punteggio conseguito al test d'ingresso di ogni studente sia un buon parametro per valutarne l'andamento generale piuttosto che i voti di un singolo esame.
+Questi valori lasciano suggerire che il punteggio conse\-guito al test d'ingresso di ogni studente sia un buon parametro per valutar\-ne l'andamento generale piuttosto che i voti di un singolo esame.
 Inoltre l'attributo test mostra una discreta correlazione con i crediti totali (e quindi anche con i crediti con voto).
 
-Per quanto riguarda le correlazioni tra i voti dei diversi esami è possibile notare che il valore più alto è quello tra Architetture degli elaboratori e Programmazione che è circa pari a 0.43.
+Per quanto riguarda le correlazioni tra i voti dei diversi esami è possibi\-le notare che il valore più alto è quello tra Architetture degli elaboratori e Programmazione che è circa pari a 0.43.
 Mentre si ha una correlazione quasi nulla, ossia circa 0.10, tra il voto di Algoritmi e strutture dati e il voto di Analisi 1.
 
-Nelle figure sono riportati gli scatterplot tra Architetture degli elaboratori e Programmazione e tra Algoritmi e strutture dati  e Analisi I.
+Nelle figure sono riportati gli scatterplot tra Architetture degli elabora\-tori e Programmazione e tra Algoritmi e strutture dati  e Analisi I.
 
 \begin{figure}[H]
 	\centering
@@ -249,28 +300,31 @@ Nelle figure sono riportati gli scatterplot tra Architetture degli elaboratori e
 
 In Figura~\ref{fig:cMatrix} viene riportata la matrice di correlazione.
 Per applicare gli algoritmi di clustering è stato utilizzato il software Weka. Tuttavia prima di applicare tali algoritmi è stato necessaria un ulteriore fase di preprocessing
-nella quale sono stati normalizzati tutti gli attributi del dataset in una scala di valori compresi tra zero e uno in modo da evitare problemi dovuto alle diverse scale di valori degli attributi.
+nella quale sono stati normalizzati tutti gli attributi del data\-set in una scala di valori compresi tra zero e uno in modo da evitare problemi dovuto alle diverse scale di valori degli attributi.
 
 
 \section{Clustering}
 \label{cap:clust}
-In questo Capitolo verranno effettuate alcune analisi di clustering sui seguenti attributi:
+In questo Capitolo verranno effettuate alcune analisi di clustering sui se\-guenti attributi:
 \begin{itemize}
 \item crediti totali, architetture, programmazione;
 \item algoritmi e strutture dati, architetture, programmazione, analisi 1 e matematica discreta e logica;
 \item voto medio e test.
 \end{itemize}
-Le tecniche di clustering utilizzate sono il clustering gerarchico, l'algoritmo di Kmeans e infine l'algoritmo DBSCAN. In particolare:
+Le tecniche di clustering utilizzate sono il clustering gerarchico, l'algori\-tmo di Kmeans e infine l'algoritmo DBSCAN. In particolare:
 \begin{itemize}
-\item l'analisi effettuata con tecniche di clustering gerarchico è stata effettuata su un sottoinsieme dei dati a disposizione selezionato in base alla coorte dello studente;
+\item l'analisi effettuata con tecniche di clustering gerarchico è stata effet\-tuata su un sottoinsieme dei dati a disposizione selezionato in base alla coorte dello studente;
 \item nel caso dell'algoritmo di Kmeans viene stabilito preventivamente il numero dei cluster possibili utilizzando valori ritenuti sensati di volta in volta;
 \item l'algoritmo DBSCAN è stato utilizzato per l'analisi relativa ai voti dei diversi esami scegliendo preventivamente i valori di \texttt{MinPts} e \texttt{eps} ritenuti sensati di volta in volta.
 \end{itemize}
-A eccezione fatta dell'algoritmo di DBSCAN tutte le analisi condotte sono state effettuate procedendo preventivamente alla normalizzazione degli attributi coinvolti. Per la valutazione dei risultati ottenuti si rimanda al Capitolo \ref{cap:val-clust} dove viene analizzata la validità dei risultati ottenuti e viene determinato: numero di cluster ottimali per l'algoritmo di Kmeans e valore di \texttt{eps} ottimale per DBSCAN.
-Come prima analisi viene mostrata quella relativa ai tre attributi del dataset maggiormente correlati (a meno di correlazioni ovvie) ossia crediti totali, architetture e programmazione.
+A eccezione fatta dell'algoritmo di DBSCAN tutte le analisi condotte sono state effettuate procedendo preventivamente alla normalizzazione degli attributi coinvolti. 
+Per la valutazione dei risultati ottenuti si rimanda al Capitolo \ref{cap:val-clust} dove viene analizzata la validità dei risultati ottenuti e viene determinato: 
+numero di cluster ottimali per l'algoritmo di Kmeans e valo\-re di \texttt{eps} ottimale per DBSCAN.
+Come prima analisi viene mostrata quella relativa ai tre attributi del dataset maggiormente correlati (a meno di 
+correlazioni ovvie) ossia crediti totali, architetture e programmazione.
 Infatti come è stato già precedentemente detto c'è una forte correlazione tra i crediti totali e architetture pari a 0.73 mentre tra crediti totali e Programmazione pari a 0.70.
 È stato utilizzato l'algoritmo di Kmeans implementato in Weka specificando inizialmente un numero di cluster pari a due, lasciando i valori di default per la generazione dei centroidi.
-In Tabella \ref{c2AP} sono riportate le coordinate dei centroidi relativi all'esecuzione dell'algoritmo con un valore di k pari a 2.
+In Tabella \ref{c2AP} sono riporta\-te le coordinate dei centroidi relativi all'esecuzione dell'algoritmo con un valore di k pari a 2.
 % Cluster# 2 sse 51.35
 % Attribute         Full Data          0          1
 %                     (316.0)    (183.0)    (133.0)
@@ -320,8 +374,8 @@ In Tabella \ref{c3AP} sono riportate le coordinate dei centroidi relativi all'es
 \end{table}
 In questo caso il valore di SSE è pari a 14.85. È inoltre possibile constatare come l'algoritmo di kmeans abbia messo in evidenza tre tipologie ben distinte di studenti:
 \begin{itemize}
-	\item Gli studenti appartenenti al cluster 0 sono gli studenti "migliori" avendo sostenuto la quasi totalità degli esami del primo anno alla fine della sessione estiva e riportando delle ottime valutazioni per quanto riguarda gli esami di Architetture e di Programmazione;
-	\item La seconda categoria di studenti (cluster 1) sono gli studenti "peggiori" che hanno sostenuto pochi esami e nel caso specifico delle materie considerate hanno conseguito valutazioni basse o non hanno sostenuto l'esame;
+	\item Gli studenti appartenenti al cluster 0 sono gli studenti "migliori" a\-vendo sostenuto la quasi totalità degli esami del primo anno alla fine della sessione estiva e riportando delle ottime valutazioni per quanto riguarda gli esami di Architetture e di Programmazione;
+	\item La seconda categoria di studenti (cluster 1) sono gli studenti "peg\-giori" che hanno sostenuto pochi esami e nel caso specifico delle materie considerate hanno conseguito valutazioni basse o non hanno sostenuto l'esame;
 	\item Infine gli studenti appartenenti all'ultimo cluster sono gli studenti che hanno sostenuto Programmazione con un buon voto ma non hanno fatto l'esame di Architetture.
 \end{itemize}
 Come si evince analizzando i tre cluster in particolare notando le diverse combinazioni dei valori assunti dai centroidi dei voti, si capisce come sia assente la categoria di studenti che ha sostenuto con profitto l'esame di architetture, ma non ha sostenuto l'esame di programmazione,
@@ -492,7 +546,8 @@ Nel Capitolo precedente, infatti, l'algoritmo di K-means è stato eseguito scegl
 Per quanto riguarda il Punto \ref{item:k-opt} è necessario approssimare il valore di $k_{opt}$ scegliendo, ad esempio, il primo valore di $k$ per cui si verifica una variazione nel SSE minore di una quantità fissata $\varepsilon$. Per quanto concerne il Punto \ref{item:corr-neg} si ha che un valore inferiore della correlazione (sperabilmente negativo) indica un miglior risultato di clustering poiché, idealmente, punti appartenenti allo stesso cluster (quindi con valore di incidenza $1$) dovrebbero trovarsi a una distanza minore. Quindi, per i tre attributi crediti totali, architetture e programmazione su cui è stata fatta la prima analisi con l'algoritmo di K-means si ottiene il grafico $k-SSE$ riportato in Figura \ref{fig:k-sse1}.
 
 \begin{figure}[H]
-	\includegraphics[width=\textwidth]{img/k-sse-crediti-totali-arc-prg.pdf}
+	\centering
+	\includegraphics[width=\textwidth, height=12cm,keepaspectratio]{img/k-sse-crediti-totali-arc-prg.pdf}
 	\caption{Andamento del valore del $SSE$ in funzione del valore di $k$.}
 	\label{fig:k-sse1}
 \end{figure}
@@ -524,9 +579,9 @@ Nel Codice \ref{datacluster} viene mostrato importare il dataset comprensivo deg
    breaklines=true
 }
 
-\begin{lstlisting}[caption={Importazione degli attributi crediti totali, architetture, programmazione e cluster.}, label={datacluster}, captionpos=b, language = R]
+\begin{lstlisting}[caption={Importazione degli attributi crediti totali, architetture, programmazione e cluster.}, label={datacluster}, captionpos=b, style = R]
 library(readr)
-crediti_totali_prg_arc_clustered <- read_csv("git/clusteringStudentiInformatica/crediti_totali-prg-arc-clustered.csv", 
+crediti_totali_prg_arc_clustered <- read_csv("dmo/crediti_totali-prg-arc-clustered.csv", 
     col_types = cols(ANI = col_skip(), ASD = col_skip(), 
         INGLESE = col_skip(), Instance_number = col_skip(), 
         MDL = col_skip(), TEST = col_skip(), 
@@ -538,12 +593,12 @@ crediti_totali_prg_arc_clustered <- read_csv("git/clusteringStudentiInformatica/
 View(crediti_totali_prg_arc_clustered)
 \end{lstlisting}
 
-\begin{lstlisting}[caption={Calcolo Matrice di incidenza dei cluster, delle distanze e correlazione tra le due matrici.}, label={matrix-cor1}, captionpos=b, language = R]
+\begin{lstlisting}[caption={Calcolo Matrice di incidenza dei cluster, delle distanze e correlazione tra le due matrici.}, label={matrix-cor1}, captionpos=b, style = R]
 #Matrice di incidenza
 C = matrix(nrow = 316,ncol = 316)
 for(i in 1:316){
     for(j in 1:316){
-        if(crediti_totali_programmazione_architetture_clustered[i,4]==crediti_totali_programmazione_architetture_clustered[j,4]){
+		if(crediti_totali_prg_arc_clustered[i,4] == crediti_totali_prg_arc_clustered[j,4]){
             C[i,j] = 1
         }else{
             C[i,j] = 0
@@ -551,7 +606,9 @@ for(i in 1:316){
     }
 }
 #Matrice distanza
-D = as.matrix(dist(crediti_totali_programmazione_architetture_clustered[,1:3],method = 'euclidean',diag = TRUE,upper = TRUE))
+D = as.matrix(
+				dist(crediti_totali_prg_arc_clustered[,1:3],
+				method = 'euclidean',diag = TRUE,upper = TRUE))
 
 c = as.vector(t(C))
 d = as.vector(t(D))
@@ -559,37 +616,112 @@ d = as.vector(t(D))
 cor(c,d,method="pearson")
 \end{lstlisting}	
 
-Il valore di correlazione ottenuto in questo caso è pari a $-0.687$. Ripetendo il clustering per gli stessi attributi con $k=3$ e $k=18$ si ottiene, rispettivamente un valore della correlazione tra le due matrici di $-0.854$ e $-0.489$. Diversamente da quanto atteso, il valore calcolato per $k_{opt}$ non presenta un valore di correlazione inferiore rispetto agli altri due clustering, bensì risulta essere il valore peggiore tra quelli verificati con il metodo della correlazione. In Figura \ref{fig:k-sse2} e Figura \ref{fig:k-sse3} sono riportati i grafici dell'andamento del $SSE$ in funzione di $k$ per, rispettivamente, l'analisi condotta sui voti conseguiti dagli studenti nelle cinque materie del primo anno e l'analisi relativa al voto medio e al risultato del test. Scegliendo quindi nuovamente $\varepsilon=0.01$ i valori di $k_{opt}$ sono, rispettivamente $36$ e $43$. 
+\begin{lstlisting}[caption={Codice Java per il calcolo di SSE al variare di K}, label={javasse}, captionpos=b, style = java]
+	import weka.core.Instances;
+	import weka.core.converters.ConverterUtils.DataSource;
+	import weka.filters.Filter;
+	import weka.filters.unsupervised.attribute.Normalize;
+	import weka.clusterers.SimpleKMeans;
+	import weka.filters.unsupervised.attribute.Remove;
+	
+	import java.io.FileWriter;
+	import java.io.IOException;
+	import java.util.ArrayList;
+	
+	public class SseWeka {
+	
+		public static void main(String[] args) throws Exception {
+			DataSource source = new DataSource("./voti-con-data.arff");
+			Instances data = source.getDataSet();
+			data.setClassIndex(-1);
+	
+			Normalize normalize = new Normalize();
+			normalize.setInputFormat(data);
+			Instances nData = Filter.useFilter(data, normalize);
+	
+			Remove remove = new Remove();
+			// 0 coorte,1 crediti_totali,2 crediti_con_voto,3 voto_medio,4 ASD,5 data_ASD,6 ARC,7 data_ARC,
+			// 8 PRG,9 data_PRG,10 ANI,11 data_ANI,12 MDL,13 data_MDL,14 INGLESE,15 data_INGLESE,16 TEST
+			int[] attributeIndexesToRemove = {1,6,8};
+			remove.setInvertSelection(true);
+			remove.setAttributeIndicesArray(attributeIndexesToRemove);
+			remove.setInputFormat(nData);
+			Instances creditiArcPrg = Filter.useFilter(nData, remove);
+	
+			SimpleKMeans kMeans = new SimpleKMeans();
+			kMeans.setPreserveInstancesOrder(true);
+	
+			int maxK = 50;
+			int minK = 2;
+			ArrayList<double[]> resultSet = new ArrayList<double[]>(maxK);
+			double[] a;
+			for (int i = minK; i < maxK; i++) {
+				kMeans.setNumClusters(i);
+				kMeans.buildClusterer(creditiArcPrg);
+				a = new double[2];
+				a[0] = i; a[1] = kMeans.getSquaredError();
+				resultSet.add(a);
+			}
+			for (int i = 0; i < maxK - minK; i++) {
+				System.out.println(resultSet.get(i)[1]);
+			}
+	
+			try {
+				FileWriter writer = new FileWriter("creditiArcSse.txt", false);
+	
+				for (int i = minK; i < maxK; i++)
+					writer.write(i + "," + resultSet.get(i - minK)[1] + "\r\n");
+				writer.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	
+		}
+	}		
+\end{lstlisting}
+Il valore di correlazione ottenuto in questo caso è pari a $-0.687$.
+Ripetendo il clustering per gli stessi attributi con $k=3$ e $k=18$ si ottiene, 
+rispettivamente un valore della correlazione tra le due matrici di $-0.854$ e $-0.489$. 
+
+Diversamente da quanto atteso, il valore calcolato per $k_{opt}$ non presenta un valore di correlazione 
+inferiore rispetto agli altri due clustering, 
+bensì risulta essere il valore peggiore tra quelli verificati con il metodo della correlazione. 
+In Figura \ref{fig:k-sse2} e Figura \ref{fig:k-sse3} sono riportati i grafici dell'andamento 
+del $SSE$ in funzione di $k$ per, rispettivamente, 
+l'analisi condotta sui voti conseguiti dagli studenti nelle cinque materie del primo anno e l'analisi relativa al voto medio e al risultato del test. 
+Scegliendo quindi nuovamente $\varepsilon=0.01$ i valori di $k_{opt}$ sono, rispettivamente $36$ e $43$. 
 
 \begin{table}[H]
-
-\label{tab:corr}
-\begin{tabular}{|l|l|l|}
+\centering
+\begin{tabular}{@{}l|l|l@{}}
 \hline
-\textbf{Attributi analizzati}                                                                                                              & \textbf{k} & \textbf{Correlazione} \\ \hline
-                                                                                                                                           & 2          & -0.687                \\ \cline{2-3} 
-crediti totali, architetture, programmazione                                                                                               & 3          & -0.854                \\ \cline{2-3} 
-                                                                                                                                           & 18         & -0.489                \\ \hline
-                                                                                                                                           & 2          & -0.520                \\ \cline{2-3} 
-\begin{tabular}[c]{@{}l@{}}architetture, programmazione, algoritmi e strutture dati\\ analisi 1, matematica discreta e logica\end{tabular} & 3          & -0.618                \\ \cline{2-3} 
-                                                                                                                                           & 36         & -0.424                \\ \hline
-                                                                                                                                           & 2          & -0.476                \\ \cline{2-3} 
-voto medio, test                                                                                                                           & 3          & -0.465                \\ \cline{2-3} 
-                                                                                                                                           & 43         & -0.273                \\ \hline
+\textbf{Attributi analizzati}   							& \textbf{k} & \textbf{Correlazione} \\ \hline
+                                							& 2          & -0.687                \\ \cline{2-3} 
+crediti totali, ARC, PRG        							& 3          & -0.854                \\ \cline{2-3} 
+                                							& 18         & -0.489                \\ \hline
+                                							& 2          & -0.520                \\ \cline{2-3} 
+ARC, ASD, PRG, MDL,	AN1	\hspace{3em}									& 3          & -0.618                \\ \cline{2-3} 
+                                							& 36         & -0.424                \\ \hline
+                                							& 2          & -0.476                \\ \cline{2-3} 
+voto medio, test                							& 3          & -0.465                \\ \cline{2-3} 
+                                							& 43         & -0.273                \\ \hline
 \end{tabular}
 \caption{Valori correlazione tra la Matrice di incidenza dei cluster e la matrice delle distanze in funzione di $k$.}
+\label{tab:corr2}
 \end{table}
 
-In Tabella \ref{tab:corr} sono riportate sinteticamente le correlazioni ottenute per ciascuna delle tre analisi condotte in funzione dei diversi valori di $k$ scelti. Come è possibile notare consultando la Tabella \ref{tab:corr}, anche nella seconda e terza analisi il valore di $k$ scelto consultando il grafico $k-SSE$ risulta essere il peggiore contrariamente alle aspettative.
+In Tabella \ref{tab:corr2} sono riportate sinteticamente le correlazioni ottenute per ciascuna delle tre analisi condotte in funzione dei diversi valori di $k$ scelti. Come è possibile notare consultando la Tabella \ref{tab:corr}, anche nella seconda e terza analisi il valore di $k$ scelto consultando il grafico $k-SSE$ risulta essere il peggiore contrariamente alle aspettative.
 
 \begin{figure}[H]
-	\includegraphics[width=0.85\textwidth]{img/k-sse-asd-arc-prg-an1-mdl.pdf}
+	\centering
+	\includegraphics[width=\textwidth, height=12cm,keepaspectratio]{img/k-sse-asd-arc-prg-an1-mdl.pdf}
 	\caption{Andamento del valore del $SSE$ in funzione del valore di $k$ per i voti di architetture, programmazione, algoritmi e strutture dati, analisi matematica 1 e matematica discreta e logica.}
 	\label{fig:k-sse2}
 \end{figure}
 
 \begin{figure}[H]
-	\includegraphics[width=\textwidth]{img/k-sse-voto_medio-test.png}
+	\centering
+	\includegraphics[width=\textwidth, height=12cm,keepaspectratio]{img/k-sse-voto_medio-test.png}
 	\caption{Andamento del valore del $SSE$ in funzione del valore di $k$ per il voto medio e il voto del test.}
 	\label{fig:k-sse3}
 \end{figure}
@@ -605,12 +737,12 @@ Una possibile spiegazione di questo fenomeno è la seguente: aumentando notevolm
 
 \begin{table}[H]
 \centering
-\begin{tabular}{|l|l|l|}
-\hline
+\begin{tabular}{@{}lll@{}}
+\toprule	
 \texttt{MinPts}, \texttt{eps} & Correlazione & Rumore \\ \hline
-$6$,$0.5$       & $-0.725$  & $38$     \\ \hline
-$10$,$0.4$      & $-0.728$  & $44$     \\ \hline
-$20$,$0.4$      & $-0.758$  & $89$     \\ \hline
+$6$,$0.5$       & $-0.725$  & $38$     \\ 
+$10$,$0.4$      & $-0.728$  & $44$     \\ 
+$20$,$0.4$      & $-0.758$  & $89$     \\ \bottomrule
 \end{tabular}
 \caption{Valori riepilogativi di correlazione e rumore per DBSCAN}
 \label{tab:corr-noise-dbscan}
