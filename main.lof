@@ -4,12 +4,14 @@
 \contentsline {figure}{\numberline {2}{\ignorespaces Scatterplot tra Crediti totali e Architetture degli elaboratori\relax }}{7}
 \contentsline {figure}{\numberline {3}{\ignorespaces Scatterplot tra Architetture degli elaboratori e Programmazione e tra Algoritmi e strutture dati e Analisi I\relax }}{8}
 \contentsline {figure}{\numberline {4}{\ignorespaces Matrice di correlazione\relax }}{9}
-\contentsline {figure}{\numberline {5}{\ignorespaces Scatter plot relativo ai cluster dei voti di Architetture degli Elaboratori e Programmazione\relax }}{13}
-\contentsline {figure}{\numberline {6}{\ignorespaces Andamento del valore del $SSE$ in funzione del valore di $k$.\relax }}{17}
-\contentsline {figure}{\numberline {7}{\ignorespaces creazione ed esportazione del dataset con indicazione del cluster di appartenenza in Weka.\relax }}{18}
-\contentsline {figure}{\numberline {8}{\ignorespaces Andamento del valore del $SSE$ in funzione del valore di $k$ per i voti di architetture, programmazione, algoritmi e strutture dati, analisi matematica 1 e matematica discreta e logica.\relax }}{23}
-\contentsline {figure}{\numberline {9}{\ignorespaces Andamento del valore del $SSE$ in funzione del valore di $k$ per il voto medio e il voto del test.\relax }}{24}
-\contentsline {figure}{\numberline {10}{\ignorespaces Valori da impostare nei parametri del filtro \texttt {RemoveWithValues} di Weka.\relax }}{25}
-\contentsline {figure}{\numberline {11}{\ignorespaces Distanze dei punti dal $k=6$-esimo pi\IeC {\`u} vicino.\relax }}{27}
-\contentsline {figure}{\numberline {12}{\ignorespaces Distanze dei punti dal $k=10$-esimo pi\IeC {\`u} vicino.\relax }}{28}
-\contentsline {figure}{\numberline {13}{\ignorespaces Distanze dei punti dal $k=20$-esimo pi\IeC {\`u} vicino.\relax }}{29}
+\contentsline {figure}{\numberline {5}{\ignorespaces Dendogramma relativo al clustering gerarchico con metodo complete.\relax }}{10}
+\contentsline {figure}{\numberline {6}{\ignorespaces Dendogramma relativo al clustering gerarchico con metodo average.\relax }}{11}
+\contentsline {figure}{\numberline {7}{\ignorespaces Scatter plot relativo ai cluster dei voti di Architetture degli Elaboratori e Programmazione\relax }}{14}
+\contentsline {figure}{\numberline {8}{\ignorespaces Andamento del valore del $SSE$ in funzione del valore di $k$.\relax }}{18}
+\contentsline {figure}{\numberline {9}{\ignorespaces creazione ed esportazione del dataset con indicazione del cluster di appartenenza in Weka.\relax }}{19}
+\contentsline {figure}{\numberline {10}{\ignorespaces Andamento del valore del $SSE$ in funzione del valore di $k$ per i voti di architetture, programmazione, algoritmi e strutture dati, analisi matematica 1 e matematica discreta e logica.\relax }}{24}
+\contentsline {figure}{\numberline {11}{\ignorespaces Andamento del valore del $SSE$ in funzione del valore di $k$ per il voto medio e il voto del test.\relax }}{25}
+\contentsline {figure}{\numberline {12}{\ignorespaces Valori da impostare nei parametri del filtro \texttt {RemoveWithValues} di Weka.\relax }}{26}
+\contentsline {figure}{\numberline {13}{\ignorespaces Distanze dei punti dal $k=6$-esimo pi\IeC {\`u} vicino.\relax }}{28}
+\contentsline {figure}{\numberline {14}{\ignorespaces Distanze dei punti dal $k=10$-esimo pi\IeC {\`u} vicino.\relax }}{29}
+\contentsline {figure}{\numberline {15}{\ignorespaces Distanze dei punti dal $k=20$-esimo pi\IeC {\`u} vicino.\relax }}{30}

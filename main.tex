@@ -314,10 +314,20 @@ In questo Capitolo verranno effettuate alcune analisi di clustering sui se\-guen
 \end{itemize}
 Le tecniche di clustering utilizzate sono il clustering gerarchico, l'algori\-tmo di Kmeans e infine l'algoritmo DBSCAN. In particolare:
 \begin{itemize}
-\item l'analisi effettuata con tecniche di clustering gerarchico è stata effet\-tuata su un sottoinsieme dei dati a disposizione selezionato in base alla coorte dello studente;
+\item l'analisi effettuata con tecniche di clustering gerarchico è stata effet\-tuata su un sottoinsieme dei dati a disposizione selezionato in base alla coorte dello studente. In Figura \ref{fig:dendo-complete} è mostrato il dendogramma relativo al clustering gerarchico con metodo complete mentre in Figura \ref{fig:dendo-average} viene mostrato il dendogramma relativo al clustering gerarchico con metodo average;
 \item nel caso dell'algoritmo di Kmeans viene stabilito preventivamente il numero dei cluster possibili utilizzando valori ritenuti sensati di volta in volta;
 \item l'algoritmo DBSCAN è stato utilizzato per l'analisi relativa ai voti dei diversi esami scegliendo preventivamente i valori di \texttt{MinPts} e \texttt{eps} ritenuti sensati di volta in volta.
 \end{itemize}
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{img/hierarchical-complete.png}
+	\caption{Dendogramma relativo al clustering gerarchico con metodo complete.}
+	\label{fig:dendo-complete}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{img/hierarchical-average.png}
+	\caption{Dendogramma relativo al clustering gerarchico con metodo average.}
+	\label{fig:dendo-average}
+\end{figure}
 A eccezione fatta dell'algoritmo di DBSCAN tutte le analisi condotte sono state effettuate procedendo preventivamente alla normalizzazione degli attributi coinvolti. 
 Per la valutazione dei risultati ottenuti si rimanda al Capitolo \ref{cap:val-clust} dove viene analizzata la validità dei risultati ottenuti e viene determinato: 
 numero di cluster ottimali per l'algoritmo di Kmeans e valo\-re di \texttt{eps} ottimale per DBSCAN.
