@@ -19,7 +19,8 @@ df <- read.table("/home/mameli/git/custeringStudentiInformatica/creditiSse.csv",
 plot(df)
 > lines(df, type = "o", col = "blue", lwd="5")
 
-Import clustered
+### Import clustered
+```{r}
 library(readr)
 crediti_totali_prg_arc_clustered <- read_csv("git/clusteringStudentiInformatica/crediti_totali-prg-arc-clustered.csv", 
     col_types = cols(ANI = col_skip(), ASD = col_skip(), 
@@ -32,39 +33,61 @@ crediti_totali_prg_arc_clustered <- read_csv("git/clusteringStudentiInformatica/
         voto_medio = col_skip()))
 View(crediti_totali_prg_arc_clustered)
 
-Matrice di incidenza
-C = matrix(nrow = 316,ncol = 316)
-for(i in 1:316){
-    for(j in 1:316){
-        if(crediti_totali_programmazione_architetture_clustered[i,4]==crediti_totali_programmazione_architetture_clustered[j,4]){
-            C[i,j] = 1
-        }else{
-            C[i,j] = 0
-        }
+# Matrice di incidenza
+matriceIncidenza <- function(data){
+  nr = nrow(data)
+  nc = ncol(data)
+  C = matrix(nrow = nr, ncol = nr)
+  for(i in 1:nr){
+    for(j in 1:nr){
+      if(data[i,nc] == data[j,nc])
+        C[i,j] = 1
+      else
+        C[i,j] = 0
     }
+  }
+  return(C)
 }
-matrice distanza
-D = as.matrix(dist(crediti_totali_prg_arc_clustered[,1:3],method = 'euclidean',diag = TRUE,upper = TRUE))
 
-c = as.vector(t(C))
-d = as.vector(t(D))
+# matrice distanza
+matriceDistanza <- function(data){
+  return(as.matrix(dist(data[,1:(ncol(data)-1)],method = 'euclidean',diag = TRUE,upper = TRUE)))
+}
 
-cor(c,d,method="pearson")
+calcoloCorrelazione <- function(data){
+  MI <- matriceIncidenza(data)
+  D <- matriceDistanza(data)
+  mi = as.vector(t(MI))
+  d = as.vector(t(D))
+  
+  return(cor(mi,d,method="pearson"))
+}
+
+calcoloCorrelazione(crediti_totali_prg_arc_clustered)
+> [1] -0.8539944
+```
 
 Voto medio e test correlazione
 -0.4755988 k=2
 -0.4652048 k=3
 -0.2730982 k=43
 
-k NN per DBSCAN
+### k NN per DBSCAN
 
-D = as.matrix(dist(asd_arc_prg_an1_mdl_clustered[,1:ncol(asd_arc_prg_an1_mdl_clustered)-1],method = 'euclidean',diag = TRUE,upper = TRUE))
-library(ggplot2)
-D_1 = D
-for(i in 1:nrow(asd_arc_prg_an1_mdl_clustered)){
+```{r}
+kDBScan <- function(data,k){
+  library(ggplot2)
+  D = as.matrix(dist(data[,1:ncol(data)-1],method = 'euclidean',diag = TRUE,upper = TRUE))
+  D_1 = D
+  for(i in 1:nrow(data)){
     D_1[i,] = sort(D[i,])
+  }
+  p = 1:nrow(data)
+  dist = sort(D_1[, k])
+  data = data.frame(p,dist)
+  ggplot(data, aes(x=p, y=dist)) +geom_point(shape=1) +  geom_line() + geom_point(color = 'black')
 }
-p = 1:nrow(asd_arc_prg_an1_mdl_clustered)
-dist = sort(D_1[,6])                                    #cambia 6 con k
-data = data.frame(p,dist)
-ggplot(data, aes(x=p, y=dist)) +    geom_point(shape=1) +  geom_line() + geom_point(color = 'black')
+
+kDBScan(crediti_totali_prg_arc_clustered, 6)
+
+```
