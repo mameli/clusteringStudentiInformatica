@@ -4,6 +4,7 @@
 \usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{subcaption}
+\usepackage{adjustbox}
 \usepackage{booktabs}
 \usepackage[italian]{babel}
 \usepackage[utf8]{inputenc}
@@ -748,7 +749,44 @@ $20$,$0.4$      & $-0.758$  & $89$     \\ \bottomrule
 \label{tab:corr-noise-dbscan}
 \end{table}
 
-Fino a questo momento è stata analizzata la bontà del clustering fornito da DBSCAN con i parametri scelti in maniera arbitraria basandosi su intuito e conoscenza del problema. In maniera del tutto analoga a quanto fatto per l'algoritmo di K-means è possibile utilizzare una procedura di model selection che cerchi di stabilire il modello (e quindi i parametri) ottimale. Nel caso di DBSCAN la procedura che verrà utilizzata cerca di determinare il valore ottimale di \texttt{eps} fissando il valore di \texttt{MinPts} basandosi sull'idea che i $k$-esimi vicini dei punti contenuti in un cluster sono più o meno posti alla stessa distanza mentre i punti etichettati come rumore hanno il $k$-esimo vicino a una distanza maggiore. Basandosi su questo fatto è possibile determinare un grafico che sulle ascisse contiene gli indici dei record ordinati in modo non decrescente rispetto alla distanza dal loro $k$-esimo recordi più vicino e sulle ordinate mostra il valore di tale distanza. Come valore di \texttt{eps} è quindi possibile scegliere una distanza che è sufficientemente maggiore dalle precedenti.
+Fino a questo momento è stata analizzata la bontà del clustering fornito da DBSCAN con i parametri scelti in maniera arbitraria basandosi sull'intuito e la conoscenza del problema. In maniera del tutto analoga a quanto fatto per l'algoritmo di K-means è possibile utilizzare una procedura di model selection che cerchi di stabilire il modello (e quindi i parametri) ottimale. Nel caso di DBSCAN la procedura che verrà utilizzata cerca di determinare il valore ottimale di \texttt{eps} fissando il valore di \texttt{MinPts} basandosi sull'idea che i $k$-esimi vicini dei punti contenuti in un cluster sono più o meno posti alla stessa distanza mentre i punti etichettati come rumore hanno il $k$-esimo vicino a una distanza maggiore. Basandosi su questo fatto è possibile determinare un grafico che sulle ascisse contiene gli indici dei record ordinati in modo non decrescente rispetto alla distanza dal loro $k$-esimo record più vicino e sulle ordinate mostra il valore di tale distanza. Come valore di \texttt{eps} è quindi possibile scegliere una distanza che è sufficientemente maggiore dalle precedenti. In Figura \ref{fig:eps-minpts6} è riportato il grafico dei valori delle distanze dei punti dal $k=6$-esimo più vicino. Come si può notare dalla Figura, il valore ottimale indicato per \texttt{eps} è maggiore di $0.4$ e minore di $0.6$ e quindi il valore di \texttt{eps} risulta essere una buona scelta. La Figura \ref{fig:eps-minpts10} e la Figura \ref{fig:eps-minpts20} riportano, rispettivamente, le distanze dei punti dal loro $k=10$-esimo più vicino e dal loro $k=20$-esimo più vicino. Nel primo caso, il valore \texttt{eps} scelto inizialmente è confermato da quanto riportato dalla Figura \ref{fig:eps-minpts10}, mentre la Figura \ref{fig:eps-minpts20} suggerisce di scegliere un valore di \texttt{eps} maggiore di $0.5$ per l'esecuzione del DBSCAN con \texttt{MinPts=20}. Tuttavia, l'esecuzione di DBSCAN con la combinazione di tali parametri non ha prodotto risultati significativi.
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=\textwidth]{img/eps-minpts6.pdf}
+	\caption{Distanze dei punti dal $k=6$-esimo più vicino.}
+	\label{fig:eps-minpts6}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=\textwidth]{img/eps-minpts10.pdf}
+	\caption{Distanze dei punti dal $k=10$-esimo più vicino.}
+	\label{fig:eps-minpts10}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=\textwidth]{img/eps-minpts20.pdf}
+	\caption{Distanze dei punti dal $k=20$-esimo più vicino.}
+	\label{fig:eps-minpts20}
+\end{figure}
+
+In Tabella \ref{tab:mod-opt} sono riportati i modelli ottimali determinati per i tre diversi aspetti del dataset che sono stati analizzati. Tali modelli sono stati scelti basandosi esclusivamente sul valore della correlazione tra la matrice di incidenza dei cluster e la matrice delle distanze e quindi nel caso di DBSCAN non viene tenuto conto della maggior perdita di dati che vengono etichettati come rumore nel modello ottimale riportato in Tabella \ref{fig:eps-minpts20}. In ogni caso, tenendo conto anche di questo aspetto, DBSCAN si è rilevato essere un algoritmo affidabile per l'analisi su cui è stato eseguito e anche l'esecuzione con gli altri parametri ha portato a risultati paragonabili a quelli del modello ottimale e decisamente migliori di quelli ottenuti con il K-means.
+
+\begin{table}[H]
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{|l|l|l|l|}
+\hline
+Attributi analizzati     & Algoritmo Migliore & Parametri ottimali & Correlazione \\ \hline
+crediti totali, ARC, PRG & K-means            & $k=3$                & $-0.854$       \\ \hline
+ARC, ASD, PRG, MDL, AN1  & DBSCAN             & \texttt{MinPts=20},\texttt{eps=0.4}  & $-0.758$       \\ \hline
+voto medio, test         & K-means            & $k=2$                & $-0.476$       \\ \hline
+\end{tabular}
+\end{adjustbox}
+\caption{Modelli ottimali.}
+\label{tab:mod-opt}
+\end{table}
 
 \section{Conclusioni}
 In riferimento ai risultati ottenuti con le tecniche di clustering è possibile trarre le seguenti conclusioni riguardo
