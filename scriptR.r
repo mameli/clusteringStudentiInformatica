@@ -28,7 +28,7 @@ kDBScan(crediti_totali_prg_arc_clustered, 6)
 # Matrice di incidenza
 matriceIncidenza <- function(data){
   nr = nrow(data)
-  nc = nrow(data)
+  nc = ncol(data)
   C = matrix(nrow = nr, ncol = nr)
   for(i in 1:nr){
     for(j in 1:nr){
@@ -41,12 +41,18 @@ matriceIncidenza <- function(data){
   return(C)
 }
 
-C = matriceIncidenza(crediti_totali_prg_arc_clustered)
-
 # matrice distanza
-D = as.matrix(dist(crediti_totali_prg_arc_clustered[,1:3],method = 'euclidean',diag = TRUE,upper = TRUE))
+matriceDistanza <- function(data){
+  return(as.matrix(dist(data[,1:(ncol(data)-1)],method = 'euclidean',diag = TRUE,upper = TRUE)))
+}
 
-c = as.vector(t(C))
-d = as.vector(t(D))
+calcoloCorrelazione <- function(data){
+  MI <- matriceIncidenza(data)
+  D <- matriceDistanza(data)
+  mi = as.vector(t(MI))
+  d = as.vector(t(D))
+  
+  return(cor(mi,d,method="pearson"))
+}
 
-cor(c,d,method="pearson")
+calcoloCorrelazione(crediti_totali_prg_arc_clustered)
