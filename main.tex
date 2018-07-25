@@ -818,12 +818,12 @@ In Tabella \ref{tab:mod-opt} sono riportati i modelli ottimali determinati per i
 
 \begin{table}[H]
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{|l|l|l|l|}
-\hline
-Attributi analizzati     & Algoritmo Migliore & Parametri ottimali & Correlazione \\ \hline
-crediti totali, ARC, PRG & K-means            & $k=3$                & $-0.854$       \\ \hline
-ARC, ASD, PRG, MDL, AN1  & DBSCAN             & \texttt{MinPts=20},\texttt{eps=0.4}  & $-0.758$       \\ \hline
-voto medio, test         & K-means            & $k=2$                & $-0.476$       \\ \hline
+\begin{tabular}{@{}llll@{}}
+\toprule
+Attributi analizzati     & Algoritmo Migliore & Parametri ottimali & Correlazione \\ \midrule
+crediti totali, ARC, PRG & K-means            & $k=3$                & $-0.854$       \\
+ARC, ASD, PRG, MDL, AN1  & DBSCAN             & \texttt{MinPts=20},\texttt{eps=0.4}  & $-0.758$ \\
+voto medio, test         & K-means            & $k=2$                & $-0.476$       \\ \bottomrule
 \end{tabular}
 \end{adjustbox}
 \caption{Modelli ottimali.}
