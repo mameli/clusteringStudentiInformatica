@@ -14,6 +14,7 @@
 \usepackage[shortlabels]{enumitem}
 
 \usepackage{mathpazo} 
+\overfullrule=2cm
 
 \definecolor{codeblue}{rgb}{0.21, 0.46, 0.80}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
@@ -187,12 +188,10 @@ Abbiamo deciso di effetture le seguenti operazioni sul dataset:
 	\item eliminare gli studenti che hanno sostenuto solo inglese
 	\item riportare tutti gli attributi relativi alle date degli esami nel formato YYYY-MM-DD
 \end{itemize}
-
 Il motivo per cui abbiamo deciso di eseguire l'operazione del primo punto è che gli studenti in questione non avendo voti in trentesimi non ci sono parsi particolarmente significativi per analisi.
 
 Per quanto riguarda il secondo punto invece, nel caso in cui uno stu\-dete non avesse sostenuto un particolare esame, erano presenti valori pari a zero in alcuni casi e valori pari a ``0000-00-00'' in altri.
 Abbiamo quindi deciso di trattare questa incosisistenza dei dati ponendo i valori zero a ``0000-00-00''.
-
 Per effetturare queste due operazioni abbiamo importato il dataset in un database creando per prima una tabella, che è stata in seguito popolata importando il file CSV con i comandi riportati in Codice \ref{import}.
 \begin{lstlisting}[caption={Creazione della table}, style=sql, label={import}, captionpos=b]
 CREATE TABLE 'studenti' (
@@ -220,8 +219,7 @@ LOAD DATA INFILE 'studenti.csv' INTO TABLE studenti
   LINES TERMINATED BY '\r\n'
   IGNORE 1 LINES;
 \end{lstlisting}
-
-Per quanto riguarda la gestione dell'incosisistenza relativa alle date degli esami abbiamo risolto il problema specificando le query ripotate nel Codice \ref{update}.
+Per quanto riguarda la gestione dell'incosisistenza relativa alle date degli esami abbiamo risolto il problema specificando le query ripotate nel \\Codice \ref{update}.
 \begin{lstlisting}[caption={Update della tabella},style=sql, label={update},captionpos=b]
 update dmo.studenti set data_ARC = '0000-00-00' where data_ARC='0'; 
 update dmo.studenti set data_ASD = '0000-00-00' where data_ASD='0'; 
@@ -234,7 +232,6 @@ update dmo.studenti set data_INGLESE = '0000-00-00' where data_INGLESE = '0';
 \section{Analisi dei dati}
 Per analizzare i dati a disposizione abbiamo utilizzato il linguaggio R per determinare la correlazione tra i diversi attributi.
 In Tabella~\ref{tab:corr} sono riportati i valori di correlazione.
-
 \begin{table}[H]
 	
 	\centering
@@ -260,10 +257,9 @@ In Tabella~\ref{tab:corr} sono riportati i valori di correlazione.
 \end{table}
 Come è possibile notare dalla tabella, ci sono alcune ovvie correlazioni, come quella che coinvolge l'attributo crediti totali e crediti con voto.
 Per quanto riguarda l'attributo coorte si può notare come questo abbia una scarsa correlazione con tutti gli altri attributi.
-
 Le correlazioni più evidenti e significative sono quelle che coinvolgono l'attributo crediti totali (e quindi anche crediti con voto) con il voto che gli studenti hanno ottenuto nei diversi esami sostenuti.
-Infatti il valore di queste correlazioni è compreso tra 0.53 per quanto riguarda l'attributo di crediti totali e quello di Algoritmi e strutture dati e 0.73 per quanto riguarda Crediti totali e il voto di Architetture degli elaboratori.
-Tale risul\-tato può essere interpretato in maniera abbastanza intuitiva, infatti mostra che se uno studente ha sostenuto più esami (e quindi ha più crediti) ha in generale ottenuto dei voti migliori.
+Infatti il valore di queste correlazioni è compreso tra 0.53 per quanto riguarda l'attributo di crediti totali e quello di Algori\-tmi e strutture dati e 0.73 per quanto riguarda Crediti totali e il voto di Architet\-ture degli elaboratori.
+Tale risul\-tato può essere interpretato in maniera abbastanza intuitiva, infatti mostra che se uno studente ha soste\-nuto più esami (e quindi ha più crediti) ha in generale ottenuto dei voti migliori.
 
 Nelle figure sono riportati gli scatterplot degli attributi relativi a crediti totali con i voti di Architetture degli elaboratori e Algoritmi e strutture dati.
 \begin{figure}[H]
@@ -280,7 +276,6 @@ L'attributo test è correlato maggiormente con l'attributo voto medio.
 Si può notare inoltre che il valore di correlazione è significativamente più alto di quello che l'attributo test ha con i voti dei singoli esami, con l'unica eccezione di MDL.
 Questi valori lasciano suggerire che il punteggio conse\-guito al test d'ingresso di ogni studente sia un buon parametro per valutar\-ne l'andamento generale piuttosto che i voti di un singolo esame.
 Inoltre l'attributo test mostra una discreta correlazione con i crediti totali (e quindi anche con i crediti con voto).
-
 Per quanto riguarda le correlazioni tra i voti dei diversi esami è possibi\-le notare che il valore più alto è quello tra Architetture degli elaboratori e Programmazione che è circa pari a 0.43.
 Mentre si ha una correlazione quasi nulla, ossia circa 0.10, tra il voto di Algoritmi e strutture dati e il voto di Analisi 1.
 
@@ -320,12 +315,12 @@ Le tecniche di clustering utilizzate sono il clustering gerarchico, l'algori\-tm
 \item l'algoritmo DBSCAN è stato utilizzato per l'analisi relativa ai voti dei diversi esami scegliendo preventivamente i valori di \texttt{MinPts} e \texttt{eps} ritenuti sensati di volta in volta.
 \end{itemize}
 A eccezione fatta dell'algoritmo di DBSCAN tutte le analisi condotte sono state effettuate dopo la normalizzazione degli attributi coinvolti. 
-Per la valutazione dei risultati ottenuti si rimanda al Capitolo \ref{cap:val-clust} dove viene analiz\-zata la validità dei risultati ottenuti e sono determinati: 
+Per la valutazione dei risultati ottenuti si rimanda al Capitolo \ref{cap:val-clust} dove viene ana\-liz\-zata la validità dei risultati ottenuti e sono determinati: 
 numero di cluster ottimali per l'algoritmo di Kmeans e valo\-re di \texttt{eps} ottimale per DBSCAN.
-Come prima analisi viene mostrata quella relativa ai tre attributi del dataset maggiormente correlati (a meno di 
+Come prima analisi viene mostrata quella relativa ai tre attributi del data\-set maggiormente correlati (a meno di 
 correlazioni ovvie) ossia crediti totali, architetture e programmazione.
-Infatti come è stato già precedentemente detto c'è una forte correlazione tra i crediti totali e architetture pari a 0.73 mentre tra crediti totali e Programmazione pari a 0.70.
-È stato utilizzato l'algoritmo di Kmeans implementato in Weka specificando inizialmente un numero di cluster pari a due, lasciando i valori di default per la generazione dei centroidi.
+Infatti come è stato già preceden\-temente detto c'è una forte correlazione tra i crediti totali e architetture pari a 0.73 mentre tra crediti totali e Programmazione pari a 0.70.
+È stato utilizzato l'algoritmo di Kmeans implementato in Weka specificando ini\-zialmente un numero di cluster pari a due, lasciando i valori di default per la generazione dei centroidi.
 In Tabella \ref{c2AP} sono riporta\-te le coordinate dei centroidi relativi all'esecuzione dell'algoritmo con un valore di k pari a 2.
 % Cluster# 2 sse 51.35
 % Attribute         Full Data          0          1
@@ -382,6 +377,7 @@ In questo caso il valore di SSE è pari a 14.85. È inoltre possibile constatare
 \end{itemize}
 Come si evince analizzando i tre cluster in particolare notando le diverse combinazioni dei valori assunti dai centroidi dei voti, si capisce come sia assente la categoria di studenti che ha sostenuto con profitto l'esame di architetture, ma non ha sostenuto l'esame di programmazione,
 lasciando quindi intendere che se uno studente ha sostenuto l'esame di architetture allora generalmente ha sostenuto con una buona valutazione l'esame di programmazione.
+
 In Figura \ref{fig:dendo-complete} è mostrato il dendogramma relativo al clustering gerarchico con metodo complete mentre in Figura \ref{fig:dendo-average} viene mostrato il dendogramma relativo al clustering gerarchico con metodo average per questa prima analisi.
 \begin{figure}[H]
 	\includegraphics[width=\textwidth]{img/hierarchical-complete.png}
@@ -415,8 +411,8 @@ In Figura \ref{fig:dendo-complete} è mostrato il dendogramma relativo al cluste
 % 	\end{tabular}
 % \end{table}
 
-La seconda analisi che è stata condotta è quella relativa ai voti conseguiti dagli studenti del primo anno durante la sessione estiva. In questo caso l'algoritmo di K-means è stato inizializzato con un valore di $k=3$.
-In Tabella \ref{c3V} sono riportate le coordinate dei centroidi al termine dell'algoritmo. 
+La seconda analisi che è stata condotta è quella relativa ai voti conse\-guiti dagli studenti del primo anno durante la sessione estiva. In questo caso l'algoritmo di K-means è stato inizializzato con un valore di $k=3$.
+In Tabella \ref{c3V} sono riportate le coordinate dei centroidi al termine dell'algori\-tmo. 
 % Attribute    Full Data          0          1          2
 %                (316.0)    (100.0)    (133.0)     (83.0)
 % =======================================================
@@ -443,16 +439,17 @@ In Tabella \ref{c3V} sono riportate le coordinate dei centroidi al termine dell'
 In questo caso sono quindi stati determinati i profili di tre diversi gruppi di studenti:
 \begin{itemize}
 \item gli studenti che hanno conseguito una buona votazione negli esami di Algoritmi e Strutture Dati e Programmazione,
-una votazione discreta all'esame di Analisi I e che non hanno sostenuto Matematica discreta e Logica e Architetture degli elaboratori;
+una votazione dis\-creta all'esame di Analisi I e che non hanno sostenuto Matematica discreta e Logica e Architetture degli elaboratori;
 \item gli studenti con le stesse caratteristiche del cluster precedente, ma che hanno sostenuto Programmazione
-\item gli studenti che hanno sostenuto tutti gli esami e con un buona votazione.
+\item gli studenti che hanno sostenuto tutti gli esami e con un buona vota\-zione.
 \end{itemize}
 In Figura \ref{APC} è riportato lo scatter plot relativo ai voti di Architetture degli Elaboratori e Programmazione che sono
 maggiormente correlati. Il valore di SSE in questo caso è pari a 106.19. 
 Come è stato specificato all'inizio del Capitolo, in questo caso è stato utilizzato anche l'algoritmo DBSCAN per effettuare il clustering degli attributi scelti. 
 Inoltre, poiché gli attributi scelti per l'analisi in questo caso hanno valori nello stesso intervallo $[0,31]$ non è stato necessario procedere alla normalizzazione. 
-Quindi, analoga\-mente a quanto fatto con l'algoritmo di K-means, i parametri con cui eseguire l'algoritmo sono stati scelti basandosi sull'intuizione e sulla conoscenza del problema. 
+Quindi, analoga\-mente a quanto fatto con l'algoritmo di K-means, i parametri con cui ese\-guire l'algoritmo sono stati scelti basandosi sull'intuizione e sulla cono\-scenza del problema. 
 Per la valutazione dei risultati ottenuti e la scelta del valore ottimale di \texttt{eps} in funzione di \texttt{MinPts} si rimanda al Capitolo \ref{cap:val-clust}. 
+
 In Tabella \ref{tab:dbscan605} sono riportati i cluster ottenuti e la proporzione di istanze al loro interno eseguendo l'algoritmo DBSCAN con \texttt{MinPts=6} e \texttt{eps=0.5}. 
 In questo caso $38$ record dei $316$ totali sono stati marcati come rumore dall'algoritmo. 
 In Tabella \ref{tab:dbscan1004} sono riportati i medesimi risultati eseguendo l'algoritmo DBSCAN con \texttt{MinPts=10} e \texttt{eps=0.4}. 
@@ -529,9 +526,9 @@ Tut\-tavia, quest'ultima esecuzione dell'algoritmo ha portato a un notevole incr
 \end{figure}
 
 Infine, l'ultima analisi che è stata condotta riguarda gli attributi test e voto medio. È stato scelto di analizzare 
-questi due attributi congiuntamente in quanto, come è stato detto nel capitolo precedente, l'attributo voto medio 
+questi due attributi congiuntamen\-te in quanto, come è stato detto nel capitolo precedente, l'attributo voto medio 
 presenta una buona correlazione con l'attributo test. 
-In Tabella \ref{c3MT} sono riportate le coordinate dei centroidi relativi all'esecuzione dell'algoritmo con un numero di cluster pari a 3.
+In Tabella \ref{c3MT} sono riportate le coordinate dei centroidi relativi all'esecuzione dell'algori\-tmo con un numero di cluster pari a 3.
 % Cluster# 3 sse 9.6
 % Attribute     Full Data          0          1          2
 %                 (316.0)     (85.0)    (146.0)     (85.0)
@@ -555,13 +552,15 @@ In Tabella \ref{c3MT} sono riportate le coordinate dei centroidi relativi all'es
 	\label{c3MT}
 \end{table}
 In questo caso è possibile notare come
-l'algoritmo di K-means determini due cluster ben definiti che suddividono il dataset tra gli studenti che hanno una
-media complessiva maggiore e un voto al test d'ingresso alto e quelli che invece hanno una media più bassa e 
+l'algoritmo di K-means determini due cluster ben definiti che suddi\-vidono il dataset tra gli studenti che hanno una
+media complessiva mag\-giore e un voto al test d'ingresso alto e quelli che invece hanno una media più bassa e 
 hanno conseguito punteggio basso al test di ingresso. Questi gruppi determinati sono coerenti con la correlazione 
 che esiste tra i due attributi che tuttavia non è particolarmente elevata (diversamente dagli attributi presi in 
 considerazione nell'analisi precedente). Infatti, oltre ai primi due cluster che identificano gli studenti "migliori"
 e quelli "peggiori" esiste un terzo cluster di studenti che hanno conseguito un punteggio al test d'ingresso decisamente
-positivo, ma non hanno mantenuto una media dei voti altrettanto buona. Il valore del SSE in questo caso è 9.6. In Figura \ref{fig:dendo-complete3} è mostrato il dendogramma relativo al clustering gerarchico con metodo complete mentre in Figura \ref{fig:dendo-average3} viene mostrato il dendogramma relativo al clustering gerarchico con metodo average per la terza e ultima analisi condotta.
+positivo, ma non hanno mantenuto una media dei voti altrettanto buona. Il valore del SSE in questo caso è 9.6. 
+
+In Figura \ref{fig:dendo-complete3} è mostrato il dendogramma relativo al clustering gerar\-chico con metodo complete mentre in Figura \ref{fig:dendo-average3} viene mostrato il dendo\-gramma relativo al clustering gerarchico con metodo average per la terza e ultima analisi condotta.
 \begin{figure}[H]
 	\includegraphics[width=\textwidth]{img/c-gerarchico-vmedio-test-complete.png}
 	\caption{Dendogramma relativo al clustering gerarchico con metodo complete.}
@@ -576,15 +575,18 @@ positivo, ma non hanno mantenuto una media dei voti altrettanto buona. Il valore
 \section{Valutazione del clustering e model selection}
 \label{cap:val-clust}
 In questo Capitolo vengono presi in considerazione alcuni metodi per scegliere i parametri con cui inizializzare gli algoritmi di K-means e DBSCAN e vengono analizzati i risultati ottenuti nel Capitolo \ref{cap:clust}.
-Nel Capitolo preceden\-te, infatti, l'algoritmo di K-means è stato eseguito scegliendo preventiva\-mente il numero di cluster possibili (tipicamente 2 o 3) basandosi esclusiva\-mente sull'intuizione e quindi senza avere garanzie circa la bontà e corret\-tezza dei risultati ottenuti. In questo Capitolo viene valutata la validità delle analisi di clustering effettuate con l'algoritmo K-means e viene utilizzata una procedura basata sul SSE e che tenta di determinare il valore ottimale di $k$ con cui inizializzare l'algoritmo di K-means in modo da migliorarne la validità. Per ciascuno degli aspetti analizzati vengono quindi eseguite le seguenti operazioni:
+Nel Capitolo prece\-dente, infatti, l'algoritmo di K-means è stato eseguito scegliendo preventi\-vamente il numero di cluster possibili (tipicamente 2 o 3) basandosi esclu\-sivamente sull'intuizione e quindi senza avere garanzie circa la bontà e corret\-tezza dei risultati ottenuti. 
+In questo Capitolo viene valutata la vali\-dità delle analisi di clustering effettuate con l'algoritmo K-means e viene utilizzata una procedura basata sul SSE e che tenta di determinare il valore ottimale di $k$ con cui inizializzare l'algoritmo di K-means in modo da mi\-gliorarne la validità. 
+
+Per ciascuno degli aspetti analizzati vengono quindi eseguite le seguenti operazioni:
 
 \begin{enumerate}
 \item determinazione dei valori del SSE in funzione di $k$;
 \item \label{item:k-opt} scelta di $k_{opt}$ come il più piccolo $k$ tale per cui il valore del SSE "smette di decrescere";
 \item \label{item:corr-neg} confronto del valore di correlazione ottenuta tra la matrice di incidenza e quella delle distanze per i valori di $k=2$,$k=3$ e $k_{opt}$.
 \end{enumerate}
-
-Per quanto riguarda il Punto \ref{item:k-opt} è necessario approssimare il valore di $k_{opt}$ scegliendo, ad esempio, il primo valore di $k$ per cui si verifica una variazione nel SSE minore di una quantità fissata $\varepsilon$. Per quanto concerne il Punto \ref{item:corr-neg} si ha che un valore inferiore della correlazione (sperabilmente negativo) indica un miglior risultato di clustering poiché, idealmente, punti appartenenti allo stesso cluster (quindi con valore di incidenza $1$) dovrebbero trovarsi a una distanza minore. Quindi, per i tre attributi crediti totali, architetture e programmazione su cui è stata fatta la prima analisi con l'algoritmo di K-means si ottiene il grafico $k-SSE$ riportato in Figura \ref{fig:k-sse1}.
+Per quanto riguarda il Punto \ref{item:k-opt} è necessario approssimare il valore di $k_{opt}$ scegliendo, ad esempio, il primo valore di $k$ per cui si verifica una varia\-zione nel SSE minore di una quantità fissata $\varepsilon$. 
+Per quanto concerne il Punto \ref{item:corr-neg} si ha che un valore inferiore della correlazione (sperabilmente negativo) indica un miglior risultato di clustering poiché, idealmente, punti appartenenti allo stesso cluster (quindi con valore di incidenza $1$) dovreb\-bero trovarsi a una distanza minore. Quindi, per i tre attributi crediti totali, architetture e programmazione su cui è stata fatta la prima analisi con l'algoritmo di K-means si ottiene il grafico $k-SSE$ riportato in Figura \ref{fig:k-sse1}.
 
 \begin{figure}[H]
 	\centering
@@ -595,7 +597,7 @@ Per quanto riguarda il Punto \ref{item:k-opt} è necessario approssimare il valo
 
 Scegliendo il valore minimo di $\varepsilon=0.01$ (dato che è stato scelto di memorizzare i valori di SSE fino alla seconda cifra decimale) si ottiene un valore di $k_{opt}=18$. 
 Quindi, per determinare il valore di correlazione tra matrice di incidenza e matrice delle distanze è necessario esportare preventivamente da Weka il dataset munito di un attributo aggiuntivo che indichi il cluster di appartenenza di ciascun record. 
-In Figura \ref{fig:add-cluster} viene mostrato come creare ed esportare un dataset con Weka aggiungendo per ogni record il riferimento al cluster di appartenenza a seguito dell'esecuzione dell'algoritmo di Kmeans per gli attributi crediti totali, architetture e program\-mazione con $k=2$.
+In Figura \ref{fig:add-cluster} viene mostrato come creare ed esportare un dataset con Weka aggiungendo per ogni record il riferimento al cluster di appartenenza a seguito dell'esecu\-zione dell'algoritmo di Kmeans per gli attributi crediti totali, architetture e program\-mazione con $k=2$.
 
 \begin{figure}
 	\centering 
@@ -616,7 +618,8 @@ In Figura \ref{fig:add-cluster} viene mostrato come creare ed esportare un datas
 		\label{fig:add-cluster}
 \end{figure}
 \newpage
-Nel Codice \ref{datacluster} viene mostrato come importare il dataset comprensivo degli attributi crediti totali, architetture, programmazione e cluster con R, mentre il Codice \ref{matrix-cor1} calcola la Matrice di incidenza dei cluster, la Matrice delle distanze per i punti e, infine, la correlazione tra le due matrici. Come si evince dal Codice, per poter calcolare il valore della correlazione è stato necessario linearizzare preventivamente le due matrici utilizzando l'istruzione \texttt{as.vector} di \texttt{R}.
+Nel Codice \ref{datacluster} viene mostrato come importare il dataset comprensivo degli attributi crediti totali, architetture, programmazione e cluster con R, mentre il Codice \ref{matrix-cor1} calcola la Matrice di incidenza dei cluster, la Matrice delle distanze per i punti e, infine, la correlazione tra le due matrici. 
+Come si evince dal Codice, per poter calcolare il valore della correlazione è stato necessario linearizzare preventivamente le due matrici utilizzando l'istru\-zione \texttt{as.vector} di \texttt{R}.
 
 \lstset{%
    breaklines=true
@@ -735,15 +738,15 @@ calcoloCorrelazione(crediti_totali_prg_arc_clustered)
 \end{lstlisting}
 Il valore di correlazione ottenuto in questo caso è pari a $-0.687$.
 Ripetendo il clustering per gli stessi attributi con $k=3$ e $k=18$ si ottiene, 
-rispettivamente un valore della correlazione tra le due matrici di $-0.854$ e $-0.489$. 
+rispetti\-vamente un valore della correlazione tra le due matrici di $-0.854$ e $-0.489$. 
 
 Diversamente da quanto atteso, il valore calcolato per $k_{opt}$ non presenta un valore di correlazione 
 inferiore rispetto agli altri due clustering, 
 bensì risulta essere il valore peggiore tra quelli verificati con il metodo della correlazione. 
-In Figura \ref{fig:k-sse2} e Figura \ref{fig:k-sse3} sono riportati i grafici dell'andamento 
+In Figura \ref{fig:k-sse2} e Figura \ref{fig:k-sse3} sono riportati i grafici dell'andamen\-to 
 del $SSE$ in funzione di $k$ per, rispettivamente, 
 l'analisi condotta sui voti conseguiti dagli studenti nelle cinque materie del primo anno e l'analisi relativa al voto medio e al risultato del test. 
-Scegliendo quindi nuovamente $\varepsilon=0.01$ i valori di $k_{opt}$ sono, rispettivamente $36$ e $43$. 
+Scegliendo quindi nuovamen\-te $\varepsilon=0.01$ i valori di $k_{opt}$ sono, rispettivamente $36$ e $43$. 
 
 \begin{table}[H]
 \centering
@@ -780,7 +783,13 @@ In Tabella \ref{tab:corr2} sono riportate sinteticamente le correlazioni ottenut
 	\label{fig:k-sse3}
 \end{figure}
 
-Una possibile spiegazione di questo fenomeno è la seguente: aumentando notevolmente il numero di cluster $k$ è probabile che record vicini vengano posti in cluster differenti soprattutto se i centroidi di quest'ultimi sono anch'essi molto vicini. Quando si verifica questa circostanza il valore di incidenza nella matrice dei cluster è $0$ anche se la corrispettiva distanza tra due record è molto piccola andando così a ridurre il modulo della correlazione (negativa) che esiste tra i valori delle due matrici. È possibile calcolare il valore di correlazione (e quindi valutare la bontà del clustering) tra matrice di incidenza dei cluster e matrice delle distanze anche nel clustering calcolato dall'algoritmo DBSCAN. Tale metodo è stato utilizzato nell'analisi relativa ai voti conseguiti dagli studenti nelle cinque materie del primo anno. Tuttavia, in questa circostanza è necessario provvedere all'eliminazione dal dataset dei record marcati come rumore da DBSCAN e quindi sarà necessario tener conto non solo del valore di correlazione ottenuto, ma considerare anche quanti dati vengono esclusi eseguendo l'algoritmo con certi parametri. La Figura \ref{fig:remove-noise} mostra con che valori inizializzare i parametri del filtro di Weka \texttt{RemoveWithValues} al fine di eliminare dal dataset i record marcati come rumore. La Tabella \ref{tab:corr-noise-dbscan} riporta sinteticamente i valori di correlazione e numero di record etichettati come rumore ottenuti per ogni esecuzione dell'algoritmo DBSCAN con i diversi parametri utilizzati. Come si evince dalla Tabella \ref{tab:corr-noise-dbscan} l'esecuzione ottimale del DBSCAN è ottenuta con \texttt{MinPts = 20} e \texttt{eps=0.4}. Tale risultato ha tuttavia un prezzo: i record etichettati in questo caso sono $89$ ossia più del doppio rispetto alle altre due esecuzioni prese in considerazione. Inoltre, considerando la Tabella \ref{tab:corr} è possibile concludere che, l'algoritmo DBSCAN determina dei clustering migliori rispetto a K-means per l'analisi relativa ai voti conseguiti dagli studenti.
+Una possibile spiegazione di questo fenomeno è la seguente: aumen\-tando notevolmente il numero di cluster $k$ è probabile che record vicini vengano posti in cluster differenti soprattutto se i centroidi di quest'ultimi sono anch'essi molto vicini. 
+Quando si verifica questa circostanza il valore di incidenza nella matrice dei cluster è $0$ anche se la corrispettiva distanza tra due record è molto piccola andando così a ridurre il modulo della correlazione (negativa) che esiste tra i valori delle due matrici. 
+È possibile calcolare il valore di correlazione (e quindi valutare la bontà del cluste\-ring) tra matrice di incidenza dei cluster e matrice delle distanze anche nel clustering calcolato dall'algoritmo DBSCAN. 
+Tale metodo è stato utilizza\-to nell'analisi relativa ai voti conseguiti dagli studenti nelle cinque materie del primo anno. 
+Tuttavia, in questa circostanza è necessario provvedere all'eliminazione dal dataset dei record marcati come rumore da DBSCAN e quindi sarà necessario tener conto non solo del valore di correlazione ottenuto, ma considerare anche quanti dati vengono esclusi eseguendo l'algoritmo con certi parametri. 
+
+La Figura \ref{fig:remove-noise} mostra con che valori inizializzare i parametri del filtro di Weka \texttt{RemoveWithValues} al fine di eliminare dal dataset i record marcati come rumore. La Tabella \ref{tab:corr-noise-dbscan} riporta sinteticamente i valori di correlazione e numero di record etichettati come rumore ottenuti per ogni esecuzione dell'algoritmo DBSCAN con i diversi parametri utilizzati. Come si evince dalla Tabella \ref{tab:corr-noise-dbscan} l'esecuzione ottimale del DBSCAN è ottenuta con \texttt{MinPts = 20} e \texttt{eps=0.4}. Tale risultato ha tuttavia un prezzo: i record etichettati in questo caso sono $89$ ossia più del doppio rispetto alle altre due esecuzioni prese in considerazione. Inoltre, considerando la Tabella \ref{tab:corr} è possibile concludere che, l'algoritmo DBSCAN determina dei clustering migliori rispetto a K-means per l'analisi relativa ai voti conseguiti dagli studenti.
 
 \begin{figure}[H]
 \centering
@@ -802,15 +811,16 @@ $20$,$0.4$      & $-0.758$  & $89$     \\ \bottomrule
 \label{tab:corr-noise-dbscan}
 \end{table}
 
-Fino a questo momento è stata analizzata la bontà del clustering fornito da DBSCAN con i parametri scelti in maniera arbitraria basandosi sull'intuito e la conoscenza del problema. 
+Fino a questo momento è stata analizzata la bontà del clustering fornito da DBSCAN con i parametri scelti in maniera arbitraria basandosi sull'in\-tuito e la conoscenza del problema. 
 In maniera del tutto analoga a quanto fatto per l'algoritmo di K-means è possibile utilizzare una procedura di model selection che cerchi di stabilire il modello (e quindi i parametri) ottimale. Nel caso di DBSCAN la procedura che verrà utilizzata cerca di determinare il valore ottimale di \texttt{eps} fissando il valore di \texttt{MinPts} basandosi sull'idea che i $k$-esimi vicini dei punti contenuti in un cluster sono più o meno posti alla stessa distanza mentre i punti etichettati come rumore hanno il $k$-esimo vicino a una distanza maggiore. 
 Basandosi su questo fatto è possibile determinare un grafico che sulle ascisse contiene gli indici dei record ordinati in modo non decrescente rispetto alla distanza dal loro $k$-esimo record più vicino e sulle ordinate mostra il valore di tale distanza. 
 Come valore di \texttt{eps} è quindi possibile scegliere la prima distanza che è "sufficientemente" maggiore dalle precedenti. 
+
 Nel Codice \ref{rknn} è mostrata la funzione in R che determina il grafico in questione e la riga di codice per calcolare tale grafico nel caso in cui \texttt{MinPts=6}. 
 In Figura \ref{fig:eps-minpts6} è riportato il grafico dei valori delle distanze dei punti dal $k$-6-esimo più vicino. 
 Come si può notare dalla Figura, il valore ottimale indicato per \texttt{eps} è maggiore di $0.4$ e minore di $0.6$ e quindi il valore di \texttt{eps} risulta essere una buona scelta. 
 La Figura \ref{fig:eps-minpts10} e la Figura \ref{fig:eps-minpts20} riportano, rispettivamente, le distanze dei punti dal loro $k$-10-esimo più vicino e dal loro $k$-20-esimo più vicino. 
-Nel primo caso, il valore \texttt{eps} scelto inizialmente è confermato da quanto riportato dalla Figura \ref{fig:eps-minpts10}, mentre la Figura \ref{fig:eps-minpts20} suggerisce di scegliere un valore di \texttt{eps} maggiore di $0.5$ per l'esecuzione del DBSCAN con \texttt{MinPts=20}. 
+Nel primo caso, il valore \texttt{eps} scelto inizialmen\-te è confermato da quanto riportato dalla Figura \ref{fig:eps-minpts10}, mentre la Figura \ref{fig:eps-minpts20} suggerisce di scegliere un valore di \texttt{eps} maggiore di $0.5$ per l'esecuzione del DBSCAN con \texttt{MinPts=20}. 
 Tuttavia, l'esecuzione di DBSCAN con la combinazione di tali parametri non ha prodotto risultati significativi.
 
 \begin{minipage}{\linewidth}
@@ -852,9 +862,9 @@ kDBScan(crediti_totali_prg_arc_clustered, 6)
 	\label{fig:eps-minpts20}
 \end{figure}
 
-In Tabella \ref{tab:mod-opt} sono riportati i modelli ottimali determinati per i tre diversi aspetti del dataset che sono stati analizzati. 
-Tali modelli sono stati scelti basandosi esclusivamente sul valore della correlazione tra la matrice di incidenza dei cluster e la matrice delle distanze e quindi nel caso di DBSCAN non viene tenuto conto della maggior perdita di dati che vengono etichettati come rumore nel modello ottimale riportato in Tabella \ref{fig:eps-minpts20}. 
-In ogni caso, tenendo conto anche di questo aspetto, DBSCAN si è rilevato essere un algoritmo affidabile per l'analisi su cui è stato eseguito e anche l'esecuzione con gli altri parametri ha portato a risultati paragonabili a quelli del modello ottimale e decisamente migliori di quelli ottenuti con il K-means.
+In Tabella \ref{tab:mod-opt} sono riportati i modelli ottimali determinati per i tre diver\-si aspetti del dataset che sono stati analizzati. 
+Tali modelli sono stati scelti basandosi esclusivamente sul valore della correlazione tra la matrice di incidenza dei cluster e la matrice delle distanze e quindi nel caso di DBSCAN non viene tenuto conto della maggior perdita di dati che vengono etiche\-ttati come rumore nel modello ottimale riportato in Tabella \ref{fig:eps-minpts20}. 
+In ogni caso, tenendo conto anche di questo aspetto, DBSCAN si è rilevato essere un algoritmo affidabile per l'analisi su cui è stato eseguito e anche l'esecu\-zione con gli altri parametri ha portato a risultati paragonabili a quelli del modello ottimale e decisamente migliori di quelli ottenuti con il K-means.
 
 \begin{table}[H]
 \begin{adjustbox}{max width=\textwidth}
@@ -877,15 +887,15 @@ In riferimento ai risultati ottenuti con il K-means è possibile trarre le segue
 le carriere degli studenti:
 \begin{itemize}
 \item l'esame di Architetture degli Elaboratori risulta essere l'esame più difficile per gli studenti del primo anno,
-  infatti la maggioranza non riesce a sostenerlo nel corso della sessione estiva. Tuttavia, generalmente gli studenti 
+  infatti la maggioranza non riesce a sostenerlo nel corso della sessione estiva. Tuttavia, general\-mente gli studenti 
   che sostengono con profitto tale esame riescono a sostenere con un buon voto anche gli altri; 
 \item la maggior parte degli studenti che ottengono un buon punteggio al test d'ingresso mantengono una buona media
   mentre quelli che hanno ottenuto un punteggio più basso hanno anche una media più bassa. Tuttavia è presente
-  un significativo gruppo di studenti che pur avendo ottenuto un buon punteggio al test di ingresso non riescono
+  un significativo gruppo di studenti che pur avendo ottenuto un buon punteggio al test di ingresso non rie\-scono
   ad avere una media altrettanto buona;
 \item La maggior parte degli studenti riesce a sostenere nel corso della sessione estiva gli esami di Algoritmi e 
   Strutture Dati, Analisi I e in alcuni casi l'esame di Programmazione con risultati altalenanti. Mentre 
-  generalmente gli esami di Architetture degli Elaborati e Matematica Discreta e Logica non vengono sostenuti
+  generalmente gli esami di Architetture degli Elaborati e Ma\-tematica Discreta e Logica non vengono sostenuti
   dagli studenti al termine del loro primo anno.
 \end{itemize}
 inoltre, in ciascuna delle analisi eseguite risultavano esserci almeno 3 gruppi di studenti che presentavano 
@@ -893,9 +903,9 @@ caratteristiche significativamente differenti.
 
 La tecnica del DBSCAN è risultata essere efficace e ha consentito di determinare dei clustering migliori rispetto a quelli determinati dal K-means nell'analisi dei voti degli studenti. 
 Diversamente dai clustering ottimali determinati dal K-means, i clustering del DBSCAN presentano un alto numero di cluster diversi ed è quindi difficile (e inconcludente) descrivere il profilo dello studente medio appartente a ciascuno gruppo. 
-Tuttavia, è necessario tenere presente che i clustering determinati con questa tecnica etichettano una buona parte dei dati totali come rumore (quasi un terzo nel clustering ottimale) e quindi l'analisi viene condotta necessariamente su un sottoinsieme del dataset. 
+Tuttavia, è necessario tenere presente che i clustering determinati con questa tecnica etichettano una buona parte dei dati totali come rumore (quasi un terzo nel clustering ottimale) e quindi l'analisi viene condotta necessaria\-mente su un sottoinsieme del dataset. 
 
-Infine, per quanto riguarda il clustering gerarchico, è stato scelto di condurre delle analisi sulla proiezione del dataset relativa all'anno di imma\-tricolazione del 2010. 
+Infine, per quanto riguarda il clustering gerarchico, è stato scelto di condurre delle analisi sulla proiezione del dataset relativa all'anno di im\-matricolazione del 2010. 
 Tale scelta è motivata dal fatto che gli studenti imma\-tricolati nei diversi anni non presentano caratteristiche (voti ai test, agli esami, crediti totali, etc.) significativamente differenti e dal fatto che i dendogrammi dell'intero dataset risultavano incomprensibili. 
 In ogni caso, l'analisi condotta con tali tecniche è limitata poiché si è scelto di valutare il numero di cluster con le tecniche presentate nel Capitolo \ref{cap:val-clust} e inoltre i relativi clustering non potevano essere valutati con il metodo della correlazione utilizzato nel Capitolo \ref{cap:val-clust} per K-means e DBSCAN.
 \newpage 
