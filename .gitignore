@@ -12,3 +12,6 @@
 *.arff
 *.csv
 *.gz
+*.nav
+*.out
+*.snm
