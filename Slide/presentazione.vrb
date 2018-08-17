@@ -1,0 +1,18 @@
+\frametitle{SQL}
+\begin{lstlisting}[style = R]
+# matrice distanza
+matriceDistanza <- function(data){
+  return(as.matrix(dist(data[,1:(ncol(data)-1)],method = 'euclidean',diag = TRUE,upper = TRUE)))
+}
+
+calcoloCorrelazione <- function(data){
+  MI <- matriceIncidenza(data)
+  D <- matriceDistanza(data)
+  mi = as.vector(t(MI))
+  d = as.vector(t(D))
+
+  return(cor(mi,d,method="pearson"))
+}
+
+calcoloCorrelazione(crediti_totali_prg_arc_clustered)
+\end{lstlisting}
