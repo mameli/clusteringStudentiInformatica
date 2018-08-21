@@ -673,67 +673,67 @@ calcoloCorrelazione(crediti_totali_prg_arc_clustered)
 \end{lstlisting}	
 
 \begin{lstlisting}[caption={Codice Java per il calcolo di SSE al variare di K}, label={javasse}, captionpos=b, style = java]
-	import weka.core.Instances;
-	import weka.core.converters.ConverterUtils.DataSource;
-	import weka.filters.Filter;
-	import weka.filters.unsupervised.attribute.Normalize;
-	import weka.clusterers.SimpleKMeans;
-	import weka.filters.unsupervised.attribute.Remove;
-	
-	import java.io.FileWriter;
-	import java.io.IOException;
-	import java.util.ArrayList;
-	
-	public class SseWeka {
-	
-		public static void main(String[] args) throws Exception {
-			DataSource source = new DataSource("./voti-con-data.arff");
-			Instances data = source.getDataSet();
-			data.setClassIndex(-1);
-	
-			Normalize normalize = new Normalize();
-			normalize.setInputFormat(data);
-			Instances nData = Filter.useFilter(data, normalize);
-	
-			Remove remove = new Remove();
-			// 0 coorte,1 crediti_totali,2 crediti_con_voto,3 voto_medio,4 ASD,5 data_ASD,6 ARC,7 data_ARC,
-			// 8 PRG,9 data_PRG,10 ANI,11 data_ANI,12 MDL,13 data_MDL,14 INGLESE,15 data_INGLESE,16 TEST
-			int[] attributeIndexesToRemove = {1,6,8};
-			remove.setInvertSelection(true);
-			remove.setAttributeIndicesArray(attributeIndexesToRemove);
-			remove.setInputFormat(nData);
-			Instances creditiArcPrg = Filter.useFilter(nData, remove);
-	
-			SimpleKMeans kMeans = new SimpleKMeans();
-			kMeans.setPreserveInstancesOrder(true);
-	
-			int maxK = 50;
-			int minK = 2;
-			ArrayList<double[]> resultSet = new ArrayList<double[]>(maxK);
-			double[] a;
-			for (int i = minK; i < maxK; i++) {
-				kMeans.setNumClusters(i);
-				kMeans.buildClusterer(creditiArcPrg);
-				a = new double[2];
-				a[0] = i; a[1] = kMeans.getSquaredError();
-				resultSet.add(a);
-			}
-			for (int i = 0; i < maxK - minK; i++) {
-				System.out.println(resultSet.get(i)[1]);
-			}
-	
-			try {
-				FileWriter writer = new FileWriter("creditiArcSse.txt", false);
-	
-				for (int i = minK; i < maxK; i++)
-					writer.write(i + "," + resultSet.get(i - minK)[1] + "\r\n");
-				writer.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	
+import weka.core.Instances;
+import weka.core.converters.ConverterUtils.DataSource;
+import weka.filters.Filter;
+import weka.filters.unsupervised.attribute.Normalize;
+import weka.clusterers.SimpleKMeans;
+import weka.filters.unsupervised.attribute.Remove;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class SseWeka {
+
+	public static void main(String[] args) throws Exception {
+		DataSource source = new DataSource("./voti-con-data.arff");
+		Instances data = source.getDataSet();
+		data.setClassIndex(-1);
+
+		Normalize normalize = new Normalize();
+		normalize.setInputFormat(data);
+		Instances nData = Filter.useFilter(data, normalize);
+
+		Remove remove = new Remove();
+		// 0 coorte,1 crediti_totali,2 crediti_con_voto,3 voto_medio,4 ASD,5 data_ASD,6 ARC,7 data_ARC,
+		// 8 PRG,9 data_PRG,10 ANI,11 data_ANI,12 MDL,13 data_MDL,14 INGLESE,15 data_INGLESE,16 TEST
+		int[] attributeIndexesToRemove = {1,6,8};
+		remove.setInvertSelection(true);
+		remove.setAttributeIndicesArray(attributeIndexesToRemove);
+		remove.setInputFormat(nData);
+		Instances creditiArcPrg = Filter.useFilter(nData, remove);
+
+		SimpleKMeans kMeans = new SimpleKMeans();
+		kMeans.setPreserveInstancesOrder(true);
+
+		int maxK = 50;
+		int minK = 2;
+		ArrayList<double[]> resultSet = new ArrayList<double[]>(maxK);
+		double[] a;
+		for (int i = minK; i < maxK; i++) {
+			kMeans.setNumClusters(i);
+			kMeans.buildClusterer(creditiArcPrg);
+			a = new double[2];
+			a[0] = i; a[1] = kMeans.getSquaredError();
+			resultSet.add(a);
 		}
-	}		
+		for (int i = 0; i < maxK - minK; i++) {
+			System.out.println(resultSet.get(i)[1]);
+		}
+
+		try {
+			FileWriter writer = new FileWriter("creditiArcSse.txt", false);
+
+			for (int i = minK; i < maxK; i++)
+				writer.write(i + "," + resultSet.get(i - minK)[1] + "\r\n");
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+}		
 \end{lstlisting}
 Il valore di correlazione ottenuto in questo caso è pari a $-0.687$.
 Ripetendo il clustering per gli stessi attributi con $k=3$ e $k=18$ si ottiene, 
