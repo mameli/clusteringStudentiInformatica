@@ -251,7 +251,7 @@ In Tabella~\ref{tab:corr} sono riportati i valori di correlazione.
 	TEST               & 0.04126  & 0.384332        & 0.39025             & 0.39428      & 0.16149  & 0.29979  & 0.2435  & 0.32378 & 0.38777  & NA      & 1       \\\bottomrule                 
 	\end{tabular}
 	}
-	\caption{Correlazione}
+	\caption{Correlazione di Pearson}
 	\label{tab:corr}
 \end{table}
 Come è possibile notare dalla tabella, ci sono alcune ovvie correlazioni, come quella che coinvolge l'attributo crediti totali e crediti con voto.
@@ -259,8 +259,13 @@ Per quanto riguarda l'attributo coorte si può notare come questo abbia una scar
 Le correlazioni più evidenti e significative sono quelle che coinvolgono l'attributo crediti totali (e quindi anche crediti con voto) con il voto che gli studenti hanno ottenuto nei diversi esami sostenuti.
 Infatti il valore di queste correlazioni è compreso tra 0.53 per quanto riguarda l'attributo di crediti totali e quello di Algori\-tmi e strutture dati e 0.73 per quanto riguarda Crediti totali e il voto di Architet\-ture degli elaboratori.
 Tale risul\-tato può essere interpretato in maniera abbastanza intuitiva, infatti mostra che se uno studente ha soste\-nuto più esami (e quindi ha più crediti) ha in generale ottenuto dei voti migliori.
+Ciò è vero soprattutto per gli esami di Architetture e Program\-mazione che hanno una correlazione con l'attributo Crediti Totali di 0.73 e 0.7 rispettivamente e in maniera meno significativa per gli esami di Matema\-tica Discreta e Logica e Analisi 1 che hanno una correlazione con l'attributo Crediti Totali di 0.63 e 0.61 rispettivamente.
+Invece, per quanto riguarda Algoritmi e strutture dati, la correlazione è significativamente inferiore rispetto agli altri esami (in particolar modo con Architetture e Program\-mazione). 
+Analizzando questi valori è quindi possibile dedurre che una significativa porzione degli studenti che ha fatto l'esame di ASD non ha sostenuto altri esami o pochi altri (attributo Crediti Totali basso).
+Mentre gli studenti che hanno sostenuto con profitto Programmazione e Architetture hanno superato anche tutti gli altri esami o la maggior parte di essi (attributo Crediti Totali alto).
+Infine i voti di Analisi 1 e Matematica rappresentano delle situzioni intermedie.
 
-Sono riportati gli scatterplot degli attributi relativi a crediti totali con i voto di Architetture degli elaboratori e Algoritmi e strutture dati.
+Nelle Figure 1 e 2 sono riportati gli scatterplot degli attributi relativi a crediti totali con i voto di Architetture degli elaboratori e Algoritmi e strutture dati.
 \begin{figure}[H]
 	\includegraphics[width=\textwidth]{img/creditiAsd.png}
 	\caption{Scatterplot tra Crediti totali e Algoritmi e strutture dati}
@@ -278,14 +283,36 @@ Inoltre l'attributo test mostra una discreta correlazione con i crediti totali (
 Per quanto riguarda le correlazioni tra i voti dei diversi esami è possibi\-le notare che il valore più alto è quello tra Architetture degli elaboratori e Programmazione che è circa pari a 0.43.
 Mentre si ha una correlazione quasi nulla, ossia circa 0.10, tra il voto di Algoritmi e strutture dati e il voto di Analisi 1.
 
-Nelle figure sono riportati gli scatterplot tra Architetture degli elabora\-tori e Programmazione e tra Algoritmi e strutture dati  e Analisi I.
+In Figura 3 sono riportati gli scatterplot tra Architetture degli elabora\-tori e Programmazione e tra Algoritmi e strutture dati  e Analisi I.
+Contrariamente a quanto indicato dai valori delle correlazioni tra le due coppie di attributi, 
+gli scatterplot mostrati in Figura 3, sembrano suggerire una correlazione simile (se non migliore) tra Algoritmi e Strutture dati e Analisi 1, rispetto a quella tra Architetture e Programmazione.
+Questo fenomeno è dovuto al fatto che un notevole numero di studenti non ha sostenuto ne architteture ne programmazione. 
+Tuttavia, in uno scatterplot non è possibile distinguere oggetti con gli stessi valori per gli attributi considerati e quindi i dati che influenzano maggiormente la correlazione tra Architetture e Programmazione non vengono essenzialmente mostrati (rappresentati tramite singolo punto) nel grafico in questione.  
+D'altra parte, gli studenti che non hanno sostenuto ne Algoritmi ne Analisi 1 sono molti meno e quindi influenzano in mondo meno significativo la correlazione tra tali attributi. 
+In Figura 4 sono mostrati gli scatterplot realizzati con Weka applicando piccole variazioni casuali ai punti per distinguere i dati che hanno valori identici (Jitter). 
+Utilizzando questa tecnica è quindi possibile notare i seguenti fatti:
+\begin{enumerate}
+	\item Il numero di studenti che non ha sostenuto ne Architteture ne Program\-mazione è, come abbiamo già detto, notevolmente superiore al numero di studenti che non hanno sostenuto ne algoritmi ne analisi 1. La presenza di studenti con queste caratteristiche influenza quindi mag\-giormente la correlazione complessiva tra Architetture e Programma\-zione rispetto a quella tra Algoritmi e Analisi1; 
+	\item Gli studenti che hanno sostenuto Programmazione ma non hanno sostenuto Architetture sono molti di più rispetto a quelli che hanno sostenuto Analisi 1 ma non hanno sostenuto Algoritmi. Viceversa, gli studenti che hanno sostenuto Architetture ma non Programmazione sono molti meno di quelli che hanno sostenuto Algoritmi ma non Analisi 1. Gli studenti con queste caratteristiche (110 per Architetture e Programma\-zione, 127 per Algoritmi e Analisi1) non evidenziano correlazioni tra le due diverse coppie di attributi ed essendo in quantità paragonabili influenzeranno le correlazione complessive tra le due diverse coppie di attributi circa in egual misura;
+	\item Confrontando gli studenti che hanno sostenuto sia Architetture che Pro\-grammazione con quelli che hanno sostenuto sia Algoritmi che Analisi 1 si nota una migliore correlazione per la seconda coppia di attributi su tali sottoinsiemi del dataset. Tuttavia, essendo i due sottoinsieme (studenti che hanno sostenuto sia Architetture che Pro\-gramma\-zione e studenti che hanno sostenuto sia Algoritmi che Analisi 1) di dimensioni paragonabili influenzeranno in modo minore la correlazione complessiva rispetto a quanto lo fanno gli oggetti discussi al punto 1.
+\end{enumerate}
+Per dimostrare la tesi secondo cui gli studenti che non hanno sostenuto ne Architetture ne Programmazione influenzano in modo decisivo la correlazione tra questi due attributi è possibile calcolare la correlazione tra i due attributi sul sottoinsieme del dataset privo di questi oggetti. 
+In questo caso infatti la correlazione tra i due attributi è T. 
+Se eseguiamo la stessa operazione rispetto però agli attributi Algoritmi e Analisi 1 otteniamo una correlazione pari a Z. 
+La differenza tra le correlazioni delle due diverse coppie di attributi è minore.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{img/arcPrg.png}
-	\includegraphics[width=\textwidth]{img/asdAni.png}
-	\captionsetup{justification=centering}
+	\includegraphics[width=\textwidth, height=21em]{img/arcPrg.png}
+	\includegraphics[width=\textwidth, height=21em]{img/asdAni.png}
 	\caption{Scatterplot tra Architetture degli elaboratori e Programmazione e tra Algoritmi e strutture dati e Analisi I}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{img/arcPrgWeka.png}
+	\includegraphics[width=\textwidth]{img/asdAniWeka.png}
+	\caption{Scatterplot tra Architetture degli elaboratori e Programmazione e tra Algoritmi e strutture dati e Analisi I con Jitter}
 \end{figure}
 
 \begin{figure}[H]
@@ -313,12 +340,11 @@ Le tecniche di clustering utilizzate sono il clustering gerarchico, l'algori\-tm
 \item nel caso dell'algoritmo di Kmeans viene stabilito preventivamente il numero dei cluster possibili utilizzando valori ritenuti sensati di volta in volta;
 \item l'algoritmo DBSCAN è stato utilizzato per l'analisi relativa ai voti dei diversi esami scegliendo preventivamente i valori di \texttt{MinPts} e \texttt{eps} ritenuti sensati di volta in volta.
 \end{itemize}
-A eccezione fatta dell'algoritmo di DBSCAN tutte le analisi condotte sono state effettuate dopo la normalizzazione degli attributi coinvolti. 
+Fatta eccezione per l'algoritmo DBSCAN tutte le analisi condotte sono state effettuate dopo la normalizzazione degli attributi coinvolti. 
 Per la valutazione dei risultati ottenuti si rimanda al capitolo \ref{cap:val-clust} dove viene ana\-liz\-zata la validità dei risultati ottenuti e sono determinati: 
 numero di cluster ottimali per l'algoritmo di Kmeans e valo\-re di \texttt{eps} ottimale per DBSCAN.
 Come prima analisi viene mostrata quella relativa ai tre attributi del data\-set maggiormente correlati (a meno di 
 correlazioni ovvie) ossia crediti totali, architetture e programmazione.
-Infatti come è stato già preceden\-temente detto c'è una forte correlazione tra i crediti totali e architetture pari a 0.73 mentre tra crediti totali e Programmazione pari a 0.70.
 È stato utilizzato l'algoritmo di Kmeans implementato in Weka specificando ini\-zialmente un numero di cluster pari a due, lasciando i valori di default per la generazione dei centroidi.
 In Tabella \ref{c2AP} sono riporta\-te le coordinate dei centroidi relativi all'esecuzione dell'algoritmo con un valore di k pari a 2.
 % Cluster# 2 sse 51.35
@@ -438,9 +464,9 @@ In Tabella \ref{c3V} sono riportate le coordinate dei centroidi al termine dell'
 In questo caso sono quindi stati determinati i profili di tre diversi gruppi di studenti:
 \begin{itemize}
 \item gli studenti che hanno conseguito una buona votazione negli esami di Algoritmi e Strutture Dati e Programmazione,
-una votazione dis\-creta all'esame di Analisi I e che non hanno sostenuto Matematica discreta e Logica e Architetture degli elaboratori;
-\item gli studenti con le stesse caratteristiche del cluster precedente, ma che non hanno sostenuto Programmazione
-\item gli studenti che hanno sostenuto tutti gli esami e con un buona vota\-zione.
+una votazione dis\-creta all'esame di Analisi I e che non hanno sostenuto Matematica discreta e Logica e Architetture degli elaboratori (Cluster 0);
+\item gli studenti con le stesse caratteristiche del cluster precedente, ma che non hanno sostenuto Programmazione (Cluster 1);
+\item gli studenti che hanno sostenuto tutti gli esami e con un buona vota\-zione (Cluster 2).
 \end{itemize}
 In Figura \ref{APC} è riportato lo scatter plot relativo ai voti di Architetture degli Elaboratori e Programmazione che sono
 maggiormente correlati. Il valore di SSE in questo caso è pari a 106.19. 
@@ -450,11 +476,19 @@ Quindi, analoga\-mente a quanto fatto con l'algoritmo di K-means, i parametri co
 Per la valutazione dei risultati ottenuti e la scelta del valore ottimale di \texttt{eps} in funzione di \texttt{MinPts} si rimanda al capitolo \ref{cap:val-clust}. 
 
 In Tabella \ref{tab:dbscan605} sono riportati i cluster ottenuti e la proporzione di istanze al loro interno eseguendo l'algoritmo DBSCAN con \texttt{MinPts=6} e \texttt{eps=0.5}. 
-In questo caso $38$ record dei $316$ totali sono stati marcati come rumore dall'algoritmo. 
+In questo caso $38$ record dei $316$ totali sono stati marcati come rumore dall'algoritmo.
+Inoltre, è possibile notare che alcuni dei cluster prodotti hanno delle dimensioni decisamente ridotte. Infatti, il cluster 6 contiene solo 6 record dei 316 totali, mentre il cluster 3, il cluster 7 e il cluster 9 contengono solo, rispettivamente 13, 18 e 14 record.
+Il cluster 8 sembra rappresentare un caso limite con 22 record complessivi.
+In ogni caso, un numero così elevato di cluster di dimensioni ridotte sembra suggerire che il valore di \texttt{MinPts} sia troppo basso e che i gruppi di oggetti riconosciuti come cluster  che hanno dimensione ridotta siano in realtà gruppi di outliers.
 In Tabella \ref{tab:dbscan1004} sono riportati i medesimi risultati eseguendo l'algoritmo DBSCAN con \texttt{MinPts=10} e \texttt{eps=0.4}. 
-In questo caso, i record marcati come rumore dall'algoritmo sono invece $44$. 
-Infine, la Tabella \ref{tab:dbscan2004} riporta i risultati ottenuti dopo l'esecuzione dell'algoritmo DBSCAN con \texttt{MinPts=20} e \texttt{eps=0.4}. 
-Tut\-tavia, quest'ultima esecuzione dell'algoritmo ha portato a un notevole incre\-mento di dati marcati come rumore. Infatti, in questo caso, ben $89$ dei $316$ record totali sono stati esclusi dal clustering. In Figura \ref{fig:dendo-complete2} è mostrato il dendogramma relativo al clustering gerarchico con metodo complete mentre in Figura \ref{fig:dendo-average2} viene mostrato il dendogramma relativo al clustering gerarchico con metodo average per la seconda analisi. 
+In questo caso, i risultati ottenuti sembrano confermare le nostre aspettative poiché i record marcati come rumore dall'algoritmo diventano $44$.
+Inoltre, il numero di cluster determinati dall'algoritmo è diminuito di uno e i cluster di dimensioni significativamente ridotte sono solamente il cluster 3 e il cluster 8.
+L'esecuzione dell'algoritmo con un numero maggiore di \texttt{MinPts} sembrerebbe quindi produrre un clustering migliore.
+Andando a incrementare ulteriormente il valore di \texttt{MinPts} ponendo \texttt{MinPts} a 20 si ottiene il clustering mostrato in Tabella \ref{tab:dbscan2004}.
+In questo caso, il numero di cluster scende ulteriormente di tre e inoltre la distribuzione dei record nei cluster risulta decisamente più uniforme e non sono presenti dei cluster di dimensioni significativamente piccole.
+Inoltre, in questo caso 89 dei 316 record totali sono stati marcati come rumore dall'algoritmo.
+
+In Figura \ref{fig:dendo-complete2} è mostrato il dendogramma relativo al clustering gerarchico con metodo complete mentre in Figura \ref{fig:dendo-average2} viene mostrato il dendogramma relativo al clustering gerarchico con metodo average per la seconda analisi. 
 \begin{figure}[H]
 	\includegraphics[width=\textwidth]{img/ARC-PRG-Cluster.png}
 	\captionsetup{justification=centering}
@@ -477,7 +511,7 @@ Tut\-tavia, quest'ultima esecuzione dell'algoritmo ha portato a un notevole incr
 \multicolumn{1}{l}{8} & 22 (8\%)   \\
 \multicolumn{1}{l}{9} & 14 (5\%)   \\\bottomrule
 \end{tabular}
-\caption{Cluster ottenuti con DBSCAN eseguito con \texttt{MinPts=6} e \texttt{eps=0.5}.}
+\caption{Cluster ottenuti con DBSCAN eseguito con \texttt{MinPts=6} e \texttt{eps=0.5}. Molti dei cluster prodotti hanno dimensioni notevolmente ridotte.}
 \label{tab:dbscan605}
 \end{table}
 \begin{table}[H]
@@ -495,7 +529,7 @@ Tut\-tavia, quest'ultima esecuzione dell'algoritmo ha portato a un notevole incr
 \multicolumn{1}{l}{7}   & 22 (8\%)   \\ 
 \multicolumn{1}{l}{8}   & 14 (5\%)   \\ \bottomrule
 \end{tabular}
-\caption{Cluster ottenuti con DBSCAN eseguito con \texttt{MinPts=10} e \texttt{eps=0.4}.}
+\caption{Cluster ottenuti con DBSCAN eseguito con \texttt{MinPts=10} e \texttt{eps=0.4}. In questo caso di ottengono meno cluster e si riduce il numero di cluster di dimensioni ridotte.}
 \label{tab:dbscan1004}
 \end{table}
 \begin{table}[H]
@@ -510,7 +544,7 @@ Tut\-tavia, quest'ultima esecuzione dell'algoritmo ha portato a un notevole incr
 \multicolumn{1}{l}{4} & 33 (15\%) \\
 \multicolumn{1}{l}{5} & 22 (10\%) \\ \bottomrule
 \end{tabular}
-\caption{Cluster ottenuti con DBSCAN eseguito con \texttt{MinPts=20} e \texttt{eps=0.4}.}
+\caption{Cluster ottenuti con DBSCAN eseguito con \texttt{MinPts=20} e \texttt{eps=0.4}. In questo caso la distribuzione dei record nei cluster risulta decisamente più uniforme.}
 \label{tab:dbscan2004}
 \end{table}
 \begin{figure}[H]
