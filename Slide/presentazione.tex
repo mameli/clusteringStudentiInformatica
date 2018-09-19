@@ -217,6 +217,35 @@ update dmo.studenti set data_INGLESE = '0000-00-00' where data_INGLESE = '0';
     \end{figure}
   \end{frame}
 
+  \begin{frame}{Scatterplot ARC e PRG con Jitter}
+    \begin{figure}[bt]
+      \begin{center}
+        \includegraphics[width=\textwidth]{../img/arcPrgWeka.png}
+      \end{center}
+    \end{figure}
+  \end{frame}
+
+  \begin{frame}{Scatterplot ASD e ANI con Jitter}
+    \begin{figure}[bt]
+      \begin{center}
+        \includegraphics[width=\textwidth]{../img/asdAniWeka.png}
+      \end{center}
+    \end{figure}
+  \end{frame}
+
+  \begin{frame}{Analisi scatterplot con Jitter}
+    \begin{enumerate}[-]
+      \item Il numero di studenti che non ha sostenuto ne Architteture ne Program\-mazione è notevolmente superiore al numero di studenti che non hanno sostenuto ne algoritmi ne analisi 1. Ciò influenza la correlazione complessiva.
+      \item Gli studenti che hanno sostenuto Programmazione ma non hanno sostenuto Architetture sono molti di più rispetto a quelli che hanno sostenuto Analisi 1 ma non hanno sostenuto Algoritmi. Viceversa, gli studenti che hanno sostenuto Architetture ma non Programmazione sono molti meno di quelli che hanno sostenuto Algoritmi ma non Analisi 1. Essendo in quantità paragonabili influenzeranno le correlazione complessive tra le due diverse coppie di attributi circa in egual misura;
+    \end{enumerate}
+  \end{frame}
+  
+  \begin{frame}{Analisi scatterplot con Jitter}
+    \begin{enumerate}[-]
+      \item Confrontando gli studenti che hanno sostenuto sia Architetture che Pro\-grammazione con quelli che hanno sostenuto sia Algoritmi che Analisi 1 si nota una migliore correlazione per la seconda coppia di attributi su tali sottoinsiemi del dataset. Tuttavia, essendo i due sottoinsieme (studenti che hanno sostenuto sia Architetture che Pro\-gramma\-zione e studenti che hanno sostenuto sia Algoritmi che Analisi 1) di dimensioni paragonabili influenzeranno in modo minore la corre\-lazione complessiva rispetto a quanto lo fanno gli oggetti discussi nel primo punto.
+    \end{enumerate}
+  \end{frame}
+
 \begin{frame}{Matrice di correlazione}
   \begin{figure}[bt]
     \begin{center}

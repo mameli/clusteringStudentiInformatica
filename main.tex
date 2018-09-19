@@ -284,28 +284,34 @@ Per quanto riguarda le correlazioni tra i voti dei diversi esami è possibi\-le 
 Mentre si ha una correlazione quasi nulla, ossia circa 0.10, tra il voto di Algoritmi e strutture dati e il voto di Analisi 1.
 
 In Figura 3 sono riportati gli scatterplot tra Architetture degli elabora\-tori e Programmazione e tra Algoritmi e strutture dati  e Analisi I.
-Contrariamente a quanto indicato dai valori delle correlazioni tra le due coppie di attributi, 
+Contraria\-mente a quanto indicato dai valori delle correlazioni tra le due coppie di attributi, 
 gli scatterplot mostrati in Figura 3, sembrano suggerire una correlazione simile (se non migliore) tra Algoritmi e Strutture dati e Analisi 1, rispetto a quella tra Architetture e Programmazione.
 Questo fenomeno è dovuto al fatto che un notevole numero di studenti non ha sostenuto ne architteture ne programmazione. 
 Tuttavia, in uno scatterplot non è possibile distinguere oggetti con gli stessi valori per gli attributi considerati e quindi i dati che influenzano maggiormente la correlazione tra Architetture e Programmazione non vengono essenzialmente mostrati (rappresentati tramite singolo punto) nel grafico in questione.  
 D'altra parte, gli studenti che non hanno sostenuto ne Algoritmi ne Analisi 1 sono molti meno e quindi influenzano in mondo meno significativo la correlazione tra tali attributi. 
 In Figura 4 sono mostrati gli scatterplot realizzati con Weka applicando piccole variazioni casuali ai punti per distinguere i dati che hanno valori identici (Jitter). 
 Utilizzando questa tecnica è quindi possibile notare i seguenti fatti:
+
 \begin{enumerate}
 	\item Il numero di studenti che non ha sostenuto ne Architteture ne Program\-mazione è, come abbiamo già detto, notevolmente superiore al numero di studenti che non hanno sostenuto ne algoritmi ne analisi 1. La presenza di studenti con queste caratteristiche influenza quindi mag\-giormente la correlazione complessiva tra Architetture e Programma\-zione rispetto a quella tra Algoritmi e Analisi1; 
 	\item Gli studenti che hanno sostenuto Programmazione ma non hanno sostenuto Architetture sono molti di più rispetto a quelli che hanno sostenuto Analisi 1 ma non hanno sostenuto Algoritmi. Viceversa, gli studenti che hanno sostenuto Architetture ma non Programmazione sono molti meno di quelli che hanno sostenuto Algoritmi ma non Analisi 1. Gli studenti con queste caratteristiche (110 per Architetture e Programma\-zione, 127 per Algoritmi e Analisi1) non evidenziano correlazioni tra le due diverse coppie di attributi ed essendo in quantità paragonabili influenzeranno le correlazione complessive tra le due diverse coppie di attributi circa in egual misura;
-	\item Confrontando gli studenti che hanno sostenuto sia Architetture che Pro\-grammazione con quelli che hanno sostenuto sia Algoritmi che Analisi 1 si nota una migliore correlazione per la seconda coppia di attributi su tali sottoinsiemi del dataset. Tuttavia, essendo i due sottoinsieme (studenti che hanno sostenuto sia Architetture che Pro\-gramma\-zione e studenti che hanno sostenuto sia Algoritmi che Analisi 1) di dimensioni paragonabili influenzeranno in modo minore la correlazione complessiva rispetto a quanto lo fanno gli oggetti discussi al punto 1.
+	\item Confrontando gli studenti che hanno sostenuto sia Architetture che Pro\-grammazione con quelli che hanno sostenuto sia Algoritmi che Analisi 1 si nota una migliore correlazione per la seconda coppia di attributi su tali sottoinsiemi del dataset. Tuttavia, essendo i due sottoinsieme (studenti che hanno sostenuto sia Architetture che Pro\-gramma\-zione e studenti che hanno sostenuto sia Algoritmi che Analisi 1) di dimensioni paragonabili influenzeranno in modo minore la corre\-lazione complessiva rispetto a quanto lo fanno gli oggetti discussi al punto 1.
 \end{enumerate}
-Per dimostrare la tesi secondo cui gli studenti che non hanno sostenuto ne Architetture ne Programmazione influenzano in modo decisivo la correlazione tra questi due attributi è possibile calcolare la correlazione tra i due attributi sul sottoinsieme del dataset privo di questi oggetti. 
-In questo caso infatti la correlazione tra i due attributi è T. 
-Se eseguiamo la stessa operazione rispetto però agli attributi Algoritmi e Analisi 1 otteniamo una correlazione pari a Z. 
-La differenza tra le correlazioni delle due diverse coppie di attributi è minore.
+% Per dimostrare la tesi secondo cui gli studenti che non hanno sostenuto ne Architetture ne Programmazione influenzano in modo decisivo la correlazione tra questi due attributi è possibile calcolare la correlazione tra i due attributi sul sottoinsieme del dataset privo di questi oggetti. 
+% In questo caso infatti la correlazione tra i due attributi è T. 
+% Se eseguiamo la stessa operazione rispetto però agli attributi Algoritmi e Analisi 1 otteniamo una correlazione pari a Z. 
+% La differenza tra le correlazioni delle due diverse coppie di attributi è minore.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth, height=21em]{img/arcPrg.png}
-	\includegraphics[width=\textwidth, height=21em]{img/asdAni.png}
-	\caption{Scatterplot tra Architetture degli elaboratori e Programmazione e tra Algoritmi e strutture dati e Analisi I}
+	\includegraphics[width=\textwidth]{img/arcPrg.png}
+	\caption{Scatterplot tra Architetture degli elaboratori e Programmazione}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{img/asdAni.png}
+	\caption{Scatterplot tra Algoritmi e strutture dati e Analisi I}
 \end{figure}
 
 \begin{figure}[H]
@@ -481,10 +487,10 @@ Inoltre, è possibile notare che alcuni dei cluster prodotti hanno delle dimensi
 Il cluster 8 sembra rappresentare un caso limite con 22 record complessivi.
 In ogni caso, un numero così elevato di cluster di dimensioni ridotte sembra suggerire che il valore di \texttt{MinPts} sia troppo basso e che i gruppi di oggetti riconosciuti come cluster  che hanno dimensione ridotta siano in realtà gruppi di outliers.
 In Tabella \ref{tab:dbscan1004} sono riportati i medesimi risultati eseguendo l'algoritmo DBSCAN con \texttt{MinPts=10} e \texttt{eps=0.4}. 
-In questo caso, i risultati ottenuti sembrano confermare le nostre aspettative poiché i record marcati come rumore dall'algoritmo diventano $44$.
-Inoltre, il numero di cluster determinati dall'algoritmo è diminuito di uno e i cluster di dimensioni significativamente ridotte sono solamente il cluster 3 e il cluster 8.
+In questo caso, i risultati ottenuti sembrano confermare le nostre aspettative poiché i record marcati come rumore dall' algoritmo diventano $44$.
+Inoltre, il numero di cluster determinati dall'algori\-tmo è diminuito di uno e i cluster di dimensioni significativamente ridotte sono solamente il cluster 3 e il cluster 8.
 L'esecuzione dell'algoritmo con un numero maggiore di \texttt{MinPts} sembrerebbe quindi produrre un clustering migliore.
-Andando a incrementare ulteriormente il valore di \texttt{MinPts} ponendo \texttt{MinPts} a 20 si ottiene il clustering mostrato in Tabella \ref{tab:dbscan2004}.
+Andando a incrementare ulteriormente il valore di \texttt{MinPts} ponen\-do \texttt{MinPts} a 20 si ottiene il clustering mostrato in Tabella \ref{tab:dbscan2004}.
 In questo caso, il numero di cluster scende ulteriormente di tre e inoltre la distribuzione dei record nei cluster risulta decisamente più uniforme e non sono presenti dei cluster di dimensioni significativamente piccole.
 Inoltre, in questo caso 89 dei 316 record totali sono stati marcati come rumore dall'algoritmo.
 
@@ -607,7 +613,7 @@ In Figura \ref{fig:dendo-complete3} è mostrato il dendogramma relativo al clust
 \newpage
 \section{Valutazione del clustering e model selection}
 \label{cap:val-clust}
-In questo capitolo vengono presi in considerazione alcuni metodi per scegliere i parametri con cui inizializzare gli algoritmi di K-means e DBSCAN e vengono analizzati i risultati ottenuti nel capitolo \ref{cap:clust}.
+In questo capitolo vengono presi in considerazione alcuni metodi per sce\-gliere i parametri con cui inizializzare gli algoritmi di K-means e DBSCAN e vengono analizzati i risultati ottenuti nel capitolo \ref{cap:clust}.
 Nel capitolo prece\-dente, infatti, l'algoritmo di K-means è stato eseguito scegliendo preventi\-vamente il numero di cluster possibili (tipicamente 2 o 3) basandosi esclu\-sivamente sull'intuizione e quindi senza avere garanzie circa la bontà e corret\-tezza dei risultati ottenuti. 
 In questo capitolo viene valutata la vali\-dità delle analisi di clustering effettuate con l'algoritmo K-means e viene utilizzata una procedura basata sul SSE che tenta di determinare il valore ottimale di $k$ con cui inizializzare l'algoritmo di K-means in modo da mi\-gliorarne la validità. 
 
@@ -802,6 +808,7 @@ voto medio, test                							& 3          & -0.465                \\ \
 
 In Tabella \ref{tab:corr2} sono riportate sinteticamente le correlazioni ottenute per ciascuna delle tre analisi condotte in funzione dei diversi valori di $k$ scelti. Come è possibile notare consultando la Tabella \ref{tab:corr}, anche nella seconda e terza analisi il valore di $k$ scelto consultando il grafico $k-SSE$ risulta essere il peggiore contrariamente alle aspettative.
 
+È stata ripetuta la procedura con valori maggiori di $\varepsilon$ ($\varepsilon=0.01$ e $\varepsilon=1$), tuttavia le correlazioni ottenute sono risultate essere, anche in questo caso, decisamente peggiori rispetto alle correlazioni ottenute con i valori di k scelti inizialmente.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth, height=12cm,keepaspectratio]{img/k-sse-asd-arc-prg-an1-mdl.pdf}
@@ -816,7 +823,7 @@ In Tabella \ref{tab:corr2} sono riportate sinteticamente le correlazioni ottenut
 	\label{fig:k-sse3}
 \end{figure}
 
-Una possibile spiegazione di questo fenomeno è la seguente: aumen\-tando notevolmente il numero di cluster $k$ è probabile che record vicini vengano posti in cluster differenti soprattutto se i centroidi di quest'ultimi sono anch'essi molto vicini. 
+Una possibile spiegazione di questo fenomeno è la seguente: aumen\-tando notevolmente il numero di cluster $k$ è probabile che record vicini vengano posti in cluster differenti soprattutto se i centroidi di quest'ultimi sono anch'essi molto vicini, ossia se i cluster non sono ben separati e risulta\-no essere particolarmente irregolare o sovrapposti. 
 Quando si verifica questa circostanza il valore di incidenza nella matrice dei cluster è $0$ anche se la corrispettiva distanza tra due record è molto piccola andando così a ridurre il modulo della correlazione (negativa) che esiste tra i valori delle due matrici. 
 È possibile calcolare il valore di correlazione (e quindi valutare la bontà del cluste\-ring) tra matrice di incidenza dei cluster e matrice delle distanze anche nel clustering calcolato dall'algoritmo DBSCAN. 
 Tale metodo è stato utilizza\-to nell'analisi relativa ai voti conseguiti dagli studenti nelle cinque materie del primo anno. 
@@ -896,7 +903,7 @@ kDBScan(crediti_totali_prg_arc_clustered, 6)
 \end{figure}
 
 In Tabella \ref{tab:mod-opt} sono riportati i modelli ottimali determinati per i tre diver\-si aspetti del dataset che sono stati analizzati. 
-Tali modelli sono stati scelti basandosi esclusivamente sul valore della correlazione tra la matrice di incidenza dei cluster e la matrice delle distanze e quindi nel caso di DBSCAN non viene tenuto conto della maggior perdita di dati che vengono etichet\-tati come rumore nel modello ottimale riportato in Tabella \ref{fig:eps-minpts20}. 
+Tali modelli sono stati scelti basandosi esclusivamente sul valore della correlazione tra la matrice di incidenza dei cluster e la matrice delle distanze e quindi nel caso di DBSCAN non viene tenuto conto della maggior perdita di dati che vengono etichet\-tati come rumore nel modello ottimale riportato in Figura \ref{fig:eps-minpts20}. 
 In ogni caso, tenendo conto anche di questo aspetto, DBSCAN si è rilevato essere un algoritmo affidabile per l'analisi su cui è stato eseguito e anche l'esecu\-zione con gli altri parametri ha portato a risultati paragonabili a quelli del modello ottimale e decisamente migliori di quelli ottenuti con il K-means.
 
 \begin{table}[H]
@@ -916,7 +923,7 @@ voto medio, test         & K-means            & $k=2$                & $-0.476$ 
 \newpage
 
 \section{Conclusioni}
-In riferimento ai risultati ottenuti con il K-means è possibile trarre le seguenti conclusioni riguardo
+In riferimento ai risultati ottenuti con il K-means è possibile trarre le seguen\-ti conclusioni riguardo
 le carriere degli studenti:
 \begin{itemize}
 \item l'esame di Architetture degli Elaboratori risulta essere l'esame più difficile per gli studenti del primo anno,
