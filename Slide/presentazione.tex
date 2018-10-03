@@ -483,7 +483,7 @@ e Programmazione non vengono essenzialmente mostrati
 
 \begin{frame}{Valutazione del clustering e model selection} 
     \begin{itemize}
-      \item Selezione del numero "ottimale" di cluster per il K-means
+      \item Selezione parametri "ottimali" per K-means e DBSCAN
       \item Valutazione del K-means
       \item Valutazione DBSCAN
     \end{itemize} 
@@ -499,41 +499,104 @@ e Programmazione non vengono essenzialmente mostrati
     con i diversi valori di $k$.
 \end{frame}
 
-\begin{frame}{Example}
+\begin{frame}[fragile]{Esecuzione automica K-means in Java (1)}
+\begin{lstlisting}[basicstyle=\tiny,style = R]
+public class SseWeka {
+public static void main(String[] args) throws Exception {
+DataSource source = new DataSource("./voti-con-data.arff");
+Instances data = source.getDataSet();
+data.setClassIndex(-1);
+Normalize normalize = new Normalize();
+normalize.setInputFormat(data);
+Instances nData = Filter.useFilter(data, normalize);
+Remove remove = new Remove();
+int[] attributeIndexesToRemove = {1,6,8};
+remove.setInvertSelection(true);
+remove.setAttributeIndicesArray(attributeIndexesToRemove);
+remove.setInputFormat(nData);
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Esecuzione automica K-means in Java (2)}
+\begin{lstlisting}[basicstyle=\tiny,style = R]
+Instances creditiArcPrg = Filter.useFilter(nData, remove);
+SimpleKMeans kMeans = new SimpleKMeans();
+kMeans.setPreserveInstancesOrder(true);
+int maxK = 50;
+int minK = 2;
+ArrayList<double[]> resultSet = new ArrayList<double[]>(maxK);
+double[] a;
+for (int i = minK; i < maxK; i++) {
+kMeans.setNumClusters(i);
+kMeans.buildClusterer(creditiArcPrg);
+a = new double[2];
+a[0] = i; a[1] = kMeans.getSquaredError();
+resultSet.add(a);
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Esecuzione automica K-means in Java (3)}
+\begin{lstlisting}[basicstyle=\tiny,style = R]
+	for (int i = 0; i < maxK - minK; i++) {
+		System.out.println(resultSet.get(i)[1]);
+	}
+	try {
+		FileWriter writer = new FileWriter("creditiArcSse.txt",
+		false);
+		for (int i = minK; i < maxK; i++)
+			writer.write(i + "," + resultSet.get(i - minK)[1] +
+			"\r\n");
+		writer.close();
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+}
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Grafico K-SSE crediti totali, architetture e programmazione}
     \begin{figure}[bt]
       \begin{center}
       \includegraphics[width = 0.45\textwidth]{../img/k-sse-crediti-totali-arc-prg.pdf}
-      \caption{Dependency update}
+      \caption{Andamento del valore del SSE in funzione del numero di cluster}
       \end{center}
     \end{figure}
 \end{frame}
 
-\begin{frame}{Example}
+\begin{frame}{Grafico K-SSE relativo ai voti}
   \begin{figure}[bt]
     \begin{center}
     \includegraphics[width = 0.45\textwidth]{../img/k-sse-asd-arc-prg-an1-mdl.pdf}
-    \caption{Dependency update}
+    \caption{Andamento del valore del SSE in funzione del numero di cluster}
     \end{center}
   \end{figure}
 \end{frame}
 
-\begin{frame}{Example}
+\begin{frame}{Grafico K-SSE test, voto-medio}
     \begin{figure}[bt]
       \begin{center}
       \includegraphics[width = 0.45\textwidth]{../img/k-sse-voto_medio-test.png}
-      \caption{Dependency update}
+      \caption{Andamento del valore del SSE in funzione del numero di cluster}
       \end{center}
     \end{figure}
 \end{frame}
 
-\begin{frame}{Selezione \texttt{Eps} fissato \texttt{MinPts} in DBSCAN} 
-    Viene effettuata tramite la seguente procedura
-    \begin{itemize}
-      \item Ordino i punti rispetto alla loro distanza dal loro $k$-esimo punto più vicino
-      item pongo \texttt{MinPts}=$k$
-      \item Determino un grafico con indici punti ordinati e distanze dal $k$-esimo più vicino 
-      \item Selezione come valore di \texttt{Eps} quello per cui c'è un picco.
-    \end{itemize} 
+\begin{frame}{Selezione valori ottimali}
+\begin{itemize}
+\item viene determinato il primo valore di $k$ per cui $SSE_{k+1} -SSE_{k} \leq \varepsilon$;
+\item risultati ottenuti con $\varepsilon = 0.01$.
+\end{itemize}
+\begin{table}[]
+\begin{tabular}{|l|c|}
+\hline
+Attributi       & \multicolumn{1}{l|}{$k_{opt}$} \\ \hline
+crediti-totali, ARC, PRG & 18                                   \\ \hline
+ARC,ASD,AN1,PRG,MDL      & 36                                   \\ \hline
+voto-medio,test          & 43                                   \\ \hline
+\end{tabular}
+\end{table}
 \end{frame}
 
 \begin{frame}{Valutazione} 
@@ -547,7 +610,39 @@ e Programmazione non vengono essenzialmente mostrati
     con il K-means con i diversi valori di $k$ e con il DBSCAN.
 \end{frame}
 
-\begin{frame}[fragile]{SQL}
+\begin{frame}{Salvataggio etichette dei cluster (1)}
+  \begin{figure}[bt]
+    \begin{center}
+    \includegraphics[width = 1\textwidth]{../img/save-cluster-ass-1.pdf}
+    \end{center}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Salvataggio etichette dei cluster (2)}
+  \begin{figure}[bt]
+    \begin{center}
+    \includegraphics[width = 1\textwidth]{../img/save-cluster-ass-2.pdf}
+    \end{center}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Salvataggio etichette dei cluster (3)}
+  \begin{figure}[bt]
+    \begin{center}
+    \includegraphics[width = 1\textwidth]{../img/save-cluster-ass-3.pdf}
+    \end{center}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Salvataggio etichette dei cluster (4)}
+  \begin{figure}[bt]
+    \begin{center}
+    \includegraphics[width = 1\textwidth]{../img/save-cluster-ass-4.pdf}
+    \end{center}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{Calcolo matrice di incidenza con R}
 \begin{lstlisting}[style = R]
 # Matrice di incidenza
 matriceIncidenza <- function(data){
@@ -566,13 +661,12 @@ return(C)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{SQL}
+\begin{frame}[fragile]{Calcolo matrice delle distanze con R}
 \begin{lstlisting}[style = R]
 # matrice distanza
 matriceDistanza <- function(data){
   return(as.matrix(dist(data[,1:(ncol(data)-1)],method = 'euclidean',diag = TRUE,upper = TRUE)))
 }
-
 calcoloCorrelazione <- function(data){
   MI <- matriceIncidenza(data)
   D <- matriceDistanza(data)
@@ -581,38 +675,35 @@ calcoloCorrelazione <- function(data){
   
   return(cor(mi,d,method="pearson"))
 }
-
 calcoloCorrelazione(crediti_totali_prg_arc_clustered)
 \end{lstlisting}
 \end{frame}
 
 \begin{frame}{Valori Correlazione K-means}
-  % tabella 9 relazione
-  \begin{table}[H]
-      \centering
-      \resizebox{\textwidth}{!}{
-      \begin{tabular}{@{}llllllllllll@{}}
-                         & coorte   & crediti totali & crediti con voto  & voto medio  & ASD      & ARC      & PRG     & ANI     & MDL      & ING & TEST    \\ \midrule
-      coorte             & 1        & 0.013343        & 0.01821             & 0.03655      & 0.03581  & -0.01609 & -0.0822 & 0.13386 & -0.04033 & NA      & 0.04126 \\ 
-      crediti\_totali    & 0.01334  & 1               & 0.99522             & 0.44571      & 0.52984  & 0.72508  & 0.69882 & 0.61015 & 0.62789  & NA      & 0.38433 \\
-      crediti\_con\_voto & 0.01821  & 0.99522         & 1                   & 0.44838      & 0.52957  & 0.71955  & 0.70879 & 0.61593 & 0.62654  & NA      & 0.39025 \\
-      voto\_medio        & 0.03655  & 0.44571         & 0.44838             & 1            & 0.36900  & 0.36427  & 0.43085 & 0.39777 & 0.31828  & NA      & 0.39428 \\
-      ASD                & 0.03581  & 0.52984         & 0.52957             & 0.36900      & 1        & 0.29321  & 0.31192 & 0.10116 & 0.23775  & NA      & 0.16149 \\
-      ARC                & -0.0160  & 0.72508         & 0.71955             & 0.36427      & 0.29321  & 1        & 0.43166 & 0.27541 & 0.39622  & NA      & 0.29979 \\
-      PRG                & -0.0822  & 0.69882         & 0.70879             & 0.43085      & 0.31192  & 0.43166  & 1       & 0.19585 & 0.27295  & NA      & 0.24356 \\
-      ANI                & 0.13386  & 0.61015         & 0.61593             & 0.39777      & 0.10116  & 0.27541  & 0.19585 & 1       & 0.36333  & NA      & 0.32378 \\
-      MDL                & -0.0403  & 0.62789         & 0.62654             & 0.31828      & 0.23775  & 0.39622  & 0.27295 & 0.36333 & 1        & NA      & 0.38777 \\
-      ING                & NA       & NA              & NA                  & NA           & NA       & NA       & NA      & NA      & NA       & 1       & NA      \\ 
-      TEST               & 0.04126  & 0.384332        & 0.39025             & 0.39428      & 0.16149  & 0.29979  & 0.2435  & 0.32378 & 0.38777  & NA      & 1       \\\bottomrule                 
-      \end{tabular}
-      }
-  \end{table}
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}l|l|l@{}}
+\hline
+\textbf{Attributi analizzati}   							& \textbf{k} & \textbf{Correlazione} \\ \hline
+                                							& 2          & -0.687                \\ \cline{2-3} 
+crediti totali, ARC, PRG        							& 3          & -0.854                \\ \cline{2-3} 
+                                							& 18         & -0.489                \\ \hline
+                                							& 2          & -0.520                \\ \cline{2-3} 
+ARC, ASD, PRG, MDL,	AN1	\hspace{3em}									& 3          & -0.618                \\ \cline{2-3} 
+                                							& 36         & -0.424                \\ \hline
+                                							& 2          & -0.476                \\ \cline{2-3} 
+voto medio, test                							& 3          & -0.465                \\ \cline{2-3} 
+                                							& 43         & -0.273                \\ \hline
+\end{tabular}
+\caption{Valori correlazione tra la Matrice di incidenza dei cluster e la matrice delle distanze in funzione di $k$.}
+\label{tab:corr2}
+\end{table}
 \end{frame}
 
 \begin{frame}{Valutazione k-Means} 
     \begin{itemize}
-      \item Procedura model selection non efficace
-      \item Valori scelti inizialmente sono migliori
+      \item Procedura model selection non efficace (anche con valori maggiori di $\varepsilon$);
+      \item Valori scelti inizialmente sono migliori.
     \end{itemize} 
 \end{frame}
 
@@ -627,98 +718,120 @@ calcoloCorrelazione(crediti_totali_prg_arc_clustered)
   \begin{figure}[bt]
     \begin{center}
     \includegraphics[width = 0.45\textwidth]{../img/filter-for-remove-noise.pdf}
-    \caption{Dependency update}
+    \caption{Filtro Weka impiegato per rimozione rumore}
     \end{center}
   \end{figure}
 \end{frame}
 
 \begin{frame}{Correlazione e rumore DBSCAN}
-  % tabella 10
-  \begin{table}[H]
-      \centering
-      \resizebox{\textwidth}{!}{
-      \begin{tabular}{@{}llllllllllll@{}}
-                         & coorte   & crediti totali & crediti con voto  & voto medio  & ASD      & ARC      & PRG     & ANI     & MDL      & ING & TEST    \\ \midrule
-      coorte             & 1        & 0.013343        & 0.01821             & 0.03655      & 0.03581  & -0.01609 & -0.0822 & 0.13386 & -0.04033 & NA      & 0.04126 \\ 
-      crediti\_totali    & 0.01334  & 1               & 0.99522             & 0.44571      & 0.52984  & 0.72508  & 0.69882 & 0.61015 & 0.62789  & NA      & 0.38433 \\
-      crediti\_con\_voto & 0.01821  & 0.99522         & 1                   & 0.44838      & 0.52957  & 0.71955  & 0.70879 & 0.61593 & 0.62654  & NA      & 0.39025 \\
-      voto\_medio        & 0.03655  & 0.44571         & 0.44838             & 1            & 0.36900  & 0.36427  & 0.43085 & 0.39777 & 0.31828  & NA      & 0.39428 \\
-      ASD                & 0.03581  & 0.52984         & 0.52957             & 0.36900      & 1        & 0.29321  & 0.31192 & 0.10116 & 0.23775  & NA      & 0.16149 \\
-      ARC                & -0.0160  & 0.72508         & 0.71955             & 0.36427      & 0.29321  & 1        & 0.43166 & 0.27541 & 0.39622  & NA      & 0.29979 \\
-      PRG                & -0.0822  & 0.69882         & 0.70879             & 0.43085      & 0.31192  & 0.43166  & 1       & 0.19585 & 0.27295  & NA      & 0.24356 \\
-      ANI                & 0.13386  & 0.61015         & 0.61593             & 0.39777      & 0.10116  & 0.27541  & 0.19585 & 1       & 0.36333  & NA      & 0.32378 \\
-      MDL                & -0.0403  & 0.62789         & 0.62654             & 0.31828      & 0.23775  & 0.39622  & 0.27295 & 0.36333 & 1        & NA      & 0.38777 \\
-      ING                & NA       & NA              & NA                  & NA           & NA       & NA       & NA      & NA      & NA       & 1       & NA      \\ 
-      TEST               & 0.04126  & 0.384332        & 0.39025             & 0.39428      & 0.16149  & 0.29979  & 0.2435  & 0.32378 & 0.38777  & NA      & 1       \\\bottomrule                 
-      \end{tabular}
-      }
-  \end{table}
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}lll@{}}
+\toprule	
+\texttt{MinPts}, \texttt{eps} & Correlazione & Rumore \\ \hline
+$6$,$0.5$       & $-0.725$  & $38$     \\ 
+$10$,$0.4$      & $-0.728$  & $44$     \\ 
+$20$,$0.4$      & $-0.758$  & $89$     \\ \bottomrule
+\end{tabular}
+\caption{Valori riepilogativi di correlazione e rumore per DBSCAN}
+\label{tab:corr-noise-dbscan}
+\end{table}  
 \end{frame}
 
-\begin{frame}[fragile]{Model selection DBSCAN}
-  % codice 6 relazione
-  \begin{lstlisting}[style=sql]
-      Hello world  
-  \end{lstlisting}
+\begin{frame}{Selezione \texttt{Eps} fissato \texttt{MinPts} in DBSCAN}
+Viene effettuata la seguente procedura
+\begin{itemize}
+\item Ordinamento dei punti rispetto alle distanze dal loro $k$-esimo punto più vicino;
+\item pongo \texttt{MinPts=k};
+\item Determinazione del grafico che mostra l'andamento crescente delle $k$-distanze dei punti;
+\item Scelta del valore di \texttt{Eps} come la prima $k$-distanza per cui verifica una sostanziale crescita.
+\end{itemize}
 \end{frame}
 
-\begin{frame}{Rimozione rumore con Weka}
+\begin{frame}[fragile]{Codice model selection DBSCAN con R}
+% codice 6 relazione
+  \begin{lstlisting}[caption={Codice R per il calcolo del grafico della k-esima distanza da ogni punto del dataset.}, label={rknn}, captionpos=b, style = R]
+kDBScan <- function(data,k){
+  library(ggplot2)
+  D = as.matrix(dist(data[,1:ncol(data)-1],method = 'euclidean',diag = TRUE,upper = TRUE))
+  D_1 = D
+  for(i in 1:nrow(data)){
+    D_1[i,] = sort(D[i,])
+  }
+  p = 1:nrow(data)
+  dist = sort(D_1[, k])
+  data = data.frame(p,dist)
+  ggplot(data, aes(x=p, y=dist)) +geom_point(shape=1) +  geom_line() + geom_point(color = 'black')
+}
+kDBScan(crediti_totali_prg_arc_clustered, 6)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Grafico $k$-distanze con $k=6$}
   \begin{figure}[bt]
     \begin{center}
     \includegraphics[width = 0.45\textwidth]{../img/eps-minpts6.pdf}
-    \caption{Dependency update}
+    \caption{Andamento $k$-distanze con $k=6$}
     \end{center}
   \end{figure}
 \end{frame}
 
-\begin{frame}{Rimozione rumore con Weka}
+\begin{frame}{Grafico $k$-distanze con $k=10$}
   \begin{figure}[bt]
     \begin{center}
     \includegraphics[width = 0.45\textwidth]{../img/eps-minpts10.pdf}
-    \caption{Dependency update}
+    \caption{Andamento $k$-distanze con $k=10$}
     \end{center}
   \end{figure}
 \end{frame}
 
-\begin{frame}{Rimozione rumore con Weka}
+\begin{frame}{Grafico $k$-distanze con $k=20$}
   \begin{figure}[bt]
     \begin{center}
     \includegraphics[width = 0.45\textwidth]{../img/eps-minpts20.pdf}
-    \caption{Dependency update}
+    \caption{Andamento $k$-distanze con $k=20$}
     \end{center}
   \end{figure}
 \end{frame}
 
-\begin{frame}{Correlazione e rumore DBSCAN}
-  % tabella 11
-  \begin{table}[H]
-      \centering
-      \resizebox{\textwidth}{!}{
-      \begin{tabular}{@{}llllllllllll@{}}
-                         & coorte   & crediti totali & crediti con voto  & voto medio  & ASD      & ARC      & PRG     & ANI     & MDL      & ING & TEST    \\ \midrule
-      coorte             & 1        & 0.013343        & 0.01821             & 0.03655      & 0.03581  & -0.01609 & -0.0822 & 0.13386 & -0.04033 & NA      & 0.04126 \\ 
-      crediti\_totali    & 0.01334  & 1               & 0.99522             & 0.44571      & 0.52984  & 0.72508  & 0.69882 & 0.61015 & 0.62789  & NA      & 0.38433 \\
-      crediti\_con\_voto & 0.01821  & 0.99522         & 1                   & 0.44838      & 0.52957  & 0.71955  & 0.70879 & 0.61593 & 0.62654  & NA      & 0.39025 \\
-      voto\_medio        & 0.03655  & 0.44571         & 0.44838             & 1            & 0.36900  & 0.36427  & 0.43085 & 0.39777 & 0.31828  & NA      & 0.39428 \\
-      ASD                & 0.03581  & 0.52984         & 0.52957             & 0.36900      & 1        & 0.29321  & 0.31192 & 0.10116 & 0.23775  & NA      & 0.16149 \\
-      ARC                & -0.0160  & 0.72508         & 0.71955             & 0.36427      & 0.29321  & 1        & 0.43166 & 0.27541 & 0.39622  & NA      & 0.29979 \\
-      PRG                & -0.0822  & 0.69882         & 0.70879             & 0.43085      & 0.31192  & 0.43166  & 1       & 0.19585 & 0.27295  & NA      & 0.24356 \\
-      ANI                & 0.13386  & 0.61015         & 0.61593             & 0.39777      & 0.10116  & 0.27541  & 0.19585 & 1       & 0.36333  & NA      & 0.32378 \\
-      MDL                & -0.0403  & 0.62789         & 0.62654             & 0.31828      & 0.23775  & 0.39622  & 0.27295 & 0.36333 & 1        & NA      & 0.38777 \\
-      ING                & NA       & NA              & NA                  & NA           & NA       & NA       & NA      & NA      & NA       & 1       & NA      \\ 
-      TEST               & 0.04126  & 0.384332        & 0.39025             & 0.39428      & 0.16149  & 0.29979  & 0.2435  & 0.32378 & 0.38777  & NA      & 1       \\\bottomrule                 
-      \end{tabular}
-      }
-  \end{table}
+\begin{frame}{Valori scelti dalla procedura }
+Tale procedura suggerisce quindi di scegliere i valori di \texttt{eps} nei seguenti intervalli
+  \begin{table}[]
+\begin{tabular}{|l|c|}
+\hline
+$K$  & \multicolumn{1}{l|}{\texttt{eps}} \\ \hline
+6  & {[}0.37,0.56{]}          \\ \hline
+10 & {[}0.36,0.58{]}          \\ \hline
+20 & {[}0.54,0.58{]}          \\ \hline
+\end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}{Confronto tra clustering}
+\begin{table}[H]
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Attributi analizzati     & Algoritmo Migliore & Parametri ottimali & Correlazione \\ \midrule
+crediti totali, ARC, PRG & K-means            & $k=3$                & $-0.854$       \\
+ARC, ASD, PRG, MDL, AN1  & DBSCAN             & \texttt{MinPts=20},\texttt{eps=0.4}  & $-0.758$ \\
+voto medio, test         & K-means            & $k=2$                & $-0.476$       \\ \bottomrule
+\end{tabular}
+\end{adjustbox}
+\caption{Confronto tra modelli.}
+\label{tab:mod-opt}
+\end{table}
 \end{frame}
 
 \section{Conclusioni}
 
 \begin{frame}{Conclusioni} 
     \begin{itemize}
-      \item Architetture degli elaboratori esame più difficile
-      \item La media alla fine del primo anno non sempre conferma i risultati ottenuti al test di ingresso
-      \item Non tutti gli esami sono generalmente sostenuti al primo anno
+      \item Architetture degli elaboratori esame più difficile;
+      \item La media alla fine del primo anno non sempre conferma i risultati; ottenuti al test di ingresso
+      \item Non tutti gli esami sono generalmente sostenuti al primo anno;
+      \item DBSCAN stabilisce un numero elevato di cluster;
+      \item Analisi clustering gerarchico non svolta.
     \end{itemize} 
 \end{frame}
 
